@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns="http://www.bigbang.io/dml/entityModel">
+	<entityModel name="SMOrderDetail" moduleName="DefaultModule">
+		<propertiesCollection>
+			<properties>
+				<primitive name="Id" order="1" isReadOnly="true" displayName="شناسه" isVisible="false"/>
+				<primitive name="Quantity" order="3"  displayName="تعداد"/>
+				<primitive name="Price" order="5"  displayName="قیمت فروش" >
+				  <formatType>
+					<currency />
+				  </formatType></primitive>
+				<primitive name="UnitPrice" order="4" displayName="قیمت واحد" isReadOnly="true">
+				  <formatType>
+					<currency />
+				  </formatType>
+				</primitive>
+				<reference name="Order" order="6"  displayName="سفارش" isVisible="false"/>
+				<reference name="Product" order="2"  displayName="محصول"/>
+			</properties>
+			<changeExpressions>
+				<changeExpression>
+					<properties>
+						<source name="Product"/>
+						<target name="UnitPrice"/>
+						<target name="Price"/>
+						<target name="Quantity"/>
+					</properties>
+					<expression>
+						createObject('UnitPrice',Model.Product.Price,'Price',Model.Product.Price,'Quantity',1)
+					</expression>
+				</changeExpression>
+				<changeExpression>
+					<properties>
+						<source name="Quantity"/>
+						<target name="Price"/>
+					</properties>
+					<expression>
+						createObject('Price',((Model.Quantity== null ? 1 :Model.Quantity) * (Model.Product.Price)))
+					</expression>
+				</changeExpression>
+			</changeExpressions> 
+		</propertiesCollection>
+	</entityModel>
+</configuration>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns="http://www.bigbang.io/dml/virtualEntityModel">
+  <virtualEntityModel name="SMActiveProduct" displayName="نمایش محصولات فعال" moduleName="DefaultModule" >
+	  <virtualPropertiesCollection>
+		  <properties>
+			  <primary isVisible="false" />
+			  <primitive name="IsActive" displayName="فعال">
+				  <propertyType>
+					  <boolean />
+				  </propertyType>
+			  </primitive>
+		  </properties>
+	  </virtualPropertiesCollection>
+  </virtualEntityModel>
+</configuration>

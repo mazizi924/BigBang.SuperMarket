@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.bigbang.io/dml/options" xmlns:bb="http://www.bigbang.io/dml/options">
+  <xs:element name="configuration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="options" type="bb:DMLOptions" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="DMLOptions">
+    <xs:all>
+      <xs:element name="category" type="bb:DMLOptionsCategory" minOccurs="0" maxOccurs="1" />
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+    </xs:all>
+    <xs:attribute name="target" use="required" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Target virtual entity model</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="mode" type="bb:DMLOptionMode" use="required" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+  </xs:complexType>
+  <xs:simpleType name="DMLOptionMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Global" />
+      <xs:enumeration value="Contact" />
+      <xs:enumeration value="COP" />
+      <xs:enumeration value="VirtualEntity" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLOptionsCategory">
+    <xs:all>
+      <xs:element name="category" type="bb:DMLOptionsCategory" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+  </xs:complexType>
+  <xs:simpleType name="BBDuration">
+    <xs:annotation>
+      <xs:documentation>pattern is (D.HH:MM:SS | D) In which D is days, HH is 2-digit 00-24 hour, MM is 2-digit 00-59 minute and SS is 2-digit second 00-59</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^\d+|(\d+\.)?([01]\d|2[0-3]):([0-5]\d)(:[0-5]\d)?$" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{09D2FB99-9CAC-4FAF-9A75-B5144A370334}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BigBang.App.SuperMarket</RootNamespace>
+    <AssemblyName>BigBang.App.SuperMarket</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BigBang.App.SuperMarket.Domain">
+      <HintPath>..\BigBang.App.SuperMarket.Domain.dll</HintPath>
+    </Reference>
+    <Reference Include="BigBang.Domain">
+      <HintPath>..\BigBang.Domain.dll</HintPath>
+    </Reference>
+    <Reference Include="BigBang.Metadata.Models">
+      <HintPath>..\packages\BigBang.Core.3.16.41\bigBangLib\debug\BigBang.Metadata.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="BigBang.WebServer.Common">
+      <HintPath>..\packages\BigBang.Core.3.16.41\bigBangLib\debug\BigBang.WebServer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\packages\BigBang.Core.3.16.41\bigBangLib\debug\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationController.cs" />
+    <Compile Include="Business\Category\BusinessEvents\CategoryReadFilterEvent.cs" />
+    <Compile Include="Business\Order\BusinessEvents\OrderReadFilterEvent.cs" />
+    <Compile Include="Services\ContactProductPrintService.cs" />
+    <EmbeddedResource Include="Resources\Application.config" />
+    <Compile Include="Business\Category\BusinessEvents\CategoryLoadedEvent.cs" />
+    <Compile Include="Business\ContactProductDetails\Reports\ContactProductDetailsReportService.cs" />
+    <Compile Include="Business\ContactProduct\BusinessEvents\ContactProductReadFilterEvent.cs" />
+    <Compile Include="Business\ContactProduct\Reports\ContactProductReportService.cs" />
+    <Compile Include="Business\OrderDetail\BusinessEvents\OrderDetailAddingEvent.cs" />
+    <Compile Include="Business\OrderDetail\BusinessEvents\OrderDetailDeletedEvent.cs" />
+    <Compile Include="Business\Order\BusinessEvents\OrderAddingEvent.cs" />
+    <Compile Include="Business\Product\BusinessEvents\ProductReadFilterEvent.cs" />
+    <Compile Include="Business\Product\ProductBusinessService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\.build\BigBang.App.SuperMarket.AssemblyVersion.cs">
+      <Link>Properties\BigBang.App.SuperMarket.AssemblyVersion.cs</Link>
+    </Compile>
+    <!--<Content Include="..\BigBang.config">
+      <Link>BigBang.config</Link>
+    </Content>-->
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

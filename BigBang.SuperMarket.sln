@@ -1,0 +1,115 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{538F7208-7C8B-4A11-A880-23D05D03FBED}"
+	ProjectSection(SolutionItems) = preProject
+		.build\BigBang.App.SuperMarket.AssemblyVersion.cs = .build\BigBang.App.SuperMarket.AssemblyVersion.cs
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host", "Host\Host.csproj", "{BDB0F5DC-5428-41DE-8064-C98EB3580A94}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D01A0511-5535-42EF-BFA0-8758E35310D8} = {D01A0511-5535-42EF-BFA0-8758E35310D8}
+		{92677D35-E5F1-4137-9921-6C691B8D21A1} = {92677D35-E5F1-4137-9921-6C691B8D21A1}
+		{09D2FB99-9CAC-4FAF-9A75-B5144A370334} = {09D2FB99-9CAC-4FAF-9A75-B5144A370334}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".bigBangSchemas", ".bigBangSchemas", "{23EFD37A-1F60-412F-9415-D6E773D10B30}"
+	ProjectSection(SolutionItems) = preProject
+		.bigBangSchemas\ApplicationConfig.xsd = .bigBangSchemas\ApplicationConfig.xsd
+		.bigBangSchemas\BigBangConfig.xsd = .bigBangSchemas\BigBangConfig.xsd
+		.bigBangSchemas\DatabaseMigrator.xsd = .bigBangSchemas\DatabaseMigrator.xsd
+		.bigBangSchemas\DMLApplication.xsd = .bigBangSchemas\DMLApplication.xsd
+		.bigBangSchemas\DMLApplicationConstant.xsd = .bigBangSchemas\DMLApplicationConstant.xsd
+		.bigBangSchemas\DMLCustomEditorDefinition.xsd = .bigBangSchemas\DMLCustomEditorDefinition.xsd
+		.bigBangSchemas\DMLCustomFormExtension.xsd = .bigBangSchemas\DMLCustomFormExtension.xsd
+		.bigBangSchemas\DMLCustomSiteItem.xsd = .bigBangSchemas\DMLCustomSiteItem.xsd
+		.bigBangSchemas\DMLCustomView.xsd = .bigBangSchemas\DMLCustomView.xsd
+		.bigBangSchemas\DMLDataInitializer.xsd = .bigBangSchemas\DMLDataInitializer.xsd
+		.bigBangSchemas\DMLDynamicFilterValue.xsd = .bigBangSchemas\DMLDynamicFilterValue.xsd
+		.bigBangSchemas\DMLEntityModel.xsd = .bigBangSchemas\DMLEntityModel.xsd
+		.bigBangSchemas\DMLEnumDefinition.xsd = .bigBangSchemas\DMLEnumDefinition.xsd
+		.bigBangSchemas\DMLExpressionFunction.xsd = .bigBangSchemas\DMLExpressionFunction.xsd
+		.bigBangSchemas\DMLExtendedApplicationConstant.xsd = .bigBangSchemas\DMLExtendedApplicationConstant.xsd
+		.bigBangSchemas\DMLExtendedCustomView.xsd = .bigBangSchemas\DMLExtendedCustomView.xsd
+		.bigBangSchemas\DMLExtendedEntityModel.xsd = .bigBangSchemas\DMLExtendedEntityModel.xsd
+		.bigBangSchemas\DMLExtendedForm.xsd = .bigBangSchemas\DMLExtendedForm.xsd
+		.bigBangSchemas\DMLExtendedGlobalCommand.xsd = .bigBangSchemas\DMLExtendedGlobalCommand.xsd
+		.bigBangSchemas\DMLExtendedMenu.xsd = .bigBangSchemas\DMLExtendedMenu.xsd
+		.bigBangSchemas\DMLExtendedModule.xsd = .bigBangSchemas\DMLExtendedModule.xsd
+		.bigBangSchemas\DMLExtendedProcess.xsd = .bigBangSchemas\DMLExtendedProcess.xsd
+		.bigBangSchemas\DMLExtendedRegistration.xsd = .bigBangSchemas\DMLExtendedRegistration.xsd
+		.bigBangSchemas\DMLExtendedReportModel.xsd = .bigBangSchemas\DMLExtendedReportModel.xsd
+		.bigBangSchemas\DMLExtendedSecurityTask.xsd = .bigBangSchemas\DMLExtendedSecurityTask.xsd
+		.bigBangSchemas\DMLForm.xsd = .bigBangSchemas\DMLForm.xsd
+		.bigBangSchemas\DMLGadget.xsd = .bigBangSchemas\DMLGadget.xsd
+		.bigBangSchemas\DMLGlobalCommand.xsd = .bigBangSchemas\DMLGlobalCommand.xsd
+		.bigBangSchemas\DMLGlobalFilter.xsd = .bigBangSchemas\DMLGlobalFilter.xsd
+		.bigBangSchemas\DMLIdentityProvider.xsd = .bigBangSchemas\DMLIdentityProvider.xsd
+		.bigBangSchemas\DMLInterfaceModel.xsd = .bigBangSchemas\DMLInterfaceModel.xsd
+		.bigBangSchemas\DMLJsonSchema.xsd = .bigBangSchemas\DMLJsonSchema.xsd
+		.bigBangSchemas\DMLMenu.xsd = .bigBangSchemas\DMLMenu.xsd
+		.bigBangSchemas\DMLMessageCode.xsd = .bigBangSchemas\DMLMessageCode.xsd
+		.bigBangSchemas\DMLMigration.xsd = .bigBangSchemas\DMLMigration.xsd
+		.bigBangSchemas\DMLModule.xsd = .bigBangSchemas\DMLModule.xsd
+		.bigBangSchemas\DMLOptions.xsd = .bigBangSchemas\DMLOptions.xsd
+		.bigBangSchemas\DMLProcess.xsd = .bigBangSchemas\DMLProcess.xsd
+		.bigBangSchemas\DMLProjectionEntityModel.xsd = .bigBangSchemas\DMLProjectionEntityModel.xsd
+		.bigBangSchemas\DMLRegistration.xsd = .bigBangSchemas\DMLRegistration.xsd
+		.bigBangSchemas\DMLReportModel.xsd = .bigBangSchemas\DMLReportModel.xsd
+		.bigBangSchemas\DMLResource.xsd = .bigBangSchemas\DMLResource.xsd
+		.bigBangSchemas\DMLRuntimeApplication.xsd = .bigBangSchemas\DMLRuntimeApplication.xsd
+		.bigBangSchemas\DMLSecurityOperation.xsd = .bigBangSchemas\DMLSecurityOperation.xsd
+		.bigBangSchemas\DMLSecurityTag.xsd = .bigBangSchemas\DMLSecurityTag.xsd
+		.bigBangSchemas\DMLSecurityTask.xsd = .bigBangSchemas\DMLSecurityTask.xsd
+		.bigBangSchemas\DMLSyncEntityModel.xsd = .bigBangSchemas\DMLSyncEntityModel.xsd
+		.bigBangSchemas\DMLVirtualEntityModel.xsd = .bigBangSchemas\DMLVirtualEntityModel.xsd
+		.bigBangSchemas\DMLWebHook.xsd = .bigBangSchemas\DMLWebHook.xsd
+		.bigBangSchemas\GeneratorConfig.xsd = .bigBangSchemas\GeneratorConfig.xsd
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigBang.App.SuperMarket.DML", "BigBang.App.SuperMarket.DML\BigBang.App.SuperMarket.DML.csproj", "{D01A0511-5535-42EF-BFA0-8758E35310D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigBang.App.SuperMarket.Migrations", "BigBang.App.SuperMarket.Migrations\BigBang.App.SuperMarket.Migrations.csproj", "{92677D35-E5F1-4137-9921-6C691B8D21A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigBang.App.SuperMarket", "BigBang.App.SuperMarket\BigBang.App.SuperMarket.csproj", "{09D2FB99-9CAC-4FAF-9A75-B5144A370334}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".config", ".config", "{70ED3358-58AC-4B06-9889-421FD83BA11A}"
+	ProjectSection(SolutionItems) = preProject
+		BigBang.config = BigBang.config
+		DatabaseMigrator.config = DatabaseMigrator.config
+		DMLGenerator.config = DMLGenerator.config
+		DomainGenerator.config = DomainGenerator.config
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDB0F5DC-5428-41DE-8064-C98EB3580A94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDB0F5DC-5428-41DE-8064-C98EB3580A94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDB0F5DC-5428-41DE-8064-C98EB3580A94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDB0F5DC-5428-41DE-8064-C98EB3580A94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D01A0511-5535-42EF-BFA0-8758E35310D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D01A0511-5535-42EF-BFA0-8758E35310D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D01A0511-5535-42EF-BFA0-8758E35310D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D01A0511-5535-42EF-BFA0-8758E35310D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92677D35-E5F1-4137-9921-6C691B8D21A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92677D35-E5F1-4137-9921-6C691B8D21A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92677D35-E5F1-4137-9921-6C691B8D21A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92677D35-E5F1-4137-9921-6C691B8D21A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09D2FB99-9CAC-4FAF-9A75-B5144A370334}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09D2FB99-9CAC-4FAF-9A75-B5144A370334}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09D2FB99-9CAC-4FAF-9A75-B5144A370334}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09D2FB99-9CAC-4FAF-9A75-B5144A370334}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A60C32B0-8C2B-4EB0-A4B5-1A74C9E2A4CF}
+	EndGlobalSection
+EndGlobal

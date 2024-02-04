@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns="http://www.bigbang.io/dml/entityModel">
+  <entityModel name="SMOrganization" moduleName="DefaultModule" displayName="مشتری حقوقی">
+	  <baseModel target="BigBang.BBContact">
+		  <settings>
+			  <properties>
+				  <property name="Name" displayName="نام شرکت"/>
+			  </properties>
+		  </settings>
+	  </baseModel>
+	  <propertiesCollection>
+		  <properties>
+			  <primitive name="Id" order="1"  isVisible="false"/>
+			  <primitive name="Code" order="2" displayName="کد شرکت"/>
+			  <primitive name="PhoneNumber" order="3" displayName="تلفن شرکت"/>
+		  </properties>
+	  </propertiesCollection>
+  </entityModel>
+</configuration>

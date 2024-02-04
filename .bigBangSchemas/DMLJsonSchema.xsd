@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.bigbang.io/dml/jsonSchema" xmlns:bb="http://www.bigbang.io/dml/jsonSchema">
+  <xs:element name="configuration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="jsonSchema" type="bb:DMLJsonSchema" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="DMLJsonSchema">
+    <xs:all>
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="provider" type="bb:DMLJsonTemplateProvider" />
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="templateExtractionProvider" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLJsonTemplateProvider">
+    <xs:choice>
+      <xs:element name="static" type="bb:DMLStaticJsonTemplateProvider" />
+      <xs:element name="dynamic" type="bb:DynamicJsonTemplateProvider" />
+      <xs:element name="userDefined" type="bb:UserDefinedJsonTemplateProvider" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="DMLStaticJsonTemplateProvider">
+    <xs:all>
+      <xs:element name="template" type="bb:DMLJsonTemplate" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLJsonTemplate">
+    <xs:all>
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="templates" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="template" type="bb:DMLJsonTemplate" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="properties" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="property" type="bb:DMLJsonProperty" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLJsonProperty">
+    <xs:all>
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="dataType" type="bb:DMLJsonPropertyDataType" />
+      <xs:element name="ruleSet" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="custom" type="bb:DMLJsonCustomValidator" />
+            <xs:element name="notNull" type="bb:DMLJsonNotNullValidator" />
+            <xs:element name="regex" type="bb:DMLJsonRegularExpressionValidator" />
+            <xs:element name="string" type="bb:DMLJsonStringValidator" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLJsonPropertyDataType">
+    <xs:choice>
+      <xs:element name="boolean" type="bb:DMLBooleanJsonPropertyDataType" />
+      <xs:element name="dateTime" type="bb:DMLDateTimeJsonPropertyDataType" />
+      <xs:element name="decimal" type="bb:DMLDecimalJsonPropertyDataType" />
+      <xs:element name="double" type="bb:DMLDoubleJsonPropertyDataType" />
+      <xs:element name="image" type="bb:DMLImageJsonPropertyDataType" />
+      <xs:element name="long" type="bb:DMLLongJsonPropertyDataType" />
+      <xs:element name="model" type="bb:DMLModelJsonPropertyDataType" />
+      <xs:element name="string" type="bb:DMLStringJsonPropertyDataType" />
+      <xs:element name="timeSpan" type="bb:DMLTimeSpanJsonPropertyDataType" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="DMLBooleanJsonPropertyDataType" />
+  <xs:complexType name="DMLDateTimeJsonPropertyDataType" />
+  <xs:complexType name="DMLDecimalJsonPropertyDataType" />
+  <xs:complexType name="DMLDoubleJsonPropertyDataType" />
+  <xs:complexType name="DMLImageJsonPropertyDataType" />
+  <xs:complexType name="DMLLongJsonPropertyDataType" />
+  <xs:complexType name="DMLModelJsonPropertyDataType">
+    <xs:attribute name="sourceModel" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLStringJsonPropertyDataType" />
+  <xs:complexType name="DMLTimeSpanJsonPropertyDataType" />
+  <xs:complexType name="DMLJsonCustomValidator">
+    <xs:all>
+      <xs:element name="expression" minOccurs="1" maxOccurs="1" type="xs:string" />
+    </xs:all>
+    <xs:attribute name="message" use="optional" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLJsonNotNullValidator">
+    <xs:attribute name="message" use="optional" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLJsonRegularExpressionValidator">
+    <xs:attribute name="pattern" use="required" type="xs:string" />
+    <xs:attribute name="multiline" use="optional" type="xs:boolean" />
+    <xs:attribute name="singleline" use="optional" type="xs:boolean" />
+    <xs:attribute name="ignoreCase" use="optional" type="xs:boolean" />
+    <xs:attribute name="message" use="optional" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLJsonStringValidator">
+    <xs:attribute name="min" use="optional" type="xs:int" />
+    <xs:attribute name="max" use="optional" type="xs:int" />
+    <xs:attribute name="message" use="optional" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DynamicJsonTemplateProvider">
+    <xs:attribute name="provider" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="UserDefinedJsonTemplateProvider" />
+  <xs:simpleType name="BBDuration">
+    <xs:annotation>
+      <xs:documentation>pattern is (D.HH:MM:SS | D) In which D is days, HH is 2-digit 00-24 hour, MM is 2-digit 00-59 minute and SS is 2-digit second 00-59</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^\d+|(\d+\.)?([01]\d|2[0-3]):([0-5]\d)(:[0-5]\d)?$" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

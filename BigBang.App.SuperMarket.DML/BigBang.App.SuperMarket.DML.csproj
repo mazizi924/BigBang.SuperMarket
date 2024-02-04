@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D01A0511-5535-42EF-BFA0-8758E35310D8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BigBang.App.SuperMarket.DML</RootNamespace>
+    <AssemblyName>BigBang.App.SuperMarket.DML</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Menus\Menus.menu-dml.xml" />
+    <EmbeddedResource Include="Modules\DefaultModule\DefaultModule.module-dml.xml" />
+    <Compile Include="..\.build\BigBang.App.SuperMarket.AssemblyVersion.cs">
+      <Link>Properties\BigBang.App.SuperMarket.AssemblyVersion.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\DefaultModule\Forms\Orders\Orders.form-dml.xml" />
+    <EmbeddedResource Include="SuperMarket.application-dml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\DefaultModule\Models\Category\Category.entityModel-dml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\DefaultModule\Models\Order\Order.entityModel-dml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\DefaultModule\Models\Organization\Organization.entityModel-dml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\DefaultModule\Models\Person\Person.entityModel-dml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\DefaultModule\Models\Product\Product.entityModel-dml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\DefaultModule\Forms\Contact\Contact.form-dml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\DefaultModule\Forms\ContactProduct\ContactProduct.form-dml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\DefaultModule\Reports\ContactProduct\ContactProduct.reportModel-dml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\DefaultModule\Reports\ContactProductDetails\ContactProductDetails.reportModel-dml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\DefaultModule\Models\ContactProduct\ContactProduct.entityModel-dml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Options\ActiveProduct\ActiveProduct.options-dml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Options\ActiveProduct\ActiveProduct.virtualEntityModel-dml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Enums\ProductStatus.enum-dml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\DefaultModule\Forms\ProductCountInCategory\ProductCountInCategory.form-dml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\DefaultModule\Models\Store\Store.entityModel-dml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\DefaultModule\Models\OrderDetail\OrderDetail.entityModel-dml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\DefaultModule\Models\Product\Product.entityModel-dml.resources\ContactProduct.mrt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\DefaultModule\Models\Product\Product.entityModel-dml.resources.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Enums\CategoryStatus.enum-dml.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

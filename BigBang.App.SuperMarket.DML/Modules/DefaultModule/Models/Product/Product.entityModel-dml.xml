@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns="http://www.bigbang.io/dml/entityModel">
+  <entityModel name="SMProduct" moduleName="DefaultModule">
+	  <propertiesCollection>
+		  <properties>
+			  <primitive name="Id" order="1" isReadOnly="true" />
+			  <primitive name="Title" order="2" displayName="نام محصول"/>
+			  <primitive name="Inventory" order="3" displayName="موجودی" />
+			  <primitive name="Price" order="4" displayName="قیمت"> 
+				  <formatType>
+					  <currency />
+				  </formatType>
+			  </primitive>
+			  <primitive name="IsActive" order="5" displayName="وضعیت"/>
+			  <reference name="Category" order="6" />
+		  </properties>
+	  </propertiesCollection>
+	  <formatting>
+		  <property name="Title"/>
+		  <constant value="("/>
+		  <constant value=" موجودی : "/>
+		  <property  name="Inventory"/>
+		  <constant value=")"/>
+	  </formatting> 
+	  <stateMachine stateProperty="IsActive" initialState="Active">
+		  <states>
+			  <state name="DeActive" value="0"  displayName="غیرفعال"/>
+			  <state name="Active" value="1"  displayName="فعال"/>
+		  </states>
+		  <transitions>
+			  <transition name="Activate" displayName="فعال کردن">
+				  <relations>
+					  <relation from="DeActive" to="Active" />
+				  </relations>
+			  </transition>
+			  <transition name="Deactivate" displayName="غیرفعال کردن">
+				  <relations>
+					  <relation from="Active" to="DeActive" />
+				  </relations>
+			  </transition>
+		  </transitions>
+	  </stateMachine>
+	  <commands>
+		  <custom  name="AddToStore" displayName="افزودن به انبار">
+			  <parametersCollection>
+				  <parameters>
+					  <parameter name="Product" sourceType="Self">
+						  <parameterType>
+							  <model sourceModel="SMProduct"/>
+						  </parameterType>
+					  </parameter>
+					  <parameter name="Quantity" sourceType="UserDefined" displayName="تعداد">
+						  <parameterType>
+							  <int/>
+						  </parameterType>
+						  <validations>
+							  <notNull/>
+						  </validations>
+					  </parameter>
+				  </parameters>
+			  </parametersCollection>
+		  </custom>
+	  </commands>
+	  <printTemplates>
+		  <printTemplate sourceLoaderType="BigBang.App.SuperMarket.Services.ContactProductPrintService,BigBang.App.SuperMarket" displayName="محصولات" name="Print">
+			  <parameters>
+				  <parameter name="ProductId" sourceType="UserDefined" isVisible="false">
+					  <parameterType>
+						  <int/>
+					  </parameterType>
+				  </parameter>
+			  </parameters>
+			  <bindings>
+				  <property sourceProperty="Id" targetParameter="ProductId"/>
+			  </bindings>
+			  <provider>
+				  <stimulSoft>
+					  <template x-key="ContactProduct"></template>
+				  </stimulSoft>
+			  </provider>
+		  </printTemplate>
+	  </printTemplates>
+  </entityModel>
+</configuration>

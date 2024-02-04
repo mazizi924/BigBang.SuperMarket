@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.bigbang.io/dml/enum" xmlns:bb="http://www.bigbang.io/dml/enum">
+  <xs:element name="configuration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="enum" type="bb:DMLEnumDefinition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="DMLEnumDefinition">
+    <xs:all>
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="members">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="member" type="bb:DMLEnumMember" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="dataType" type="bb:DMLEnumDataType" use="optional" />
+    <xs:attribute name="isFlag" use="optional" type="xs:boolean" />
+    <xs:attribute name="sortType" type="bb:DMLEnumSortType" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="DMLEnumMember">
+    <xs:all>
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="formatting" minOccurs="0" maxOccurs="1" type="xs:string" />
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="value" use="required" type="xs:long" />
+  </xs:complexType>
+  <xs:simpleType name="DMLEnumDataType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Byte" />
+      <xs:enumeration value="Short" />
+      <xs:enumeration value="Int" />
+      <xs:enumeration value="Long" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DMLEnumSortType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Index" />
+      <xs:enumeration value="Value" />
+      <xs:enumeration value="DisplayNameOrName" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BBDuration">
+    <xs:annotation>
+      <xs:documentation>pattern is (D.HH:MM:SS | D) In which D is days, HH is 2-digit 00-24 hour, MM is 2-digit 00-59 minute and SS is 2-digit second 00-59</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^\d+|(\d+\.)?([01]\d|2[0-3]):([0-5]\d)(:[0-5]\d)?$" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,3110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.bigbang.io/dml/projectionEntityModel" xmlns:bb="http://www.bigbang.io/dml/projectionEntityModel">
+  <xs:element name="configuration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="projectionEntityModel" type="bb:DMLProjectionEntityModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="DMLProjectionEntityModel">
+    <xs:all>
+      <xs:element name="projectionPropertiesCollection" type="bb:DMLProjectionEntityPropertyCollection" minOccurs="0" maxOccurs="1" />
+      <xs:element name="baseModel" type="bb:DMLBaseEntityModel" minOccurs="0" maxOccurs="1" />
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="icon" type="bb:DMLIcon" minOccurs="0" maxOccurs="1" />
+      <xs:element name="attachment" type="bb:DMLEntityModelAttachment" minOccurs="0" maxOccurs="1" />
+      <xs:element name="constant" type="bb:DMLEntityModelConstant" minOccurs="0" maxOccurs="1" />
+      <xs:element name="commands" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="create" type="bb:DMLEntityModelCreateCommand" />
+            <xs:element name="read" type="bb:DMLEntityModelReadCommand" />
+            <xs:element name="update" type="bb:DMLEntityModelUpdateCommand" />
+            <xs:element name="delete" type="bb:DMLEntityModelDeleteCommand" />
+            <xs:element name="custom" type="bb:DMLEntityModelCustomCommand" />
+            <xs:element name="storedProcedure" type="bb:DMLEntityModelStoredProcedureCommand" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="formatting" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="constant" type="bb:DMLModelFormattingConstant" />
+            <xs:element name="property" type="bb:DMLModelFormattingProperty" />
+            <xs:element name="dynamic" type="bb:DMLModelFormattingExpression" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="exportFormatting" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="constant" type="bb:DMLModelFormattingConstant" />
+            <xs:element name="property" type="bb:DMLModelFormattingProperty" />
+            <xs:element name="dynamic" type="bb:DMLModelFormattingExpression" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="printTemplates" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="printTemplate" type="bb:DMLPrintTemplate" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="defaultSorts" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="defaultSort" type="bb:DMLEntityModelDefaultSort" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="stateMachine" type="bb:DMLEntityModelStateMachine" minOccurs="0" maxOccurs="1" />
+      <xs:element name="relatedReports" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="relatedReport" type="bb:DMLEntityModelRelatedReport" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="defaultEditor" type="bb:DMLModelDefaultEditor" minOccurs="0" maxOccurs="1" />
+      <xs:element name="preferences" type="bb:DMLPreferences" minOccurs="0" maxOccurs="1" />
+      <xs:element name="predefinedFilters" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="self" type="bb:DMLSelfPredefinedFilter" />
+            <xs:element name="base" type="bb:DMLBasePredefinedFilter" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="defaultRestrictions" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="basic" type="bb:DMLBasicRestriction" />
+            <xs:element name="local" type="bb:DMLLocalRestriction" />
+            <xs:element name="custom" type="bb:DMLCustomRestriction" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="systemRestrictions" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="custom" type="bb:DMLCustomRestriction" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="notification" type="bb:DMLEntityNotification" minOccurs="0" maxOccurs="1" />
+      <xs:element name="interfaces" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="interface" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="interfaceMappings" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="interfaceMapping" type="bb:DMLEntityInterfacePropertyMapping" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="dragCondition" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="rowAccessLevelProperties" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>by default searchable properties will be shown in row access level filter. Set this property to customize it</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="rowAccessLevelProperty" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="selfReferencePolicy" type="bb:DMLSelfReferencePolicy" minOccurs="0" maxOccurs="1" />
+      <xs:element name="autoCreate" type="bb:DMLEntityModelAutoCreate" minOccurs="0" maxOccurs="1" />
+      <xs:element name="createTemplateForms" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="createTemplateForm" type="bb:DMLCreateTemplateForm" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="hasChildrenExpression" minOccurs="0" maxOccurs="1" type="xs:string" />
+    </xs:all>
+    <xs:attribute name="primaryProperty" use="required" type="xs:string" />
+    <xs:attribute name="inheritancySelfReferenceType" type="bb:DMLInheritancySelfReferenceType" use="optional">
+      <xs:annotation>
+        <xs:documentation>Type of parent and children property in inheritancy</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="name" use="required">
+      <xs:annotation>
+        <xs:documentation>Name of entity model must be matched by this pattern: ^[A-Za-z_][A-Za-z0-9_]*$</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="^[A-Za-z_][A-Za-z0-9_]*$" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="isReadOnly" use="optional" type="xs:boolean" />
+    <xs:attribute name="moduleName" use="required" type="xs:string" />
+    <xs:attribute name="presentForm" use="optional" type="xs:string" />
+    <xs:attribute name="searchForm" use="optional" type="xs:string" />
+    <xs:attribute name="newNavigationForm" use="optional" type="xs:string" />
+    <xs:attribute name="editNavigationForm" use="optional" type="xs:string" />
+    <xs:attribute name="isActive" use="optional" type="xs:boolean" />
+    <xs:attribute name="presentInDevelopment" use="optional" type="xs:boolean" />
+    <xs:attribute name="isAbstract" use="optional" type="xs:boolean" />
+    <xs:attribute name="isSealed" use="optional" type="xs:boolean" />
+    <xs:attribute name="abstractionPolicy" type="bb:DMLAbstractionPolicy" use="optional" />
+    <xs:attribute name="isLocateSupported" use="optional" type="xs:boolean" />
+    <xs:attribute name="isLocateFromSupported" use="optional" type="xs:boolean" />
+    <xs:attribute name="isDefaultViewSupported" use="optional" type="xs:boolean" />
+    <xs:attribute name="isAdditionalPropertiesSupported" use="optional" type="xs:boolean" />
+    <xs:attribute name="defaultSearchProperty" use="optional" type="xs:string" />
+    <xs:attribute name="partialLoad" use="optional" type="xs:boolean" />
+    <xs:attribute name="aliasName" use="optional" type="xs:string" />
+    <xs:attribute name="abstractEntityAddingPolicy" type="bb:DMLAbstractEntityAddingPolicy" use="optional" />
+    <xs:attribute name="defaultCommand" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The custom command that will be executed when the item double clicked. Default is set to 'Update' command.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="privacy" type="bb:DMLEntityModelPrivacy" use="optional" />
+    <xs:attribute name="defaultReadModel" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLProjectionEntityPropertyCollection">
+    <xs:all>
+      <xs:element name="properties" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="primitive" type="bb:DMLProjectionEntityModelPrimitiveProperty" />
+            <xs:element name="reference" type="bb:DMLProjectionEntityModelReferenceProperty" />
+            <xs:element name="crossReference" type="bb:DMLProjectionEntityModelCrossReferenceProperty" />
+            <xs:element name="list" type="bb:DMLProjectionEntityModelListProperty" />
+            <xs:element name="complex" type="bb:DMLProjectionEntityModelVirtualComplexProperty" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="validations" type="bb:DMLModelValidation" minOccurs="0" maxOccurs="1" />
+      <xs:element name="changeExpressions" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="changeExpression" type="bb:DMLChangeExpression" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createExpressions" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="createExpression" type="bb:DMLCreateExpression" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="saveExpressions" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="saveExpression" type="bb:DMLSaveExpression" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="summaries" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="max" type="bb:DMLMaxSummary" />
+            <xs:element name="min" type="bb:DMLMinSummary" />
+            <xs:element name="sum" type="bb:DMLSumSummary" />
+            <xs:element name="average" type="bb:DMLAverageSummary" />
+            <xs:element name="custom" type="bb:DMLCustomSummary" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="layoutExpressions" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="readOnlyField" type="bb:DMLFieldReadOnlyLayoutExpression" />
+            <xs:element name="disabledField" type="bb:DMLFieldDisabledLayoutExpression" />
+            <xs:element name="invisibleField" type="bb:DMLFieldInvisibleLayoutExpression" />
+            <xs:element name="readOnly" type="bb:DMLReadOnlyLayoutExpression" />
+            <xs:element name="disabled" type="bb:DMLDisabledLayoutExpression" />
+            <xs:element name="focusField" type="bb:DMLFieldFocusLayoutExpression" />
+            <xs:element name="backgroundColorField" type="bb:DMLFieldBackgroundColorLayoutExpression" />
+            <xs:element name="backgroundColor" type="bb:DMLBackgroundColorLayoutExpression" />
+            <xs:element name="foreColorField" type="bb:DMLFieldForeColorLayoutExpression" />
+            <xs:element name="foreColor" type="bb:DMLForeColorLayoutExpression" />
+            <xs:element name="captionColorField" type="bb:DMLFieldCaptionColorLayoutExpression" />
+            <xs:element name="textDecorationField" type="bb:DMLFieldTextDecorationLayoutExpression" />
+            <xs:element name="textDecoration" type="bb:DMLTextDecorationLayoutExpression" />
+            <xs:element name="fontStyleField" type="bb:DMLFieldFontStyleLayoutExpression" />
+            <xs:element name="fontStyle" type="bb:DMLFontStyleLayoutExpression" />
+            <xs:element name="filterField" type="bb:DMLFieldFilterLayoutExpression" />
+            <xs:element name="selectJsonTemplateField" type="bb:DMLFieldSelectJsonSchemaTemplateLayoutExpression" />
+            <xs:element name="filterEnumField" type="bb:DMLFieldEnumFilterLayoutExpression" />
+            <xs:element name="crossReferenceFilterField" type="bb:DMLFieldFilterCrossReferenceLayoutExpression" />
+            <xs:element name="customField" type="bb:DMLFieldCustomLayoutExpression" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="defaultForm" use="optional" type="xs:string" />
+    <xs:attribute name="viewForm" use="optional" type="xs:string" />
+    <xs:attribute name="editForm" use="optional" type="xs:string" />
+    <xs:attribute name="newForm" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLProjectionEntityModelPrimitiveProperty">
+    <xs:all>
+      <xs:element name="propertyType" type="bb:DMLPrimitiveFieldDataType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="formatType" type="bb:DMLPropertyFormatType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="editor" type="bb:DMLFieldEditor" minOccurs="0" maxOccurs="1" />
+      <xs:element name="validation" type="bb:DMLPropertyValidation" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="lazy" use="optional" type="xs:boolean" />
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="allowNull" use="optional" type="xs:boolean" />
+    <xs:attribute name="isSearchable" use="optional" type="xs:boolean" />
+    <xs:attribute name="isVisible" use="optional" type="xs:boolean" />
+    <xs:attribute name="isReadOnly" use="optional" type="xs:boolean" />
+    <xs:attribute name="isSortable" use="optional" type="xs:boolean" />
+    <xs:attribute name="viewVisible" use="optional" type="xs:boolean" />
+    <xs:attribute name="entryVisible" use="optional" type="xs:boolean" />
+    <xs:attribute name="dynamicFilterKey" use="optional" type="xs:string" />
+    <xs:attribute name="logHistory" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLPrimitiveFieldDataType">
+    <xs:choice>
+      <xs:element name="dictionary" type="bb:DMLDictionaryFieldDataType" />
+      <xs:element name="crossReference" type="bb:DMLCrossReferenceFieldDataType" />
+      <xs:element name="list" type="bb:DMLListFieldDataType" />
+      <xs:element name="guid" type="bb:DMLGuidFieldDataType" />
+      <xs:element name="string" type="bb:DMLStringFieldDataType" />
+      <xs:element name="dateTime" type="bb:DMLDateTimeFieldDataType" />
+      <xs:element name="boolean" type="bb:DMLBooleanFieldDataType" />
+      <xs:element name="byte" type="bb:DMLByteFieldDataType" />
+      <xs:element name="short" type="bb:DMLShortFieldDataType" />
+      <xs:element name="int" type="bb:DMLIntFieldDataType" />
+      <xs:element name="long" type="bb:DMLLongFieldDataType" />
+      <xs:element name="float" type="bb:DMLFloatFieldDataType" />
+      <xs:element name="decimal" type="bb:DMLDecimalFieldDataType" />
+      <xs:element name="double" type="bb:DMLDoubleFieldDataType" />
+      <xs:element name="binary" type="bb:DMLBinaryFieldDataType" />
+      <xs:element name="file" type="bb:DMLFileFieldDataType" />
+      <xs:element name="image" type="bb:DMLImageFieldDataType" />
+      <xs:element name="version" type="bb:DMLVersionFieldDataType" />
+      <xs:element name="duration" type="bb:DMLDurationFieldDataType" />
+      <xs:element name="enum" type="bb:DMLEnumFieldDataType" />
+      <xs:element name="json" type="bb:DMLJsonFieldDataType" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="DMLDictionaryFieldDataType">
+    <xs:all>
+      <xs:element name="valueType" type="bb:DMLDictionaryFilteredFieldDataType" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLDictionaryFilteredFieldDataType">
+    <xs:choice>
+      <xs:element name="guid" type="bb:DMLGuidFieldDataType" />
+      <xs:element name="string" type="bb:DMLStringFieldDataType" />
+      <xs:element name="dateTime" type="bb:DMLDateTimeFieldDataType" />
+      <xs:element name="boolean" type="bb:DMLBooleanFieldDataType" />
+      <xs:element name="byte" type="bb:DMLByteFieldDataType" />
+      <xs:element name="short" type="bb:DMLShortFieldDataType" />
+      <xs:element name="int" type="bb:DMLIntFieldDataType" />
+      <xs:element name="long" type="bb:DMLLongFieldDataType" />
+      <xs:element name="float" type="bb:DMLFloatFieldDataType" />
+      <xs:element name="decimal" type="bb:DMLDecimalFieldDataType" />
+      <xs:element name="double" type="bb:DMLDoubleFieldDataType" />
+      <xs:element name="duration" type="bb:DMLDurationFieldDataType" />
+      <xs:element name="enum" type="bb:DMLEnumFieldDataType" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="DMLGuidFieldDataType" />
+  <xs:complexType name="DMLStringFieldDataType" />
+  <xs:complexType name="DMLDateTimeFieldDataType" />
+  <xs:complexType name="DMLBooleanFieldDataType" />
+  <xs:complexType name="DMLByteFieldDataType" />
+  <xs:complexType name="DMLShortFieldDataType" />
+  <xs:complexType name="DMLIntFieldDataType" />
+  <xs:complexType name="DMLLongFieldDataType" />
+  <xs:complexType name="DMLFloatFieldDataType" />
+  <xs:complexType name="DMLDecimalFieldDataType" />
+  <xs:complexType name="DMLDoubleFieldDataType" />
+  <xs:complexType name="DMLDurationFieldDataType" />
+  <xs:complexType name="DMLEnumFieldDataType">
+    <xs:attribute name="name" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLCrossReferenceFieldDataType">
+    <xs:all>
+      <xs:element name="entityModels" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="entityModel" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="interface" use="optional" type="xs:string" />
+    <xs:attribute name="useCrossReferenceTypeWhenInterfaceProvided" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLListFieldDataType">
+    <xs:all>
+      <xs:element name="elementType" type="bb:DMLListFilteredFieldDataType" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLListFilteredFieldDataType">
+    <xs:choice>
+      <xs:element name="object" type="bb:DMLObjectFieldDataType" />
+      <xs:element name="dictionary" type="bb:DMLDictionaryFieldDataType" />
+      <xs:element name="model" type="bb:DMLModelFieldDataType" />
+      <xs:element name="crossReference" type="bb:DMLCrossReferenceFieldDataType" />
+      <xs:element name="guid" type="bb:DMLGuidFieldDataType" />
+      <xs:element name="string" type="bb:DMLStringFieldDataType" />
+      <xs:element name="dateTime" type="bb:DMLDateTimeFieldDataType" />
+      <xs:element name="boolean" type="bb:DMLBooleanFieldDataType" />
+      <xs:element name="byte" type="bb:DMLByteFieldDataType" />
+      <xs:element name="short" type="bb:DMLShortFieldDataType" />
+      <xs:element name="int" type="bb:DMLIntFieldDataType" />
+      <xs:element name="long" type="bb:DMLLongFieldDataType" />
+      <xs:element name="float" type="bb:DMLFloatFieldDataType" />
+      <xs:element name="decimal" type="bb:DMLDecimalFieldDataType" />
+      <xs:element name="double" type="bb:DMLDoubleFieldDataType" />
+      <xs:element name="binary" type="bb:DMLBinaryFieldDataType" />
+      <xs:element name="file" type="bb:DMLFileFieldDataType" />
+      <xs:element name="image" type="bb:DMLImageFieldDataType" />
+      <xs:element name="version" type="bb:DMLVersionFieldDataType" />
+      <xs:element name="duration" type="bb:DMLDurationFieldDataType" />
+      <xs:element name="enum" type="bb:DMLEnumFieldDataType" />
+      <xs:element name="json" type="bb:DMLJsonFieldDataType" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="DMLObjectFieldDataType">
+    <xs:attribute name="specialType" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLModelFieldDataType">
+    <xs:attribute name="sourceModel" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLBinaryFieldDataType" />
+  <xs:complexType name="DMLFileFieldDataType" />
+  <xs:complexType name="DMLImageFieldDataType" />
+  <xs:complexType name="DMLVersionFieldDataType" />
+  <xs:complexType name="DMLJsonFieldDataType">
+    <xs:attribute name="schema" use="optional" type="xs:string" />
+    <xs:attribute name="templateSelectionPolicy" type="bb:DMLJsonTemplateSelectionPolicy" use="optional" />
+  </xs:complexType>
+  <xs:simpleType name="DMLJsonTemplateSelectionPolicy">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Property" />
+      <xs:enumeration value="BeforeCreate" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLPropertyFormatType">
+    <xs:choice>
+      <xs:element name="currency" type="bb:DMLCurrencyFormatType" />
+      <xs:element name="time" type="bb:DMLTimeFormatType" />
+      <xs:element name="date" type="bb:DMLDateFormatType" />
+      <xs:element name="dateTime" type="bb:DMLDateTimeFormatType" />
+      <xs:element name="url" type="bb:DMLUrlFormatType" />
+      <xs:element name="email" type="bb:DMLEmailFormatType" />
+      <xs:element name="duration" type="bb:DMLDurationFormatType" />
+      <xs:element name="digit" type="bb:DMLDigitFormatType" />
+      <xs:element name="custom" type="bb:DMLCustomFormatType" />
+      <xs:element name="stringFormat" type="bb:DMLStringFormatType" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="DMLCurrencyFormatType" />
+  <xs:complexType name="DMLTimeFormatType">
+    <xs:attribute name="durationType" type="bb:DMLTimeFormattingType" use="optional" />
+  </xs:complexType>
+  <xs:simpleType name="DMLTimeFormattingType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Hour" />
+      <xs:enumeration value="HourMinute" />
+      <xs:enumeration value="HourMinuteSecond" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLDateFormatType" />
+  <xs:complexType name="DMLDateTimeFormatType">
+    <xs:attribute name="timeRemaining" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLUrlFormatType">
+    <xs:all>
+      <xs:element name="textExpression" minOccurs="0" maxOccurs="1" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLEmailFormatType">
+    <xs:all>
+      <xs:element name="textExpression" minOccurs="0" maxOccurs="1" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLDurationFormatType" />
+  <xs:complexType name="DMLDigitFormatType">
+    <xs:attribute name="scale" use="optional" type="xs:int" />
+  </xs:complexType>
+  <xs:complexType name="DMLCustomFormatType">
+    <xs:all>
+      <xs:element name="formatting" minOccurs="1" maxOccurs="1" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLStringFormatType">
+    <xs:attribute name="format" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLFieldEditor">
+    <xs:choice>
+      <xs:element name="color" type="bb:DMLColorEditor" />
+      <xs:element name="audio" type="bb:DMLAudioEditor" />
+      <xs:element name="json" type="bb:DMLJsonEditor" />
+      <xs:element name="html" type="bb:DMLHtmlEditor" />
+      <xs:element name="keyValue" type="bb:DMLKeyValueEditor" />
+      <xs:element name="manyToMany" type="bb:DMLManyToManyEditor" />
+      <xs:element name="list" type="bb:DMLListEditor" />
+      <xs:element name="cron" type="bb:DMLCronEditor" />
+      <xs:element name="boolean" type="bb:DMLBooleanEditor" />
+      <xs:element name="crossReference" type="bb:DMLCrossReferenceModelEditor" />
+      <xs:element name="custom" type="bb:DMLCustomEditor" />
+      <xs:element name="date" type="bb:DMLDateEditor" />
+      <xs:element name="dateTime" type="bb:DMLDateTimeEditor" />
+      <xs:element name="duration" type="bb:DMLDurationEditor" />
+      <xs:element name="file" type="bb:DMLFileEditor" />
+      <xs:element name="image" type="bb:DMLImageEditor" />
+      <xs:element name="model" type="bb:DMLModelEditor" />
+      <xs:element name="numerical" type="bb:DMLNumericalEditor" />
+      <xs:element name="enum" type="bb:DMLEnumEditor" />
+      <xs:element name="state" type="bb:DMLStateEditor" />
+      <xs:element name="string" type="bb:DMLStringEditor" />
+      <xs:element name="time" type="bb:DMLTimeEditor" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="DMLColorEditor">
+    <xs:attribute name="width" use="optional" type="xs:string" />
+    <xs:attribute name="height" use="optional" type="xs:string" />
+    <xs:attribute name="direction" type="bb:DMLDirection" use="optional" />
+    <xs:attribute name="viewMode" type="bb:DMLEditorViewMode" use="optional" />
+  </xs:complexType>
+  <xs:simpleType name="DMLDirection">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Default" />
+      <xs:enumeration value="RightToLeft" />
+      <xs:enumeration value="LeftToRight" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DMLEditorViewMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Default" />
+      <xs:enumeration value="ViewOnly" />
+      <xs:enumeration value="InLineEdit" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLAudioEditor">
+    <xs:attribute name="isDownloadCapable" use="optional" type="xs:boolean" />
+    <xs:attribute name="audioRecordingFormat" type="bb:DMLAudioRecordingFormat" use="optional" />
+    <xs:attribute name="audioInputMethod" type="bb:DMLAudioInputMethod" use="optional" />
+    <xs:attribute name="width" use="optional" type="xs:string" />
+    <xs:attribute name="height" use="optional" type="xs:string" />
+    <xs:attribute name="direction" type="bb:DMLDirection" use="optional" />
+    <xs:attribute name="viewMode" type="bb:DMLEditorViewMode" use="optional" />
+  </xs:complexType>
+  <xs:simpleType name="DMLAudioRecordingFormat">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="WebM" />
+      <xs:enumeration value="Ogg" />
+      <xs:enumeration value="Wave" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DMLAudioInputMethod">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Both" />
+      <xs:enumeration value="RecordOnly" />
+      <xs:enumeration value="AddFileOnly" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLJsonEditor">
+    <xs:attribute name="showTemplateSelector" use="optional" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>Enalbled by default</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="showGrouping" use="optional" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>Disabled by default</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="width" use="optional" type="xs:string" />
+    <xs:attribute name="height" use="optional" type="xs:string" />
+    <xs:attribute name="direction" type="bb:DMLDirection" use="optional" />
+    <xs:attribute name="viewMode" type="bb:DMLEditorViewMode" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="DMLHtmlEditor">
+    <xs:attribute name="maxLength" use="optional" type="xs:int" />
+    <xs:attribute name="width" use="optional" type="xs:string" />
+    <xs:attribute name="height" use="optional" type="xs:string" />
+    <xs:attribute name="direction" type="bb:DMLDirection" use="optional" />
+    <xs:attribute name="viewMode" type="bb:DMLEditorViewMode" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="DMLKeyValueEditor">
+    <xs:all>
+      <xs:element name="valueEditor" type="bb:DMLFieldEditor" />
+    </xs:all>
+    <xs:attribute name="width" use="optional" type="xs:string" />
+    <xs:attribute name="height" use="optional" type="xs:string" />
+    <xs:attribute name="direction" type="bb:DMLDirection" use="optional" />
+    <xs:attribute name="viewMode" type="bb:DMLEditorViewMode" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="DMLManyToManyEditor">
+    <xs:attribute name="preventDuplicate" use="optional" type="xs:boolean" />
+    <xs:attribute name="totalLoadCount" use="optional" type="xs:int" />
+    <xs:attribute name="debounceRate" use="optional" type="xs:int" />
+    <xs:attribute name="width" use="optional" type="xs:string" />
+    <xs:attribute name="height" use="optional" type="xs:string" />
+    <xs:attribute name="direction" type="bb:DMLDirection" use="optional" />
+    <xs:attribute name="viewMode" type="bb:DMLEditorViewMode" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="DMLListEditor">
+    <xs:all>
+      <xs:element name="elementEditor" type="bb:DMLFieldEditor" />
+    </xs:all>
+    <xs:attribute name="width" use="optional" type="xs:string" />
+    <xs:attribute name="height" use="optional" type="xs:string" />
+    <xs:attribute name="direction" type="bb:DMLDirection" use="optional" />
+    <xs:attribute name="viewMode" type="bb:DMLEditorViewMode" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="DMLCronEditor">
+    <xs:attribute name="secondsSupported" use="optional" type="xs:boolean" />
+    <xs:attribute name="width" use="optional" type="xs:string" />
+    <xs:attribute name="height" use="optional" type="xs:string" />
+    <xs:attribute name="direction" type="bb:DMLDirection" use="optional" />
+    <xs:attribute name="viewMode" type="bb:DMLEditorViewMode" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="DMLBooleanEditor">
+    <xs:attribute name="editorType" type="bb:DMLBooleanEditorType" use="optional" />
+    <xs:attribute name="width" use="optional" type="xs:string" />
+    <xs:attribute name="height" use="optional" type="xs:string" />
+    <xs:attribute name="direction" type="bb:DMLDirection" use="optional" />
+    <xs:attribute name="viewMode" type="bb:DMLEditorViewMode" use="optional" />
+  </xs:complexType>
+  <xs:simpleType name="DMLBooleanEditorType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CheckBox" />
+      <xs:enumeration value="ComboBox" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLCrossReferenceModelEditor">
+    <xs:all>
+      <xs:element name="businessContext" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="businessContextItem" type="bb:DMLBusinessContextItem" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="isReferenceModelsVisible" use="optional" type="xs:boolean" />
+    <xs:attribute name="isCompactMode" use="optional" type="xs:boolean" />
+    <xs:attribute name="newItem" type="bb:DMLModelEditorButtonDisplayMode" use="optional" />
+    <xs:attribute name="searchMore" type="bb:DMLModelEditorButtonDisplayMode" use="optional" />
+    <xs:attribute name="openForm" type="bb:DMLModelEditorButtonDisplayMode" use="optional" />
+    <xs:attribute name="showLocateForm" use="optional" type="xs:boolean" />
+    <xs:attribute name="totalLoadCount" use="optional" type="xs:int" />
+    <xs:attribute name="model" use="optional" type="xs:string" />
+    <xs:attribute name="isAutoCreateActive" use="optional" type="xs:boolean" />
+    <xs:attribute name="cascadeBusinessContext" use="optional" type="xs:boolean" />
+    <xs:attribute name="cascadeParameterContext" use="optional" type="xs:boolean" />
+    <xs:attribute name="stringPropertySearchOperator" type="bb:DMLStringPropertySearchOperator" use="optional" />
+    <xs:attribute name="debounceRate" use="optional" type="xs:int" />
+    <xs:attribute name="width" use="optional" type="xs:string" />
+    <xs:attribute name="height" use="optional" type="xs:string" />
+    <xs:attribute name="direction" type="bb:DMLDirection" use="optional" />
+    <xs:attribute name="viewMode" type="bb:DMLEditorViewMode" use="optional" />
+  </xs:complexType>
+  <xs:simpleType name="DMLModelEditorButtonDisplayMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Show" />
+      <xs:enumeration value="Hide" />
+      <xs:enumeration value="Auto" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLBusinessContextItem">
+    <xs:all>
+      <xs:element name="value" minOccurs="1" maxOccurs="1" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Expression for business context value</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="DMLStringPropertySearchOperator">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Contains" />
+      <xs:enumeration value="Equal" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLCustomEditor">
+    <xs:all>
+      <xs:element name="configs" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="config" type="bb:DMLCustomEditorConfig" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="editorType" type="bb:DMLCustomEditorType" use="optional" />
+    <xs:attribute name="width" use="optional" type="xs:string" />
+    <xs:attribute name="height" use="optional" type="xs:string" />
+    <xs:attribute name="direction" type="bb:DMLDirection" use="optional" />
+    <xs:attribute name="viewMode" type="bb:DMLEditorViewMode" use="optional" />
+  </xs:complexType>
+  <xs:simpleType name="DMLCustomEditorType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Inline" />
+      <xs:enumeration value="Dialog" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLCustomEditorConfig">
+    <xs:all>
+      <xs:element name="expression" minOccurs="1" maxOccurs="1" type="xs:string" />
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLDateEditor">
+    <xs:attribute name="width" use="optional" type="xs:string" />
+    <xs:attribute name="height" use="optional" type="xs:string" />
+    <xs:attribute name="direction" type="bb:DMLDirection" use="optional" />
+    <xs:attribute name="viewMode" type="bb:DMLEditorViewMode" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="DMLDateTimeEditor">
+    <xs:attribute name="width" use="optional" type="xs:string" />
+    <xs:attribute name="height" use="optional" type="xs:string" />
+    <xs:attribute name="direction" type="bb:DMLDirection" use="optional" />
+    <xs:attribute name="viewMode" type="bb:DMLEditorViewMode" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="DMLDurationEditor">
+    <xs:attribute name="editorType" type="bb:DMLDurationEditorType" use="optional" />
+    <xs:attribute name="width" use="optional" type="xs:string" />
+    <xs:attribute name="height" use="optional" type="xs:string" />
+    <xs:attribute name="direction" type="bb:DMLDirection" use="optional" />
+    <xs:attribute name="viewMode" type="bb:DMLEditorViewMode" use="optional" />
+  </xs:complexType>
+  <xs:simpleType name="DMLDurationEditorType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Second" />
+      <xs:enumeration value="Minute" />
+      <xs:enumeration value="Hour" />
+      <xs:enumeration value="Day" />
+      <xs:enumeration value="DayHour" />
+      <xs:enumeration value="DayHourMinute" />
+      <xs:enumeration value="DayHourMinuteSecond" />
+      <xs:enumeration value="HourMinute" />
+      <xs:enumeration value="HourMinuteSecond" />
+      <xs:enumeration value="MinuteSecond" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLFileEditor">
+    <xs:attribute name="isDownloadable" use="optional" type="xs:boolean" />
+    <xs:attribute name="width" use="optional" type="xs:string" />
+    <xs:attribute name="height" use="optional" type="xs:string" />
+    <xs:attribute name="direction" type="bb:DMLDirection" use="optional" />
+    <xs:attribute name="viewMode" type="bb:DMLEditorViewMode" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="DMLImageEditor">
+    <xs:attribute name="isDownloadable" use="optional" type="xs:boolean" />
+    <xs:attribute name="width" use="optional" type="xs:string" />
+    <xs:attribute name="height" use="optional" type="xs:string" />
+    <xs:attribute name="direction" type="bb:DMLDirection" use="optional" />
+    <xs:attribute name="viewMode" type="bb:DMLEditorViewMode" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="DMLModelEditor">
+    <xs:all>
+      <xs:element name="formatting" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="constant" type="bb:DMLModelFormattingConstant" />
+            <xs:element name="property" type="bb:DMLModelFormattingProperty" />
+            <xs:element name="dynamic" type="bb:DMLModelFormattingExpression" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="businessContext" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="businessContextItem" type="bb:DMLBusinessContextItem" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="newItem" type="bb:DMLModelEditorButtonDisplayMode" use="optional" />
+    <xs:attribute name="searchMore" type="bb:DMLModelEditorButtonDisplayMode" use="optional" />
+    <xs:attribute name="openForm" type="bb:DMLModelEditorButtonDisplayMode" use="optional" />
+    <xs:attribute name="showLocateForm" use="optional" type="xs:boolean" />
+    <xs:attribute name="totalLoadCount" use="optional" type="xs:int" />
+    <xs:attribute name="model" use="optional" type="xs:string" />
+    <xs:attribute name="editorType" type="bb:DMLModelEditorType" use="optional" />
+    <xs:attribute name="presentForm" use="optional" type="xs:string" />
+    <xs:attribute name="searchForm" use="optional" type="xs:string" />
+    <xs:attribute name="isAutoCreateActive" use="optional" type="xs:boolean" />
+    <xs:attribute name="cascadeBusinessContext" use="optional" type="xs:boolean" />
+    <xs:attribute name="cascadeParameterContext" use="optional" type="xs:boolean" />
+    <xs:attribute name="stringPropertySearchOperator" type="bb:DMLStringPropertySearchOperator" use="optional" />
+    <xs:attribute name="debounceRate" use="optional" type="xs:int" />
+    <xs:attribute name="width" use="optional" type="xs:string" />
+    <xs:attribute name="height" use="optional" type="xs:string" />
+    <xs:attribute name="direction" type="bb:DMLDirection" use="optional" />
+    <xs:attribute name="viewMode" type="bb:DMLEditorViewMode" use="optional" />
+  </xs:complexType>
+  <xs:simpleType name="DMLModelEditorType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ComboBox" />
+      <xs:enumeration value="Lookup" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLModelFormattingConstant">
+    <xs:attribute name="value" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLModelFormattingProperty">
+    <xs:attribute name="name" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLModelFormattingExpression">
+    <xs:all>
+      <xs:element name="expression" minOccurs="1" maxOccurs="1" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLNumericalEditor">
+    <xs:attribute name="decimalPlaces" use="optional" type="xs:int" />
+    <xs:attribute name="decimalCharacter" use="optional" type="xs:string" />
+    <xs:attribute name="decimalCharacterAlternate" use="optional" type="xs:string" />
+    <xs:attribute name="currencySymbol" type="bb:DMLSymbol" use="optional" />
+    <xs:attribute name="currencySymbolPosition" type="bb:DMLSymbolPosition" use="optional" />
+    <xs:attribute name="digitGroupSeparator" use="optional" type="xs:string" />
+    <xs:attribute name="isDigitGrouping" use="optional" type="xs:boolean" />
+    <xs:attribute name="minValue" use="optional" type="xs:decimal" />
+    <xs:attribute name="maxValue" use="optional" type="xs:decimal" />
+    <xs:attribute name="width" use="optional" type="xs:string" />
+    <xs:attribute name="height" use="optional" type="xs:string" />
+    <xs:attribute name="direction" type="bb:DMLDirection" use="optional" />
+    <xs:attribute name="viewMode" type="bb:DMLEditorViewMode" use="optional" />
+  </xs:complexType>
+  <xs:simpleType name="DMLSymbol">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Rial" />
+      <xs:enumeration value="Doller" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DMLSymbolPosition">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Left" />
+      <xs:enumeration value="Right" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLEnumEditor">
+    <xs:attribute name="sortType" type="bb:DMLEnumSortType" use="optional" />
+    <xs:attribute name="width" use="optional" type="xs:string" />
+    <xs:attribute name="height" use="optional" type="xs:string" />
+    <xs:attribute name="direction" type="bb:DMLDirection" use="optional" />
+    <xs:attribute name="viewMode" type="bb:DMLEditorViewMode" use="optional" />
+  </xs:complexType>
+  <xs:simpleType name="DMLEnumSortType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Index" />
+      <xs:enumeration value="Value" />
+      <xs:enumeration value="DisplayNameOrName" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLStateEditor">
+    <xs:attribute name="width" use="optional" type="xs:string" />
+    <xs:attribute name="height" use="optional" type="xs:string" />
+    <xs:attribute name="direction" type="bb:DMLDirection" use="optional" />
+    <xs:attribute name="viewMode" type="bb:DMLEditorViewMode" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="DMLStringEditor">
+    <xs:attribute name="multiline" use="optional" type="xs:boolean" />
+    <xs:attribute name="isPassword" use="optional" type="xs:boolean" />
+    <xs:attribute name="maxLength" use="optional" type="xs:int" />
+    <xs:attribute name="width" use="optional" type="xs:string" />
+    <xs:attribute name="height" use="optional" type="xs:string" />
+    <xs:attribute name="direction" type="bb:DMLDirection" use="optional" />
+    <xs:attribute name="viewMode" type="bb:DMLEditorViewMode" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="DMLTimeEditor">
+    <xs:attribute name="editorType" type="bb:DMLTimeEditorType" use="optional" />
+    <xs:attribute name="width" use="optional" type="xs:string" />
+    <xs:attribute name="height" use="optional" type="xs:string" />
+    <xs:attribute name="direction" type="bb:DMLDirection" use="optional" />
+    <xs:attribute name="viewMode" type="bb:DMLEditorViewMode" use="optional" />
+  </xs:complexType>
+  <xs:simpleType name="DMLTimeEditorType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Second" />
+      <xs:enumeration value="Minute" />
+      <xs:enumeration value="Hour" />
+      <xs:enumeration value="HourMinute" />
+      <xs:enumeration value="HourMinuteSecond" />
+      <xs:enumeration value="MinuteSecond" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLPropertyValidation">
+    <xs:all>
+      <xs:element name="new" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="notNull" type="bb:DMLNotNullFieldValidator" />
+            <xs:element name="jsonSchema" type="bb:DMLJsonSchemaFieldValidator" />
+            <xs:element name="binary" type="bb:DMLBinaryFieldValidator" />
+            <xs:element name="string" type="bb:DMLStringFieldValidator" />
+            <xs:element name="regex" type="bb:DMLRegularExpressionFieldValidator" />
+            <xs:element name="custom" type="bb:DMLCustomValidator" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="edit" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="notNull" type="bb:DMLNotNullFieldValidator" />
+            <xs:element name="jsonSchema" type="bb:DMLJsonSchemaFieldValidator" />
+            <xs:element name="binary" type="bb:DMLBinaryFieldValidator" />
+            <xs:element name="string" type="bb:DMLStringFieldValidator" />
+            <xs:element name="regex" type="bb:DMLRegularExpressionFieldValidator" />
+            <xs:element name="custom" type="bb:DMLCustomValidator" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="default" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="notNull" type="bb:DMLNotNullFieldValidator" />
+            <xs:element name="jsonSchema" type="bb:DMLJsonSchemaFieldValidator" />
+            <xs:element name="binary" type="bb:DMLBinaryFieldValidator" />
+            <xs:element name="string" type="bb:DMLStringFieldValidator" />
+            <xs:element name="regex" type="bb:DMLRegularExpressionFieldValidator" />
+            <xs:element name="custom" type="bb:DMLCustomValidator" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLNotNullFieldValidator">
+    <xs:attribute name="message" use="optional" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLJsonSchemaFieldValidator">
+    <xs:attribute name="message" use="optional" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLBinaryFieldValidator">
+    <xs:all>
+      <xs:element name="mimeTypes" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="mimeType" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="maxSize" use="optional" type="xs:int" />
+    <xs:attribute name="message" use="optional" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLStringFieldValidator">
+    <xs:attribute name="min" use="optional" type="xs:int" />
+    <xs:attribute name="max" use="optional" type="xs:int" />
+    <xs:attribute name="message" use="optional" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLRegularExpressionFieldValidator">
+    <xs:attribute name="pattern" use="required" type="xs:string" />
+    <xs:attribute name="multiline" use="optional" type="xs:boolean" />
+    <xs:attribute name="singleline" use="optional" type="xs:boolean" />
+    <xs:attribute name="ignoreCase" use="optional" type="xs:boolean" />
+    <xs:attribute name="message" use="optional" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLCustomValidator">
+    <xs:all>
+      <xs:element name="expression" minOccurs="1" maxOccurs="1" type="xs:string" />
+    </xs:all>
+    <xs:attribute name="message" use="optional" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLProjectionEntityModelReferenceProperty">
+    <xs:all>
+      <xs:element name="propertyType" type="bb:DMLPrimitiveFieldDataType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="formatType" type="bb:DMLPropertyFormatType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="editor" type="bb:DMLFieldEditor" minOccurs="0" maxOccurs="1" />
+      <xs:element name="validation" type="bb:DMLPropertyValidation" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="target" use="required" type="xs:string" />
+    <xs:attribute name="targetProperty" use="optional" type="xs:string" />
+    <xs:attribute name="ignoreGlobalFilter" use="optional" type="xs:boolean" />
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="allowNull" use="optional" type="xs:boolean" />
+    <xs:attribute name="isSearchable" use="optional" type="xs:boolean" />
+    <xs:attribute name="isVisible" use="optional" type="xs:boolean" />
+    <xs:attribute name="isReadOnly" use="optional" type="xs:boolean" />
+    <xs:attribute name="isSortable" use="optional" type="xs:boolean" />
+    <xs:attribute name="viewVisible" use="optional" type="xs:boolean" />
+    <xs:attribute name="entryVisible" use="optional" type="xs:boolean" />
+    <xs:attribute name="dynamicFilterKey" use="optional" type="xs:string" />
+    <xs:attribute name="logHistory" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLProjectionEntityModelCrossReferenceProperty">
+    <xs:all>
+      <xs:element name="entityModels" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="entityModel" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="formatType" type="bb:DMLPropertyFormatType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="editor" type="bb:DMLFieldEditor" minOccurs="0" maxOccurs="1" />
+      <xs:element name="validation" type="bb:DMLPropertyValidation" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="modelProperty" use="required" type="xs:string" />
+    <xs:attribute name="identityProperty" use="required" type="xs:string" />
+    <xs:attribute name="modelPropertyDisplayName" use="optional" type="xs:string" />
+    <xs:attribute name="interface" use="optional" type="xs:string" />
+    <xs:attribute name="deleteCascade" type="bb:DMLDeleteCascadeMode" use="optional" />
+    <xs:attribute name="targetProperty" use="optional" type="xs:string" />
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="allowNull" use="optional" type="xs:boolean" />
+    <xs:attribute name="isSearchable" use="optional" type="xs:boolean" />
+    <xs:attribute name="isVisible" use="optional" type="xs:boolean" />
+    <xs:attribute name="isReadOnly" use="optional" type="xs:boolean" />
+    <xs:attribute name="isSortable" use="optional" type="xs:boolean" />
+    <xs:attribute name="viewVisible" use="optional" type="xs:boolean" />
+    <xs:attribute name="entryVisible" use="optional" type="xs:boolean" />
+    <xs:attribute name="dynamicFilterKey" use="optional" type="xs:string" />
+    <xs:attribute name="logHistory" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:simpleType name="DMLDeleteCascadeMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Exception" />
+      <xs:enumeration value="Delete" />
+      <xs:enumeration value="SetNull" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLProjectionEntityModelListProperty">
+    <xs:all>
+      <xs:element name="businessContext" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="businessContextItem" type="bb:DMLBusinessContextItem" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="formatType" type="bb:DMLPropertyFormatType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="editor" type="bb:DMLFieldEditor" minOccurs="0" maxOccurs="1" />
+      <xs:element name="validation" type="bb:DMLPropertyValidation" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="target" use="required" type="xs:string" />
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="allowNull" use="optional" type="xs:boolean" />
+    <xs:attribute name="isSearchable" use="optional" type="xs:boolean" />
+    <xs:attribute name="isVisible" use="optional" type="xs:boolean" />
+    <xs:attribute name="isReadOnly" use="optional" type="xs:boolean" />
+    <xs:attribute name="isSortable" use="optional" type="xs:boolean" />
+    <xs:attribute name="viewVisible" use="optional" type="xs:boolean" />
+    <xs:attribute name="entryVisible" use="optional" type="xs:boolean" />
+    <xs:attribute name="dynamicFilterKey" use="optional" type="xs:string" />
+    <xs:attribute name="logHistory" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLProjectionEntityModelVirtualComplexProperty">
+    <xs:all>
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="formatType" type="bb:DMLPropertyFormatType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="editor" type="bb:DMLFieldEditor" minOccurs="0" maxOccurs="1" />
+      <xs:element name="validation" type="bb:DMLPropertyValidation" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="specialType" use="required" type="xs:string" />
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="allowNull" use="optional" type="xs:boolean" />
+    <xs:attribute name="isSearchable" use="optional" type="xs:boolean" />
+    <xs:attribute name="isVisible" use="optional" type="xs:boolean" />
+    <xs:attribute name="isReadOnly" use="optional" type="xs:boolean" />
+    <xs:attribute name="isSortable" use="optional" type="xs:boolean" />
+    <xs:attribute name="viewVisible" use="optional" type="xs:boolean" />
+    <xs:attribute name="entryVisible" use="optional" type="xs:boolean" />
+    <xs:attribute name="dynamicFilterKey" use="optional" type="xs:string" />
+    <xs:attribute name="logHistory" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLModelValidation">
+    <xs:all>
+      <xs:element name="new" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="custom" type="bb:DMLCustomValidator" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="edit" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="custom" type="bb:DMLCustomValidator" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="default" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="custom" type="bb:DMLCustomValidator" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLChangeExpression">
+    <xs:all>
+      <xs:element name="expression" minOccurs="1" maxOccurs="1" type="xs:string" />
+      <xs:element name="properties" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="source" type="bb:DMLSourceExpressionField" />
+            <xs:element name="target" type="bb:DMLTargetExpressionField" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLSourceExpressionField">
+    <xs:attribute name="name" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLTargetExpressionField">
+    <xs:attribute name="name" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLCreateExpression">
+    <xs:all>
+      <xs:element name="expression" minOccurs="1" maxOccurs="1" type="xs:string" />
+      <xs:element name="properties" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="target" type="bb:DMLTargetExpressionField" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLSaveExpression">
+    <xs:all>
+      <xs:element name="expression" minOccurs="1" maxOccurs="1" type="xs:string" />
+      <xs:element name="properties" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="target" type="bb:DMLTargetExpressionField" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLMaxSummary">
+    <xs:all>
+      <xs:element name="formatType" type="bb:DMLPropertyFormatType" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="property" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="hideTitle" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLMinSummary">
+    <xs:all>
+      <xs:element name="formatType" type="bb:DMLPropertyFormatType" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="property" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="hideTitle" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLSumSummary">
+    <xs:all>
+      <xs:element name="formatType" type="bb:DMLPropertyFormatType" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="property" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="hideTitle" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLAverageSummary">
+    <xs:all>
+      <xs:element name="formatType" type="bb:DMLPropertyFormatType" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="property" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="hideTitle" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLCustomSummary">
+    <xs:all>
+      <xs:element name="aggregationExpression" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="formatType" type="bb:DMLPropertyFormatType" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="provider" use="required" type="xs:string" />
+    <xs:attribute name="property" use="optional" type="xs:string" />
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="hideTitle" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLFieldReadOnlyLayoutExpression">
+    <xs:all>
+      <xs:element name="condition" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="multiBind" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="multiBind" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="field" use="required" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="mode" type="bb:DMLLayoutExpressionMode" use="optional" />
+    <xs:attribute name="bindTo" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="DMLLayoutExpressionMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="All" />
+      <xs:enumeration value="Present">
+        <xs:annotation>
+          <xs:documentation>Apply layout expression only on present (like grid and list)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="New" />
+      <xs:enumeration value="Edit" />
+      <xs:enumeration value="Form">
+        <xs:annotation>
+          <xs:documentation>Apply layout expression on edit and new</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLFieldDisabledLayoutExpression">
+    <xs:all>
+      <xs:element name="condition" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="multiBind" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="multiBind" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="field" use="required" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="mode" type="bb:DMLLayoutExpressionMode" use="optional" />
+    <xs:attribute name="bindTo" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLFieldInvisibleLayoutExpression">
+    <xs:all>
+      <xs:element name="condition" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="multiBind" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="multiBind" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="field" use="required" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="mode" type="bb:DMLLayoutExpressionMode" use="optional" />
+    <xs:attribute name="bindTo" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLReadOnlyLayoutExpression">
+    <xs:all>
+      <xs:element name="condition" minOccurs="0" maxOccurs="1" type="xs:string" />
+    </xs:all>
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="mode" type="bb:DMLLayoutExpressionMode" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="DMLDisabledLayoutExpression">
+    <xs:all>
+      <xs:element name="condition" minOccurs="0" maxOccurs="1" type="xs:string" />
+    </xs:all>
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="mode" type="bb:DMLLayoutExpressionMode" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="DMLFieldFocusLayoutExpression">
+    <xs:attribute name="field" use="required" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="mode" type="bb:DMLLayoutExpressionMode" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="DMLFieldBackgroundColorLayoutExpression">
+    <xs:all>
+      <xs:element name="colors">
+        <xs:complexType>
+          <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="color" type="bb:DMLColorCondition" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="multiBind" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="multiBind" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="field" use="required" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="mode" type="bb:DMLLayoutExpressionMode" use="optional" />
+    <xs:attribute name="bindTo" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLColorCondition">
+    <xs:all>
+      <xs:element name="condition" minOccurs="1" maxOccurs="1" type="xs:string" />
+    </xs:all>
+    <xs:attribute name="color" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLBackgroundColorLayoutExpression">
+    <xs:all>
+      <xs:element name="colors" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="color" type="bb:DMLColorCondition" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="multiBind" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="multiBind" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="mode" type="bb:DMLLayoutExpressionMode" use="optional" />
+    <xs:attribute name="bindTo" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLFieldForeColorLayoutExpression">
+    <xs:all>
+      <xs:element name="colors">
+        <xs:complexType>
+          <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="color" type="bb:DMLColorCondition" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="multiBind" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="multiBind" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="field" use="required" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="mode" type="bb:DMLLayoutExpressionMode" use="optional" />
+    <xs:attribute name="bindTo" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLForeColorLayoutExpression">
+    <xs:all>
+      <xs:element name="colors">
+        <xs:complexType>
+          <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="color" type="bb:DMLColorCondition" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="multiBind" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="multiBind" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="mode" type="bb:DMLLayoutExpressionMode" use="optional" />
+    <xs:attribute name="bindTo" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLFieldCaptionColorLayoutExpression">
+    <xs:all>
+      <xs:element name="colors">
+        <xs:complexType>
+          <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="color" type="bb:DMLColorCondition" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="multiBind" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="multiBind" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="field" use="required" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="mode" type="bb:DMLLayoutExpressionMode" use="optional" />
+    <xs:attribute name="bindTo" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLFieldTextDecorationLayoutExpression">
+    <xs:all>
+      <xs:element name="decorations">
+        <xs:complexType>
+          <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="decoration" type="bb:DMLTextDecorationCondition" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="multiBind" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="multiBind" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="field" use="required" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="mode" type="bb:DMLLayoutExpressionMode" use="optional" />
+    <xs:attribute name="bindTo" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLTextDecorationCondition">
+    <xs:all>
+      <xs:element name="condition" minOccurs="1" maxOccurs="1" type="xs:string" />
+    </xs:all>
+    <xs:attribute name="decoration" type="bb:DMLTextDecoration" use="required" />
+  </xs:complexType>
+  <xs:simpleType name="DMLTextDecoration">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OverLine" />
+      <xs:enumeration value="LineThrough" />
+      <xs:enumeration value="UnderLine" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLTextDecorationLayoutExpression">
+    <xs:all>
+      <xs:element name="decorations">
+        <xs:complexType>
+          <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="decoration" type="bb:DMLTextDecorationCondition" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="multiBind" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="multiBind" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="mode" type="bb:DMLLayoutExpressionMode" use="optional" />
+    <xs:attribute name="bindTo" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLFieldFontStyleLayoutExpression">
+    <xs:all>
+      <xs:element name="styles">
+        <xs:complexType>
+          <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="style" type="bb:DMLFontStyleCondition" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="multiBind" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="multiBind" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="field" use="required" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="mode" type="bb:DMLLayoutExpressionMode" use="optional" />
+    <xs:attribute name="bindTo" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLFontStyleCondition">
+    <xs:all>
+      <xs:element name="condition" minOccurs="1" maxOccurs="1" type="xs:string" />
+    </xs:all>
+    <xs:attribute name="style" type="bb:DMLFontStyle" use="required" />
+  </xs:complexType>
+  <xs:simpleType name="DMLFontStyle">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Bold" />
+      <xs:enumeration value="Italic" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLFontStyleLayoutExpression">
+    <xs:all>
+      <xs:element name="styles">
+        <xs:complexType>
+          <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="style" type="bb:DMLFontStyleCondition" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="multiBind" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="multiBind" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="mode" type="bb:DMLLayoutExpressionMode" use="optional" />
+    <xs:attribute name="bindTo" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLFieldFilterLayoutExpression">
+    <xs:all>
+      <xs:element name="bql" type="bb:DMLBql" minOccurs="0" maxOccurs="1" />
+      <xs:element name="businessContext" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="businessContextItem" type="bb:DMLBusinessContextItem" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="multiBind" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="multiBind" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="field" use="required" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="mode" type="bb:DMLLayoutExpressionMode" use="optional" />
+    <xs:attribute name="bindTo" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLBql">
+    <xs:choice>
+      <xs:element name="and" type="bb:DMLBqlAndGroup" />
+      <xs:element name="or" type="bb:DMLBqlOrGroup" />
+      <xs:element name="equal" type="bb:DMLBqlEqualCondition" />
+      <xs:element name="greaterThan" type="bb:DMLBqlGreaterThanCondition" />
+      <xs:element name="greaterThanOrEqual" type="bb:DMLBqlGreaterThanOrEqualCondition" />
+      <xs:element name="lessThan" type="bb:DMLBqlLessThanCondition" />
+      <xs:element name="lessThanOrEqual" type="bb:DMLBqlLessThanOrEqualCondition" />
+      <xs:element name="isBetween" type="bb:DMLBqlIsBetweenCondition" />
+      <xs:element name="beginWith" type="bb:DMLBqlBeginWithCondition" />
+      <xs:element name="contains" type="bb:DMLBqlContainsCondition" />
+      <xs:element name="endWith" type="bb:DMLBqlEndWithCondition" />
+      <xs:element name="isLike" type="bb:DMLBqlIsLikeCondition" />
+      <xs:element name="isBlank" type="bb:DMLBqlIsBlankCondition" />
+      <xs:element name="isAnyOf" type="bb:DMLBqlIsAnyOfCondition" />
+      <xs:element name="dynamicFilter" type="bb:DMLBqlDynamicFilterCondition" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="DMLBqlAndGroup">
+    <xs:all>
+      <xs:element name="items" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="and" type="bb:DMLBqlAndGroup" />
+            <xs:element name="or" type="bb:DMLBqlOrGroup" />
+            <xs:element name="equal" type="bb:DMLBqlEqualCondition" />
+            <xs:element name="greaterThan" type="bb:DMLBqlGreaterThanCondition" />
+            <xs:element name="greaterThanOrEqual" type="bb:DMLBqlGreaterThanOrEqualCondition" />
+            <xs:element name="lessThan" type="bb:DMLBqlLessThanCondition" />
+            <xs:element name="lessThanOrEqual" type="bb:DMLBqlLessThanOrEqualCondition" />
+            <xs:element name="isBetween" type="bb:DMLBqlIsBetweenCondition" />
+            <xs:element name="beginWith" type="bb:DMLBqlBeginWithCondition" />
+            <xs:element name="contains" type="bb:DMLBqlContainsCondition" />
+            <xs:element name="endWith" type="bb:DMLBqlEndWithCondition" />
+            <xs:element name="isLike" type="bb:DMLBqlIsLikeCondition" />
+            <xs:element name="isBlank" type="bb:DMLBqlIsBlankCondition" />
+            <xs:element name="isAnyOf" type="bb:DMLBqlIsAnyOfCondition" />
+            <xs:element name="dynamicFilter" type="bb:DMLBqlDynamicFilterCondition" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="not" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLBqlOrGroup">
+    <xs:all>
+      <xs:element name="items" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="and" type="bb:DMLBqlAndGroup" />
+            <xs:element name="or" type="bb:DMLBqlOrGroup" />
+            <xs:element name="equal" type="bb:DMLBqlEqualCondition" />
+            <xs:element name="greaterThan" type="bb:DMLBqlGreaterThanCondition" />
+            <xs:element name="greaterThanOrEqual" type="bb:DMLBqlGreaterThanOrEqualCondition" />
+            <xs:element name="lessThan" type="bb:DMLBqlLessThanCondition" />
+            <xs:element name="lessThanOrEqual" type="bb:DMLBqlLessThanOrEqualCondition" />
+            <xs:element name="isBetween" type="bb:DMLBqlIsBetweenCondition" />
+            <xs:element name="beginWith" type="bb:DMLBqlBeginWithCondition" />
+            <xs:element name="contains" type="bb:DMLBqlContainsCondition" />
+            <xs:element name="endWith" type="bb:DMLBqlEndWithCondition" />
+            <xs:element name="isLike" type="bb:DMLBqlIsLikeCondition" />
+            <xs:element name="isBlank" type="bb:DMLBqlIsBlankCondition" />
+            <xs:element name="isAnyOf" type="bb:DMLBqlIsAnyOfCondition" />
+            <xs:element name="dynamicFilter" type="bb:DMLBqlDynamicFilterCondition" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="not" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLBqlEqualCondition">
+    <xs:attribute name="value" use="required" type="xs:string" />
+    <xs:attribute name="not" use="optional" type="xs:boolean" />
+    <xs:attribute name="property" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLBqlGreaterThanCondition">
+    <xs:attribute name="value" use="required" type="xs:string" />
+    <xs:attribute name="not" use="optional" type="xs:boolean" />
+    <xs:attribute name="property" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLBqlGreaterThanOrEqualCondition">
+    <xs:attribute name="value" use="required" type="xs:string" />
+    <xs:attribute name="not" use="optional" type="xs:boolean" />
+    <xs:attribute name="property" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLBqlLessThanCondition">
+    <xs:attribute name="value" use="required" type="xs:string" />
+    <xs:attribute name="not" use="optional" type="xs:boolean" />
+    <xs:attribute name="property" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLBqlLessThanOrEqualCondition">
+    <xs:attribute name="value" use="required" type="xs:string" />
+    <xs:attribute name="not" use="optional" type="xs:boolean" />
+    <xs:attribute name="property" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLBqlIsBetweenCondition">
+    <xs:attribute name="from" use="required" type="xs:string" />
+    <xs:attribute name="to" use="required" type="xs:string" />
+    <xs:attribute name="not" use="optional" type="xs:boolean" />
+    <xs:attribute name="property" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLBqlBeginWithCondition">
+    <xs:attribute name="value" use="required" type="xs:string" />
+    <xs:attribute name="not" use="optional" type="xs:boolean" />
+    <xs:attribute name="property" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLBqlContainsCondition">
+    <xs:attribute name="value" use="required" type="xs:string" />
+    <xs:attribute name="not" use="optional" type="xs:boolean" />
+    <xs:attribute name="property" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLBqlEndWithCondition">
+    <xs:attribute name="value" use="required" type="xs:string" />
+    <xs:attribute name="not" use="optional" type="xs:boolean" />
+    <xs:attribute name="property" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLBqlIsLikeCondition">
+    <xs:attribute name="value" use="required" type="xs:string" />
+    <xs:attribute name="not" use="optional" type="xs:boolean" />
+    <xs:attribute name="property" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLBqlIsBlankCondition">
+    <xs:attribute name="not" use="optional" type="xs:boolean" />
+    <xs:attribute name="property" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLBqlIsAnyOfCondition">
+    <xs:all>
+      <xs:element name="values" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="value" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="not" use="optional" type="xs:boolean" />
+    <xs:attribute name="property" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLBqlDynamicFilterCondition">
+    <xs:all>
+      <xs:element name="parameters" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="parameter" type="bb:DMLBqlDynamicFilterParameter" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="operator" type="bb:DMLFilterConditionOperator" use="required" />
+    <xs:attribute name="filterName" use="required" type="xs:string" />
+    <xs:attribute name="not" use="optional" type="xs:boolean" />
+    <xs:attribute name="property" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="DMLFilterConditionOperator">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Equal" />
+      <xs:enumeration value="NotEqual" />
+      <xs:enumeration value="GreaterThan" />
+      <xs:enumeration value="GreaterThanOrEqual" />
+      <xs:enumeration value="LessThan" />
+      <xs:enumeration value="LessThanOrEqual" />
+      <xs:enumeration value="IsBetween" />
+      <xs:enumeration value="IsNotBetween" />
+      <xs:enumeration value="BeginWith" />
+      <xs:enumeration value="Contains" />
+      <xs:enumeration value="DoesNotContains" />
+      <xs:enumeration value="EndWith" />
+      <xs:enumeration value="IsLike" />
+      <xs:enumeration value="IsNotLike" />
+      <xs:enumeration value="IsBlank" />
+      <xs:enumeration value="IsNotBlank" />
+      <xs:enumeration value="IsAnyOf" />
+      <xs:enumeration value="IsNoneOf" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLBqlDynamicFilterParameter">
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="value" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLFieldSelectJsonSchemaTemplateLayoutExpression">
+    <xs:all>
+      <xs:element name="multiBind" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="multiBind" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="field" use="required" type="xs:string" />
+    <xs:attribute name="template" use="optional" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="mode" type="bb:DMLLayoutExpressionMode" use="optional" />
+    <xs:attribute name="bindTo" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLFieldEnumFilterLayoutExpression">
+    <xs:all>
+      <xs:element name="filter" minOccurs="1" maxOccurs="1" type="xs:string" />
+      <xs:element name="multiBind" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="multiBind" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="field" use="required" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="mode" type="bb:DMLLayoutExpressionMode" use="optional" />
+    <xs:attribute name="bindTo" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLFieldFilterCrossReferenceLayoutExpression">
+    <xs:all>
+      <xs:element name="filters" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="filter" type="bb:DMLCrossReferenceFilter" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="multiBind" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="multiBind" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="field" use="required" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="mode" type="bb:DMLLayoutExpressionMode" use="optional" />
+    <xs:attribute name="bindTo" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLCrossReferenceFilter">
+    <xs:all>
+      <xs:element name="bql" type="bb:DMLBql" minOccurs="0" maxOccurs="1" />
+      <xs:element name="businessContext" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="businessContextItem" type="bb:DMLBusinessContextItem" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="targetModel" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLFieldCustomLayoutExpression">
+    <xs:all>
+      <xs:element name="arguments" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="argument" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="multiBind" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="multiBind" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="action" use="required" type="xs:string" />
+    <xs:attribute name="field" use="required" type="xs:string" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="mode" type="bb:DMLLayoutExpressionMode" use="optional" />
+    <xs:attribute name="bindTo" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLBaseEntityModel">
+    <xs:all>
+      <xs:element name="settings" type="bb:DMLBaseModelSettings" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="target" use="required" type="xs:string" />
+    <xs:attribute name="deleteCascade" type="bb:DMLInheritencyDeleteCascadeMode" use="optional" />
+  </xs:complexType>
+  <xs:simpleType name="DMLInheritencyDeleteCascadeMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Exception" />
+      <xs:enumeration value="Delete" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLBaseModelSettings">
+    <xs:all>
+      <xs:element name="properties" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="property" type="bb:DMLBaseModelSettingProperty" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLBaseModelSettingProperty">
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="isVisible" use="optional" type="xs:boolean" />
+    <xs:attribute name="isSearchable" use="optional" type="xs:boolean" />
+    <xs:attribute name="isReadOnly" use="optional" type="xs:boolean" />
+    <xs:attribute name="viewVisible" use="optional" type="xs:boolean" />
+    <xs:attribute name="entryVisible" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:simpleType name="DMLInheritancySelfReferenceType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Self">
+        <xs:annotation>
+          <xs:documentation>Parent Property and children type will be set to type of inheritor model</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Base">
+        <xs:annotation>
+          <xs:documentation>Parent Property and children type will be set to type of base (root of inheritancy) model</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLIcon">
+    <xs:choice>
+      <xs:element name="simple" type="bb:DMLSimpleIcon" />
+      <xs:element name="font" type="bb:DMLFontIcon" />
+      <xs:element name="system" type="bb:DMLSystemIcon" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="DMLSimpleIcon">
+    <xs:all>
+      <xs:element name="content">
+        <xs:complexType>
+          <xs:attribute name="x-key" type="xs:string" />
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLFontIcon">
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="color" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLSystemIcon">
+    <xs:attribute name="type" type="bb:DMLSystemIconType" use="required" />
+    <xs:attribute name="color" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="DMLSystemIconType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Submit" />
+      <xs:enumeration value="Cancel" />
+      <xs:enumeration value="Apply" />
+      <xs:enumeration value="Settings" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLEntityModelAttachment">
+    <xs:all>
+      <xs:element name="readRelativeSecurityItems" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="customOperation" type="bb:DMLCustomOperationSecurityMember" />
+            <xs:element name="serviceMethod" type="bb:DMLServiceMethodSecurityMember" />
+            <xs:element name="service" type="bb:DMLServiceSecurityMember" />
+            <xs:element name="customTask" type="bb:DMLTaskSecurityMember" />
+            <xs:element name="create" type="bb:DMLEntityCreateSecurityMember" />
+            <xs:element name="customCommand" type="bb:DMLEntityCustomCommandSecurityMember" />
+            <xs:element name="delete" type="bb:DMLEntityDeleteSecurityMember" />
+            <xs:element name="log" type="bb:DMLEntityLogSecurityMember" />
+            <xs:element name="entityPrint" type="bb:DMLEntityPrintSecurityMember" />
+            <xs:element name="read" type="bb:DMLEntityReadSecurityMember" />
+            <xs:element name="entity" type="bb:DMLEntitySecurityTaskMember" />
+            <xs:element name="stateHistory" type="bb:DMLEntityStateHistorySecurityMember" />
+            <xs:element name="transition" type="bb:DMLEntityTransitionSecurityMember" />
+            <xs:element name="update" type="bb:DMLEntityUpdateSecurityMember" />
+            <xs:element name="form" type="bb:DMLFormSecurityMember" />
+            <xs:element name="globalCommand" type="bb:DMLGlobalCommandSecurityMember" />
+            <xs:element name="process" type="bb:DMLProcessSecurityMember" />
+            <xs:element name="report" type="bb:DMLReportSecurityMember" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createRelativeSecurityItems" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="customOperation" type="bb:DMLCustomOperationSecurityMember" />
+            <xs:element name="serviceMethod" type="bb:DMLServiceMethodSecurityMember" />
+            <xs:element name="service" type="bb:DMLServiceSecurityMember" />
+            <xs:element name="customTask" type="bb:DMLTaskSecurityMember" />
+            <xs:element name="create" type="bb:DMLEntityCreateSecurityMember" />
+            <xs:element name="customCommand" type="bb:DMLEntityCustomCommandSecurityMember" />
+            <xs:element name="delete" type="bb:DMLEntityDeleteSecurityMember" />
+            <xs:element name="log" type="bb:DMLEntityLogSecurityMember" />
+            <xs:element name="entityPrint" type="bb:DMLEntityPrintSecurityMember" />
+            <xs:element name="read" type="bb:DMLEntityReadSecurityMember" />
+            <xs:element name="entity" type="bb:DMLEntitySecurityTaskMember" />
+            <xs:element name="stateHistory" type="bb:DMLEntityStateHistorySecurityMember" />
+            <xs:element name="transition" type="bb:DMLEntityTransitionSecurityMember" />
+            <xs:element name="update" type="bb:DMLEntityUpdateSecurityMember" />
+            <xs:element name="form" type="bb:DMLFormSecurityMember" />
+            <xs:element name="globalCommand" type="bb:DMLGlobalCommandSecurityMember" />
+            <xs:element name="process" type="bb:DMLProcessSecurityMember" />
+            <xs:element name="report" type="bb:DMLReportSecurityMember" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="updateRelativeSecurityItems" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="customOperation" type="bb:DMLCustomOperationSecurityMember" />
+            <xs:element name="serviceMethod" type="bb:DMLServiceMethodSecurityMember" />
+            <xs:element name="service" type="bb:DMLServiceSecurityMember" />
+            <xs:element name="customTask" type="bb:DMLTaskSecurityMember" />
+            <xs:element name="create" type="bb:DMLEntityCreateSecurityMember" />
+            <xs:element name="customCommand" type="bb:DMLEntityCustomCommandSecurityMember" />
+            <xs:element name="delete" type="bb:DMLEntityDeleteSecurityMember" />
+            <xs:element name="log" type="bb:DMLEntityLogSecurityMember" />
+            <xs:element name="entityPrint" type="bb:DMLEntityPrintSecurityMember" />
+            <xs:element name="read" type="bb:DMLEntityReadSecurityMember" />
+            <xs:element name="entity" type="bb:DMLEntitySecurityTaskMember" />
+            <xs:element name="stateHistory" type="bb:DMLEntityStateHistorySecurityMember" />
+            <xs:element name="transition" type="bb:DMLEntityTransitionSecurityMember" />
+            <xs:element name="update" type="bb:DMLEntityUpdateSecurityMember" />
+            <xs:element name="form" type="bb:DMLFormSecurityMember" />
+            <xs:element name="globalCommand" type="bb:DMLGlobalCommandSecurityMember" />
+            <xs:element name="process" type="bb:DMLProcessSecurityMember" />
+            <xs:element name="report" type="bb:DMLReportSecurityMember" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="removeRelativeSecurityItems" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="customOperation" type="bb:DMLCustomOperationSecurityMember" />
+            <xs:element name="serviceMethod" type="bb:DMLServiceMethodSecurityMember" />
+            <xs:element name="service" type="bb:DMLServiceSecurityMember" />
+            <xs:element name="customTask" type="bb:DMLTaskSecurityMember" />
+            <xs:element name="create" type="bb:DMLEntityCreateSecurityMember" />
+            <xs:element name="customCommand" type="bb:DMLEntityCustomCommandSecurityMember" />
+            <xs:element name="delete" type="bb:DMLEntityDeleteSecurityMember" />
+            <xs:element name="log" type="bb:DMLEntityLogSecurityMember" />
+            <xs:element name="entityPrint" type="bb:DMLEntityPrintSecurityMember" />
+            <xs:element name="read" type="bb:DMLEntityReadSecurityMember" />
+            <xs:element name="entity" type="bb:DMLEntitySecurityTaskMember" />
+            <xs:element name="stateHistory" type="bb:DMLEntityStateHistorySecurityMember" />
+            <xs:element name="transition" type="bb:DMLEntityTransitionSecurityMember" />
+            <xs:element name="update" type="bb:DMLEntityUpdateSecurityMember" />
+            <xs:element name="form" type="bb:DMLFormSecurityMember" />
+            <xs:element name="globalCommand" type="bb:DMLGlobalCommandSecurityMember" />
+            <xs:element name="process" type="bb:DMLProcessSecurityMember" />
+            <xs:element name="report" type="bb:DMLReportSecurityMember" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="capacity" use="optional" type="xs:long" />
+    <xs:attribute name="count" use="optional" type="xs:int" />
+    <xs:attribute name="totalProperty" use="optional" type="xs:string" />
+    <xs:attribute name="deleteCascade" type="bb:DMLAttachmentDeleteCascadeMode" use="optional" />
+  </xs:complexType>
+  <xs:simpleType name="DMLAttachmentDeleteCascadeMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Exception" />
+      <xs:enumeration value="Delete" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLCustomOperationSecurityMember">
+    <xs:attribute name="operation" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLServiceMethodSecurityMember">
+    <xs:attribute name="service" use="required" type="xs:string" />
+    <xs:attribute name="method" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLServiceSecurityMember">
+    <xs:attribute name="service" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLTaskSecurityMember">
+    <xs:attribute name="task" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityCreateSecurityMember">
+    <xs:attribute name="model" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityCustomCommandSecurityMember">
+    <xs:attribute name="command" use="required" type="xs:string" />
+    <xs:attribute name="model" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityDeleteSecurityMember">
+    <xs:attribute name="model" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityLogSecurityMember">
+    <xs:attribute name="model" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityPrintSecurityMember">
+    <xs:attribute name="printTemplate" use="required" type="xs:string" />
+    <xs:attribute name="model" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityReadSecurityMember">
+    <xs:attribute name="model" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntitySecurityTaskMember">
+    <xs:attribute name="model" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityStateHistorySecurityMember">
+    <xs:attribute name="model" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityTransitionSecurityMember">
+    <xs:attribute name="transition" use="required" type="xs:string" />
+    <xs:attribute name="model" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityUpdateSecurityMember">
+    <xs:attribute name="model" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLFormSecurityMember">
+    <xs:attribute name="form" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLGlobalCommandSecurityMember">
+    <xs:attribute name="globalCommand" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLProcessSecurityMember">
+    <xs:attribute name="process" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLReportSecurityMember">
+    <xs:attribute name="report" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityModelConstant">
+    <xs:attribute name="nameProperty" use="required" type="xs:string" />
+    <xs:attribute name="valueProperty" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityModelCreateCommand">
+    <xs:all>
+      <xs:element name="preCommands" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="preCommand" type="bb:DMLEntityModelPreCommand" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="postCommands" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="postCommand" type="bb:DMLEntityModelPostCommand" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="associateAffects" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="associateAffect" type="bb:DMLEntityModelAssociateAffect" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="confirmMessage" type="bb:DMLUserMessage" minOccurs="0" maxOccurs="1" />
+      <xs:element name="successMessage" type="bb:DMLUserMessage" minOccurs="0" maxOccurs="1" />
+      <xs:element name="icon" type="bb:DMLIcon" minOccurs="0" maxOccurs="1" />
+      <xs:element name="relativeSecurityItems" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="customOperation" type="bb:DMLCustomOperationSecurityMember" />
+            <xs:element name="serviceMethod" type="bb:DMLServiceMethodSecurityMember" />
+            <xs:element name="service" type="bb:DMLServiceSecurityMember" />
+            <xs:element name="customTask" type="bb:DMLTaskSecurityMember" />
+            <xs:element name="create" type="bb:DMLEntityCreateSecurityMember" />
+            <xs:element name="customCommand" type="bb:DMLEntityCustomCommandSecurityMember" />
+            <xs:element name="delete" type="bb:DMLEntityDeleteSecurityMember" />
+            <xs:element name="log" type="bb:DMLEntityLogSecurityMember" />
+            <xs:element name="entityPrint" type="bb:DMLEntityPrintSecurityMember" />
+            <xs:element name="read" type="bb:DMLEntityReadSecurityMember" />
+            <xs:element name="entity" type="bb:DMLEntitySecurityTaskMember" />
+            <xs:element name="stateHistory" type="bb:DMLEntityStateHistorySecurityMember" />
+            <xs:element name="transition" type="bb:DMLEntityTransitionSecurityMember" />
+            <xs:element name="update" type="bb:DMLEntityUpdateSecurityMember" />
+            <xs:element name="form" type="bb:DMLFormSecurityMember" />
+            <xs:element name="globalCommand" type="bb:DMLGlobalCommandSecurityMember" />
+            <xs:element name="process" type="bb:DMLProcessSecurityMember" />
+            <xs:element name="report" type="bb:DMLReportSecurityMember" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="parametersCollection" type="bb:DMLParameterCollection" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="affectType" type="bb:DMLEntityModelCommandAffectType" use="optional" />
+    <xs:attribute name="executionMode" type="bb:DMLEntityModelCommandExecutionMode" use="optional" />
+    <xs:attribute name="ignoreSuccessMessage" use="optional" type="xs:boolean" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="isLoggable" use="optional" type="xs:boolean" />
+    <xs:attribute name="isActive" use="optional" type="xs:boolean" />
+    <xs:attribute name="isRestricted" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityModelPreCommand">
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityModelPostCommand">
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="DMLEntityModelCommandAffectType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Single" />
+      <xs:enumeration value="Multi" />
+      <xs:enumeration value="Partial" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DMLEntityModelCommandExecutionMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Single">
+        <xs:annotation>
+          <xs:documentation>Only execution is possible on a single entity</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MultipleWithIgnoreExceptions">
+        <xs:annotation>
+          <xs:documentation>Execution is possible on multiple entities.But the multiple call will raise for each entity.(exception on a command not affect on other commands execution)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MultipleWithoutIgnoreExceptions">
+        <xs:annotation>
+          <xs:documentation>Execution is possible on multiple entities.But the multiple call will raise for each entity.(one exception in execution of a command cause role back of all commands)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MultipleAsASingleCall">
+        <xs:annotation>
+          <xs:documentation>Execution is possible on multiple entities.A single call is executed to method of command. An IEnumerable&lt;&gt; of entity in parameters of method will be required.(one exception in execution of a command cause role back of all commands)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLEntityModelAssociateAffect">
+    <xs:attribute name="property" use="required" type="xs:string" />
+    <xs:attribute name="affectType" type="bb:DMLEntityModelCommandAffectType" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="DMLUserMessage">
+    <xs:all>
+      <xs:element name="titleExpression" minOccurs="0" maxOccurs="1" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Title expression can generate dynamic title of message. Use 'Model' in expression as selected entity and 'Fields' as parameters.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="messageExpression" minOccurs="0" maxOccurs="1" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Message expression can generate dynamic content of message. Use 'Model' in expression as selected entity and 'Fields' as parameters.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="conditionExpression" minOccurs="0" maxOccurs="1" type="xs:string" />
+    </xs:all>
+    <xs:attribute name="title" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Title can generate static title of message.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="message" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Message can generate static content of message.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="DMLParameterCollection">
+    <xs:all>
+      <xs:element name="parameters">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="parameter" type="bb:DMLParameter" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="defaultExpressions" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="defaultExpression" type="bb:DMLDefaultExpression" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="changeExpressions" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="changeExpression" type="bb:DMLChangeExpression" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="validations" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="custom" type="bb:DMLCustomValidator" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="layoutExpressions" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="readOnlyField" type="bb:DMLFieldReadOnlyLayoutExpression" />
+            <xs:element name="disabledField" type="bb:DMLFieldDisabledLayoutExpression" />
+            <xs:element name="invisibleField" type="bb:DMLFieldInvisibleLayoutExpression" />
+            <xs:element name="readOnly" type="bb:DMLReadOnlyLayoutExpression" />
+            <xs:element name="disabled" type="bb:DMLDisabledLayoutExpression" />
+            <xs:element name="focusField" type="bb:DMLFieldFocusLayoutExpression" />
+            <xs:element name="backgroundColorField" type="bb:DMLFieldBackgroundColorLayoutExpression" />
+            <xs:element name="backgroundColor" type="bb:DMLBackgroundColorLayoutExpression" />
+            <xs:element name="foreColorField" type="bb:DMLFieldForeColorLayoutExpression" />
+            <xs:element name="foreColor" type="bb:DMLForeColorLayoutExpression" />
+            <xs:element name="captionColorField" type="bb:DMLFieldCaptionColorLayoutExpression" />
+            <xs:element name="textDecorationField" type="bb:DMLFieldTextDecorationLayoutExpression" />
+            <xs:element name="textDecoration" type="bb:DMLTextDecorationLayoutExpression" />
+            <xs:element name="fontStyleField" type="bb:DMLFieldFontStyleLayoutExpression" />
+            <xs:element name="fontStyle" type="bb:DMLFontStyleLayoutExpression" />
+            <xs:element name="filterField" type="bb:DMLFieldFilterLayoutExpression" />
+            <xs:element name="selectJsonTemplateField" type="bb:DMLFieldSelectJsonSchemaTemplateLayoutExpression" />
+            <xs:element name="filterEnumField" type="bb:DMLFieldEnumFilterLayoutExpression" />
+            <xs:element name="crossReferenceFilterField" type="bb:DMLFieldFilterCrossReferenceLayoutExpression" />
+            <xs:element name="customField" type="bb:DMLFieldCustomLayoutExpression" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="form" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLParameter">
+    <xs:all>
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="editor" type="bb:DMLFieldEditor" minOccurs="0" maxOccurs="1" />
+      <xs:element name="parameterType" type="bb:DMLFieldDataType" minOccurs="0" maxOccurs="1" />
+      <xs:element name="validations" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="notNull" type="bb:DMLNotNullFieldValidator" />
+            <xs:element name="jsonSchema" type="bb:DMLJsonSchemaFieldValidator" />
+            <xs:element name="binary" type="bb:DMLBinaryFieldValidator" />
+            <xs:element name="string" type="bb:DMLStringFieldValidator" />
+            <xs:element name="regex" type="bb:DMLRegularExpressionFieldValidator" />
+            <xs:element name="custom" type="bb:DMLCustomValidator" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="allowNull" use="optional" type="xs:boolean" />
+    <xs:attribute name="sourceType" type="bb:DMLCommandParameterSourceType" use="optional" />
+    <xs:attribute name="multiplicity" type="bb:DMLCommandParameterValueMultiplicity" use="optional" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="ignoreGlobalFilter" use="optional" type="xs:boolean" />
+    <xs:attribute name="isReadOnly" use="optional" type="xs:boolean" />
+    <xs:attribute name="isVisible" use="optional" type="xs:boolean" />
+    <xs:attribute name="logHistory" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:simpleType name="DMLCommandParameterSourceType">
+    <xs:annotation>
+      <xs:documentation>Source type of parameter</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="This">
+        <xs:annotation>
+          <xs:documentation>Locate parameter data from the property of selected entity.(this type is valid for model command and transition)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Self">
+        <xs:annotation>
+          <xs:documentation>The selected entity will be assigned to parameter.(this type is valid for model command and transition)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SystemDefined">
+        <xs:annotation>
+          <xs:documentation>System parameter like user id or cop</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UserDefined">
+        <xs:annotation>
+          <xs:documentation>This type of parameter will be resolved from user entry</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DMLCommandParameterValueMultiplicity">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Single" />
+      <xs:enumeration value="Multi" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLFieldDataType">
+    <xs:choice>
+      <xs:element name="object" type="bb:DMLObjectFieldDataType" />
+      <xs:element name="dictionary" type="bb:DMLDictionaryFieldDataType" />
+      <xs:element name="model" type="bb:DMLModelFieldDataType" />
+      <xs:element name="crossReference" type="bb:DMLCrossReferenceFieldDataType" />
+      <xs:element name="list" type="bb:DMLListFieldDataType" />
+      <xs:element name="guid" type="bb:DMLGuidFieldDataType" />
+      <xs:element name="string" type="bb:DMLStringFieldDataType" />
+      <xs:element name="dateTime" type="bb:DMLDateTimeFieldDataType" />
+      <xs:element name="boolean" type="bb:DMLBooleanFieldDataType" />
+      <xs:element name="byte" type="bb:DMLByteFieldDataType" />
+      <xs:element name="short" type="bb:DMLShortFieldDataType" />
+      <xs:element name="int" type="bb:DMLIntFieldDataType" />
+      <xs:element name="long" type="bb:DMLLongFieldDataType" />
+      <xs:element name="float" type="bb:DMLFloatFieldDataType" />
+      <xs:element name="decimal" type="bb:DMLDecimalFieldDataType" />
+      <xs:element name="double" type="bb:DMLDoubleFieldDataType" />
+      <xs:element name="binary" type="bb:DMLBinaryFieldDataType" />
+      <xs:element name="file" type="bb:DMLFileFieldDataType" />
+      <xs:element name="image" type="bb:DMLImageFieldDataType" />
+      <xs:element name="version" type="bb:DMLVersionFieldDataType" />
+      <xs:element name="duration" type="bb:DMLDurationFieldDataType" />
+      <xs:element name="enum" type="bb:DMLEnumFieldDataType" />
+      <xs:element name="json" type="bb:DMLJsonFieldDataType" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="DMLDefaultExpression">
+    <xs:all>
+      <xs:element name="expression" minOccurs="1" maxOccurs="1" type="xs:string" />
+      <xs:element name="properties" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="target" type="bb:DMLTargetExpressionField" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityModelReadCommand">
+    <xs:all>
+      <xs:element name="associateAffects" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="associateAffect" type="bb:DMLEntityModelAssociateAffect" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="confirmMessage" type="bb:DMLUserMessage" minOccurs="0" maxOccurs="1" />
+      <xs:element name="successMessage" type="bb:DMLUserMessage" minOccurs="0" maxOccurs="1" />
+      <xs:element name="icon" type="bb:DMLIcon" minOccurs="0" maxOccurs="1" />
+      <xs:element name="relativeSecurityItems" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="customOperation" type="bb:DMLCustomOperationSecurityMember" />
+            <xs:element name="serviceMethod" type="bb:DMLServiceMethodSecurityMember" />
+            <xs:element name="service" type="bb:DMLServiceSecurityMember" />
+            <xs:element name="customTask" type="bb:DMLTaskSecurityMember" />
+            <xs:element name="create" type="bb:DMLEntityCreateSecurityMember" />
+            <xs:element name="customCommand" type="bb:DMLEntityCustomCommandSecurityMember" />
+            <xs:element name="delete" type="bb:DMLEntityDeleteSecurityMember" />
+            <xs:element name="log" type="bb:DMLEntityLogSecurityMember" />
+            <xs:element name="entityPrint" type="bb:DMLEntityPrintSecurityMember" />
+            <xs:element name="read" type="bb:DMLEntityReadSecurityMember" />
+            <xs:element name="entity" type="bb:DMLEntitySecurityTaskMember" />
+            <xs:element name="stateHistory" type="bb:DMLEntityStateHistorySecurityMember" />
+            <xs:element name="transition" type="bb:DMLEntityTransitionSecurityMember" />
+            <xs:element name="update" type="bb:DMLEntityUpdateSecurityMember" />
+            <xs:element name="form" type="bb:DMLFormSecurityMember" />
+            <xs:element name="globalCommand" type="bb:DMLGlobalCommandSecurityMember" />
+            <xs:element name="process" type="bb:DMLProcessSecurityMember" />
+            <xs:element name="report" type="bb:DMLReportSecurityMember" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="parametersCollection" type="bb:DMLParameterCollection" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="affectType" type="bb:DMLEntityModelCommandAffectType" use="optional" />
+    <xs:attribute name="executionMode" type="bb:DMLEntityModelCommandExecutionMode" use="optional" />
+    <xs:attribute name="ignoreSuccessMessage" use="optional" type="xs:boolean" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="isLoggable" use="optional" type="xs:boolean" />
+    <xs:attribute name="isActive" use="optional" type="xs:boolean" />
+    <xs:attribute name="isRestricted" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityModelUpdateCommand">
+    <xs:all>
+      <xs:element name="preCommands" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="preCommand" type="bb:DMLEntityModelPreCommand" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="postCommands" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="postCommand" type="bb:DMLEntityModelPostCommand" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="associateAffects" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="associateAffect" type="bb:DMLEntityModelAssociateAffect" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="confirmMessage" type="bb:DMLUserMessage" minOccurs="0" maxOccurs="1" />
+      <xs:element name="successMessage" type="bb:DMLUserMessage" minOccurs="0" maxOccurs="1" />
+      <xs:element name="icon" type="bb:DMLIcon" minOccurs="0" maxOccurs="1" />
+      <xs:element name="relativeSecurityItems" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="customOperation" type="bb:DMLCustomOperationSecurityMember" />
+            <xs:element name="serviceMethod" type="bb:DMLServiceMethodSecurityMember" />
+            <xs:element name="service" type="bb:DMLServiceSecurityMember" />
+            <xs:element name="customTask" type="bb:DMLTaskSecurityMember" />
+            <xs:element name="create" type="bb:DMLEntityCreateSecurityMember" />
+            <xs:element name="customCommand" type="bb:DMLEntityCustomCommandSecurityMember" />
+            <xs:element name="delete" type="bb:DMLEntityDeleteSecurityMember" />
+            <xs:element name="log" type="bb:DMLEntityLogSecurityMember" />
+            <xs:element name="entityPrint" type="bb:DMLEntityPrintSecurityMember" />
+            <xs:element name="read" type="bb:DMLEntityReadSecurityMember" />
+            <xs:element name="entity" type="bb:DMLEntitySecurityTaskMember" />
+            <xs:element name="stateHistory" type="bb:DMLEntityStateHistorySecurityMember" />
+            <xs:element name="transition" type="bb:DMLEntityTransitionSecurityMember" />
+            <xs:element name="update" type="bb:DMLEntityUpdateSecurityMember" />
+            <xs:element name="form" type="bb:DMLFormSecurityMember" />
+            <xs:element name="globalCommand" type="bb:DMLGlobalCommandSecurityMember" />
+            <xs:element name="process" type="bb:DMLProcessSecurityMember" />
+            <xs:element name="report" type="bb:DMLReportSecurityMember" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="parametersCollection" type="bb:DMLParameterCollection" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="affectType" type="bb:DMLEntityModelCommandAffectType" use="optional" />
+    <xs:attribute name="executionMode" type="bb:DMLEntityModelCommandExecutionMode" use="optional" />
+    <xs:attribute name="ignoreSuccessMessage" use="optional" type="xs:boolean" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="isLoggable" use="optional" type="xs:boolean" />
+    <xs:attribute name="isActive" use="optional" type="xs:boolean" />
+    <xs:attribute name="isRestricted" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityModelDeleteCommand">
+    <xs:all>
+      <xs:element name="preCommands" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="preCommand" type="bb:DMLEntityModelPreCommand" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="postCommands" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="postCommand" type="bb:DMLEntityModelPostCommand" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="associateAffects" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="associateAffect" type="bb:DMLEntityModelAssociateAffect" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="confirmMessage" type="bb:DMLUserMessage" minOccurs="0" maxOccurs="1" />
+      <xs:element name="successMessage" type="bb:DMLUserMessage" minOccurs="0" maxOccurs="1" />
+      <xs:element name="icon" type="bb:DMLIcon" minOccurs="0" maxOccurs="1" />
+      <xs:element name="relativeSecurityItems" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="customOperation" type="bb:DMLCustomOperationSecurityMember" />
+            <xs:element name="serviceMethod" type="bb:DMLServiceMethodSecurityMember" />
+            <xs:element name="service" type="bb:DMLServiceSecurityMember" />
+            <xs:element name="customTask" type="bb:DMLTaskSecurityMember" />
+            <xs:element name="create" type="bb:DMLEntityCreateSecurityMember" />
+            <xs:element name="customCommand" type="bb:DMLEntityCustomCommandSecurityMember" />
+            <xs:element name="delete" type="bb:DMLEntityDeleteSecurityMember" />
+            <xs:element name="log" type="bb:DMLEntityLogSecurityMember" />
+            <xs:element name="entityPrint" type="bb:DMLEntityPrintSecurityMember" />
+            <xs:element name="read" type="bb:DMLEntityReadSecurityMember" />
+            <xs:element name="entity" type="bb:DMLEntitySecurityTaskMember" />
+            <xs:element name="stateHistory" type="bb:DMLEntityStateHistorySecurityMember" />
+            <xs:element name="transition" type="bb:DMLEntityTransitionSecurityMember" />
+            <xs:element name="update" type="bb:DMLEntityUpdateSecurityMember" />
+            <xs:element name="form" type="bb:DMLFormSecurityMember" />
+            <xs:element name="globalCommand" type="bb:DMLGlobalCommandSecurityMember" />
+            <xs:element name="process" type="bb:DMLProcessSecurityMember" />
+            <xs:element name="report" type="bb:DMLReportSecurityMember" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="parametersCollection" type="bb:DMLParameterCollection" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="affectType" type="bb:DMLEntityModelCommandAffectType" use="optional" />
+    <xs:attribute name="executionMode" type="bb:DMLEntityModelCommandExecutionMode" use="optional" />
+    <xs:attribute name="ignoreSuccessMessage" use="optional" type="xs:boolean" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="isLoggable" use="optional" type="xs:boolean" />
+    <xs:attribute name="isActive" use="optional" type="xs:boolean" />
+    <xs:attribute name="isRestricted" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityModelCustomCommand">
+    <xs:all>
+      <xs:element name="canExecute" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="hook" type="bb:DMLCustomCommandHook" minOccurs="0" maxOccurs="1" />
+      <xs:element name="longRunning" type="bb:DMLCustomCommandLongRunning" minOccurs="0" maxOccurs="1" />
+      <xs:element name="associateAffects" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="associateAffect" type="bb:DMLEntityModelAssociateAffect" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="confirmMessage" type="bb:DMLUserMessage" minOccurs="0" maxOccurs="1" />
+      <xs:element name="successMessage" type="bb:DMLUserMessage" minOccurs="0" maxOccurs="1" />
+      <xs:element name="icon" type="bb:DMLIcon" minOccurs="0" maxOccurs="1" />
+      <xs:element name="relativeSecurityItems" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="customOperation" type="bb:DMLCustomOperationSecurityMember" />
+            <xs:element name="serviceMethod" type="bb:DMLServiceMethodSecurityMember" />
+            <xs:element name="service" type="bb:DMLServiceSecurityMember" />
+            <xs:element name="customTask" type="bb:DMLTaskSecurityMember" />
+            <xs:element name="create" type="bb:DMLEntityCreateSecurityMember" />
+            <xs:element name="customCommand" type="bb:DMLEntityCustomCommandSecurityMember" />
+            <xs:element name="delete" type="bb:DMLEntityDeleteSecurityMember" />
+            <xs:element name="log" type="bb:DMLEntityLogSecurityMember" />
+            <xs:element name="entityPrint" type="bb:DMLEntityPrintSecurityMember" />
+            <xs:element name="read" type="bb:DMLEntityReadSecurityMember" />
+            <xs:element name="entity" type="bb:DMLEntitySecurityTaskMember" />
+            <xs:element name="stateHistory" type="bb:DMLEntityStateHistorySecurityMember" />
+            <xs:element name="transition" type="bb:DMLEntityTransitionSecurityMember" />
+            <xs:element name="update" type="bb:DMLEntityUpdateSecurityMember" />
+            <xs:element name="form" type="bb:DMLFormSecurityMember" />
+            <xs:element name="globalCommand" type="bb:DMLGlobalCommandSecurityMember" />
+            <xs:element name="process" type="bb:DMLProcessSecurityMember" />
+            <xs:element name="report" type="bb:DMLReportSecurityMember" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="parametersCollection" type="bb:DMLParameterCollection" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="isSchedulable" use="optional" type="xs:boolean" />
+    <xs:attribute name="dropParameter" use="optional" type="xs:string" />
+    <xs:attribute name="affectType" type="bb:DMLEntityModelCommandAffectType" use="optional" />
+    <xs:attribute name="executionMode" type="bb:DMLEntityModelCommandExecutionMode" use="optional" />
+    <xs:attribute name="ignoreSuccessMessage" use="optional" type="xs:boolean" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="isLoggable" use="optional" type="xs:boolean" />
+    <xs:attribute name="isActive" use="optional" type="xs:boolean" />
+    <xs:attribute name="isRestricted" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLCustomCommandHook">
+    <xs:attribute name="assembly" use="required" type="xs:string" />
+    <xs:attribute name="jsResourceName" use="required" type="xs:string" />
+    <xs:attribute name="serviceName" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLCustomCommandLongRunning">
+    <xs:attribute name="isProgressive" use="optional" type="xs:boolean" />
+    <xs:attribute name="isCancelable" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityModelStoredProcedureCommand">
+    <xs:all>
+      <xs:element name="expressions" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="default" type="bb:DMLCreateExpression" />
+            <xs:element name="change" type="bb:DMLChangeExpression" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="preCommands" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="preCommand" type="bb:DMLEntityModelPreCommand" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="postCommands" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="postCommand" type="bb:DMLEntityModelPostCommand" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="associateAffects" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="associateAffect" type="bb:DMLEntityModelAssociateAffect" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="confirmMessage" type="bb:DMLUserMessage" minOccurs="0" maxOccurs="1" />
+      <xs:element name="successMessage" type="bb:DMLUserMessage" minOccurs="0" maxOccurs="1" />
+      <xs:element name="icon" type="bb:DMLIcon" minOccurs="0" maxOccurs="1" />
+      <xs:element name="relativeSecurityItems" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="customOperation" type="bb:DMLCustomOperationSecurityMember" />
+            <xs:element name="serviceMethod" type="bb:DMLServiceMethodSecurityMember" />
+            <xs:element name="service" type="bb:DMLServiceSecurityMember" />
+            <xs:element name="customTask" type="bb:DMLTaskSecurityMember" />
+            <xs:element name="create" type="bb:DMLEntityCreateSecurityMember" />
+            <xs:element name="customCommand" type="bb:DMLEntityCustomCommandSecurityMember" />
+            <xs:element name="delete" type="bb:DMLEntityDeleteSecurityMember" />
+            <xs:element name="log" type="bb:DMLEntityLogSecurityMember" />
+            <xs:element name="entityPrint" type="bb:DMLEntityPrintSecurityMember" />
+            <xs:element name="read" type="bb:DMLEntityReadSecurityMember" />
+            <xs:element name="entity" type="bb:DMLEntitySecurityTaskMember" />
+            <xs:element name="stateHistory" type="bb:DMLEntityStateHistorySecurityMember" />
+            <xs:element name="transition" type="bb:DMLEntityTransitionSecurityMember" />
+            <xs:element name="update" type="bb:DMLEntityUpdateSecurityMember" />
+            <xs:element name="form" type="bb:DMLFormSecurityMember" />
+            <xs:element name="globalCommand" type="bb:DMLGlobalCommandSecurityMember" />
+            <xs:element name="process" type="bb:DMLProcessSecurityMember" />
+            <xs:element name="report" type="bb:DMLReportSecurityMember" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="parametersCollection" type="bb:DMLParameterCollection" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="affectType" type="bb:DMLEntityModelCommandAffectType" use="optional" />
+    <xs:attribute name="executionMode" type="bb:DMLEntityModelCommandExecutionMode" use="optional" />
+    <xs:attribute name="ignoreSuccessMessage" use="optional" type="xs:boolean" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="isLoggable" use="optional" type="xs:boolean" />
+    <xs:attribute name="isActive" use="optional" type="xs:boolean" />
+    <xs:attribute name="isRestricted" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLPrintTemplate">
+    <xs:all>
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="provider" type="bb:DMLPrintProvider" />
+      <xs:element name="parameters" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="parameter" type="bb:DMLParameter" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="bindings" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="property" type="bb:DMLPrintPropertyToParameterBinding" />
+            <xs:element name="parameter" type="bb:DMLPrintParameterToParameterBinding" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="icon" type="bb:DMLIcon" minOccurs="0" maxOccurs="1" />
+      <xs:element name="relativeSecurityItems" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="customOperation" type="bb:DMLCustomOperationSecurityMember" />
+            <xs:element name="serviceMethod" type="bb:DMLServiceMethodSecurityMember" />
+            <xs:element name="service" type="bb:DMLServiceSecurityMember" />
+            <xs:element name="customTask" type="bb:DMLTaskSecurityMember" />
+            <xs:element name="create" type="bb:DMLEntityCreateSecurityMember" />
+            <xs:element name="customCommand" type="bb:DMLEntityCustomCommandSecurityMember" />
+            <xs:element name="delete" type="bb:DMLEntityDeleteSecurityMember" />
+            <xs:element name="log" type="bb:DMLEntityLogSecurityMember" />
+            <xs:element name="entityPrint" type="bb:DMLEntityPrintSecurityMember" />
+            <xs:element name="read" type="bb:DMLEntityReadSecurityMember" />
+            <xs:element name="entity" type="bb:DMLEntitySecurityTaskMember" />
+            <xs:element name="stateHistory" type="bb:DMLEntityStateHistorySecurityMember" />
+            <xs:element name="transition" type="bb:DMLEntityTransitionSecurityMember" />
+            <xs:element name="update" type="bb:DMLEntityUpdateSecurityMember" />
+            <xs:element name="form" type="bb:DMLFormSecurityMember" />
+            <xs:element name="globalCommand" type="bb:DMLGlobalCommandSecurityMember" />
+            <xs:element name="process" type="bb:DMLProcessSecurityMember" />
+            <xs:element name="report" type="bb:DMLReportSecurityMember" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="sourceLoaderType" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLPrintProvider">
+    <xs:choice>
+      <xs:element name="crystal" type="bb:DMLCrystalReportPrintProvider" />
+      <xs:element name="stimulSoft" type="bb:DMLStimulSoftReportPrintProvider" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="DMLCrystalReportPrintProvider">
+    <xs:all>
+      <xs:element name="template">
+        <xs:complexType>
+          <xs:attribute name="x-key" type="xs:string" />
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLStimulSoftReportPrintProvider">
+    <xs:all>
+      <xs:element name="template">
+        <xs:complexType>
+          <xs:attribute name="x-key" type="xs:string" />
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLPrintPropertyToParameterBinding">
+    <xs:attribute name="sourceProperty" use="required" type="xs:string" />
+    <xs:attribute name="targetParameter" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLPrintParameterToParameterBinding">
+    <xs:attribute name="sourceParameter" use="required" type="xs:string" />
+    <xs:attribute name="targetParameter" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityModelDefaultSort">
+    <xs:attribute name="property" use="required" type="xs:string" />
+    <xs:attribute name="sortType" type="bb:DMLEntityModelSortType" use="optional" />
+  </xs:complexType>
+  <xs:simpleType name="DMLEntityModelSortType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Asc" />
+      <xs:enumeration value="Desc" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLEntityModelStateMachine">
+    <xs:all>
+      <xs:element name="states">
+        <xs:complexType>
+          <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="state" type="bb:DMLEntityModelState" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="transitions">
+        <xs:complexType>
+          <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="transition" type="bb:DMLEntityModelTransition" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="triggers" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="trigger" type="bb:DMLEntityModelTransitionTrigger" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="stateProperty" use="required" type="xs:string" />
+    <xs:attribute name="initialState" use="required" type="xs:string" />
+    <xs:attribute name="isLoggable" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityModelState">
+    <xs:all>
+      <xs:element name="blockedCommands" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="blockedSelfCommand" type="bb:DMLEntityModelBlockedSelfCommand" />
+            <xs:element name="blockedAssociateCommand" type="bb:DMLEntityModelBlockedAssociateCommand" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="blockedProperties" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="blockedProperty" type="bb:DMLEntityModelBlockedProperty" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="value" use="required" type="xs:string" />
+    <xs:attribute name="comparerValue" use="optional" type="xs:string" />
+    <xs:attribute name="comparerOperator" type="bb:DMLStateInfoValueComparerOperator" use="optional" />
+  </xs:complexType>
+  <xs:simpleType name="DMLStateInfoValueComparerOperator">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Equal" />
+      <xs:enumeration value="NotEqual" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLEntityModelBlockedSelfCommand">
+    <xs:attribute name="command" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityModelBlockedAssociateCommand">
+    <xs:attribute name="command" use="required" type="xs:string" />
+    <xs:attribute name="associateProperty" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityModelBlockedProperty">
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="blockType" type="bb:DMLEntityModelBlockedPropertyType" use="required" />
+  </xs:complexType>
+  <xs:simpleType name="DMLEntityModelBlockedPropertyType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="BlockRead" />
+      <xs:enumeration value="BlockWrite" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLEntityModelTransition">
+    <xs:all>
+      <xs:element name="condition" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="relations" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="relation" type="bb:DMLEntityModelStateRelation" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="preCommands" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="preCommand" type="bb:DMLEntityModelPreCommand" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="postCommands" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="postCommand" type="bb:DMLEntityModelPostCommand" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="parametersCollection" type="bb:DMLParameterCollection" minOccurs="0" maxOccurs="1" />
+      <xs:element name="associateAffects" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="associateAffect" type="bb:DMLEntityModelAssociateAffect" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="confirmMessage" type="bb:DMLUserMessage" minOccurs="0" maxOccurs="1" />
+      <xs:element name="successMessage" type="bb:DMLUserMessage" minOccurs="0" maxOccurs="1" />
+      <xs:element name="icon" type="bb:DMLIcon" minOccurs="0" maxOccurs="1" />
+      <xs:element name="relativeSecurityItems" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="customOperation" type="bb:DMLCustomOperationSecurityMember" />
+            <xs:element name="serviceMethod" type="bb:DMLServiceMethodSecurityMember" />
+            <xs:element name="service" type="bb:DMLServiceSecurityMember" />
+            <xs:element name="customTask" type="bb:DMLTaskSecurityMember" />
+            <xs:element name="create" type="bb:DMLEntityCreateSecurityMember" />
+            <xs:element name="customCommand" type="bb:DMLEntityCustomCommandSecurityMember" />
+            <xs:element name="delete" type="bb:DMLEntityDeleteSecurityMember" />
+            <xs:element name="log" type="bb:DMLEntityLogSecurityMember" />
+            <xs:element name="entityPrint" type="bb:DMLEntityPrintSecurityMember" />
+            <xs:element name="read" type="bb:DMLEntityReadSecurityMember" />
+            <xs:element name="entity" type="bb:DMLEntitySecurityTaskMember" />
+            <xs:element name="stateHistory" type="bb:DMLEntityStateHistorySecurityMember" />
+            <xs:element name="transition" type="bb:DMLEntityTransitionSecurityMember" />
+            <xs:element name="update" type="bb:DMLEntityUpdateSecurityMember" />
+            <xs:element name="form" type="bb:DMLFormSecurityMember" />
+            <xs:element name="globalCommand" type="bb:DMLGlobalCommandSecurityMember" />
+            <xs:element name="process" type="bb:DMLProcessSecurityMember" />
+            <xs:element name="report" type="bb:DMLReportSecurityMember" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="affectType" type="bb:DMLEntityModelTransitionAffectType" use="optional" />
+    <xs:attribute name="isActive" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityModelStateRelation">
+    <xs:all>
+      <xs:element name="condition" minOccurs="0" maxOccurs="1" type="xs:string" />
+    </xs:all>
+    <xs:attribute name="from" use="required" type="xs:string" />
+    <xs:attribute name="to" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="DMLEntityModelTransitionAffectType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Single" />
+      <xs:enumeration value="Multi" />
+      <xs:enumeration value="Partial" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLEntityModelTransitionTrigger">
+    <xs:attribute name="state" use="required" type="xs:string" />
+    <xs:attribute name="associateProperty" use="required" type="xs:string" />
+    <xs:attribute name="associateTransition" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityModelRelatedReport">
+    <xs:all>
+      <xs:element name="bindings" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="binding" type="bb:DMLEntityModelReportBinding" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="report" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityModelReportBinding">
+    <xs:attribute name="property" use="required" type="xs:string" />
+    <xs:attribute name="parameter" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="DMLAbstractionPolicy">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Abstractable" />
+      <xs:enumeration value="NonAbstractable" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLModelDefaultEditor">
+    <xs:choice>
+      <xs:element name="model" type="bb:DMLModelEditor" />
+      <xs:element name="custom" type="bb:DMLCustomEditor" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="DMLPreferences">
+    <xs:all>
+      <xs:element name="organizational" type="bb:DMLOrganizationalPreferences" minOccurs="0" maxOccurs="1" />
+      <xs:element name="date" type="bb:DMLDatePreferences" minOccurs="0" maxOccurs="1" />
+      <xs:element name="cop" type="bb:DMLCOPPreferences" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLOrganizationalPreferences">
+    <xs:all>
+      <xs:element name="owner" type="bb:DMLOrganizationalInfo" minOccurs="0" maxOccurs="1" />
+      <xs:element name="creator" type="bb:DMLOrganizationalInfo" minOccurs="0" maxOccurs="1" />
+      <xs:element name="modifier" type="bb:DMLOrganizationalInfo" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLOrganizationalInfo">
+    <xs:all>
+      <xs:element name="organization" type="bb:DMLPreferenceProperty" minOccurs="0" maxOccurs="1" />
+      <xs:element name="unit" type="bb:DMLPreferenceProperty" minOccurs="0" maxOccurs="1" />
+      <xs:element name="position" type="bb:DMLPreferenceProperty" minOccurs="0" maxOccurs="1" />
+      <xs:element name="contact" type="bb:DMLPreferenceProperty" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLPreferenceProperty">
+    <xs:all>
+      <xs:element name="formatType" type="bb:DMLPropertyFormatType" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="isVisible" use="optional" type="xs:boolean" />
+    <xs:attribute name="viewVisible" use="optional" type="xs:boolean" />
+    <xs:attribute name="entryVisible" use="optional" type="xs:boolean" />
+    <xs:attribute name="isSearchable" use="optional" type="xs:boolean" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+  </xs:complexType>
+  <xs:complexType name="DMLDatePreferences">
+    <xs:all>
+      <xs:element name="createDate" type="bb:DMLPreferenceProperty" minOccurs="0" maxOccurs="1" />
+      <xs:element name="modifiedDate" type="bb:DMLPreferenceProperty" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLCOPPreferences">
+    <xs:all>
+      <xs:element name="creatorCOP" type="bb:DMLPreferenceProperty" minOccurs="0" maxOccurs="1" />
+      <xs:element name="modifierCOP" type="bb:DMLPreferenceProperty" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+  </xs:complexType>
+  <xs:simpleType name="DMLAbstractEntityAddingPolicy">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None">
+        <xs:annotation>
+          <xs:documentation>Add will be disabled on all form that directly use the abstract model</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NearestNoneAbstract">
+        <xs:annotation>
+          <xs:documentation>First none abstract model in any level of inheritancy selected</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Leaves">
+        <xs:annotation>
+          <xs:documentation>The none abstract leaves of inherited item will be selected</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AllNoneAbstracts">
+        <xs:annotation>
+          <xs:documentation>All none abstract inheritor will be selected</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLSelfPredefinedFilter">
+    <xs:all>
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="bql" type="bb:DMLBql" />
+      <xs:element name="icon" type="bb:DMLIcon" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLBasePredefinedFilter">
+    <xs:all>
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="bql" type="bb:DMLBql" />
+      <xs:element name="icon" type="bb:DMLIcon" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="baseModel" use="required" type="xs:string" />
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLBasicRestriction">
+    <xs:attribute name="mode" type="bb:DMLRestrictionMode" use="optional" />
+  </xs:complexType>
+  <xs:simpleType name="DMLRestrictionMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Create" />
+      <xs:enumeration value="Update" />
+      <xs:enumeration value="Delete" />
+      <xs:enumeration value="Read" />
+      <xs:enumeration value="All" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLLocalRestriction">
+    <xs:attribute name="mode" type="bb:DMLRestrictionMode" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="DMLCustomRestriction">
+    <xs:all>
+      <xs:element name="bql" type="bb:DMLBql" />
+    </xs:all>
+    <xs:attribute name="mode" type="bb:DMLRestrictionMode" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityNotification">
+    <xs:attribute name="realTime" use="optional" type="xs:boolean" />
+    <xs:attribute name="addMode" type="bb:DMLEntityNotificationAddMode" use="optional" />
+    <xs:attribute name="updateMode" type="bb:DMLEntityNotificationUpdateMode" use="optional" />
+    <xs:attribute name="deleteMode" type="bb:DMLEntityNotificationDeleteMode" use="optional" />
+  </xs:complexType>
+  <xs:simpleType name="DMLEntityNotificationAddMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ToEnd" />
+      <xs:enumeration value="AsFirst" />
+      <xs:enumeration value="Sorted" />
+      <xs:enumeration value="Disabled" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DMLEntityNotificationUpdateMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Update" />
+      <xs:enumeration value="UpdateAndCheckRemove" />
+      <xs:enumeration value="UpdateAndCheckRemoveAndAdd" />
+      <xs:enumeration value="Disabled" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DMLEntityNotificationDeleteMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Delete" />
+      <xs:enumeration value="Disabled" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DMLEntityModelPrivacy">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Public" />
+      <xs:enumeration value="Private" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLEntityInterfacePropertyMapping">
+    <xs:all>
+      <xs:element name="mappings">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="mapping" type="bb:DMLEntityInterfacePropertyMappingItem" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="interface" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityInterfacePropertyMappingItem">
+    <xs:attribute name="interfaceProperty" use="required" type="xs:string" />
+    <xs:attribute name="entityProperty" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLSelfReferencePolicy">
+    <xs:choice>
+      <xs:element name="auto" type="bb:DMLAutoSelfReferencePolicy" />
+      <xs:element name="manual" type="bb:DMLManualSelfReferencePolicy" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="DMLAutoSelfReferencePolicy" />
+  <xs:complexType name="DMLManualSelfReferencePolicy">
+    <xs:attribute name="parentProperty" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Parent property name.most the time used when 2 self reference property exists or want to force not self referenced considered as parent property(by passing no value to parent property)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="DMLEntityModelAutoCreate">
+    <xs:choice>
+      <xs:element name="property" type="bb:DMLPropertyEntityModelAutoCreate" />
+      <xs:element name="custom" type="bb:DMLCustomEntityModelAutoCreate" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="DMLPropertyEntityModelAutoCreate">
+    <xs:attribute name="property" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLCustomEntityModelAutoCreate">
+    <xs:all>
+      <xs:element name="converter" minOccurs="1" maxOccurs="1" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLCreateTemplateForm">
+    <xs:all>
+      <xs:element name="icon" type="bb:DMLIcon" minOccurs="0" maxOccurs="1" />
+      <xs:element name="visibleExpression" minOccurs="0" maxOccurs="1" type="xs:string" />
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="description" use="optional" type="xs:string" />
+    <xs:attribute name="form" use="required" type="xs:string" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+  </xs:complexType>
+  <xs:simpleType name="BBDuration">
+    <xs:annotation>
+      <xs:documentation>pattern is (D.HH:MM:SS | D) In which D is days, HH is 2-digit 00-24 hour, MM is 2-digit 00-59 minute and SS is 2-digit second 00-59</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^\d+|(\d+\.)?([01]\d|2[0-3]):([0-5]\d)(:[0-5]\d)?$" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

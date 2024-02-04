@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemas.bigbang.io/configuration/metadatagenerator" xmlns:bb="http://schemas.bigbang.io/configuration/metadatagenerator">
+  <xs:element name="configuration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="generator" type="bb:GeneratorConfig" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="GeneratorConfig">
+    <xs:choice>
+      <xs:element name="bpmn" type="bb:DMLProcessGeneratorTaskConfig" />
+      <xs:element name="domain" type="bb:DomainGeneratorTaskConfig" />
+      <xs:element name="dml" type="bb:DMLGeneratorTaskConfig" />
+      <xs:element name="xsd" type="bb:XSDGeneratorTaskConfig" />
+      <xs:element name="xsdPackage" type="bb:XSDPackageGeneratorTaskConfig" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="DMLProcessGeneratorTaskConfig">
+    <xs:attribute name="path" use="required" type="xs:string" />
+    <xs:attribute name="version" use="required" type="xs:int" />
+    <xs:attribute name="module" use="required" type="xs:string" />
+    <xs:attribute name="buildPath" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DomainGeneratorTaskConfig">
+    <xs:all>
+      <xs:element name="copy" type="bb:DomainCopyConfig" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Copy</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="applicationFilter" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>This property is used as filter of application.By default all application in bigbang.config will be built.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="assembliesLoadPath" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Path to the directory that all dependent assemblies going to be loaded from. Default location is current directory.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="domainCompileDependentAssemblies" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Path to the directory that all dependent assemblies of domain compiler will be picked from. Default location is assembliesLoadPath</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="bigbangConfig" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Path to bigbang.config file.default will be picked from bigbang.config near to BigBang.Metadata.GeneratorTool.exe</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="buildPath" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Path to the directory that all application going to be built.default location is current directory.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="hostProject" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Use this configuration to get package.config of nuget. Default is set to 'Host' project</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="solution" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Path of Solution.Default is set to the CurrentDirectory</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="DomainCopyConfig">
+    <xs:all>
+      <xs:element name="applications" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="application" type="bb:DomainApplicationCopyConfig" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DomainApplicationCopyConfig">
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="additionalPath" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLGeneratorTaskConfig">
+    <xs:attribute name="applicationFilter" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>This property is used as filter of application.By default all application in bigbang.config will be built.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="assembliesLoadPath" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Path to the directory that all dependent assemblies going to be loaded from. Default location is current directory.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="domainCompileDependentAssemblies" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Path to the directory that all dependent assemblies of domain compiler will be picked from. Default location is assembliesLoadPath</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="bigbangConfig" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Path to bigbang.config file.default will be picked from bigbang.config near to BigBang.Metadata.GeneratorTool.exe</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="buildPath" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Path to the directory that all application going to be built.default location is current directory.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="hostProject" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Use this configuration to get package.config of nuget. Default is set to 'Host' project</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="solution" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Path of Solution.Default is set to the CurrentDirectory</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="XSDGeneratorTaskConfig">
+    <xs:attribute name="path" use="required" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Path to Directory that xsd files will be created in.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="assembliesLoadPath" use="required" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Path to Directory that all valid tags will be searched.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="XSDPackageGeneratorTaskConfig">
+    <xs:attribute name="path" use="required" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Path to Directory that xsd package file will be created in.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="name" use="required" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Name to config package file name.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="assembliesLoadPath" use="required" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Path to Directory that all valid tags will be searched.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="BBDuration">
+    <xs:annotation>
+      <xs:documentation>pattern is (D.HH:MM:SS | D) In which D is days, HH is 2-digit 00-24 hour, MM is 2-digit 00-59 minute and SS is 2-digit second 00-59</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^\d+|(\d+\.)?([01]\d|2[0-3]):([0-5]\d)(:[0-5]\d)?$" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

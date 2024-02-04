@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.bigbang.io/dml/dataInitializer" xmlns:bb="http://www.bigbang.io/dml/dataInitializer">
+  <xs:element name="configuration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="dataInitializer" type="bb:DMLDataInitializer" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="DMLDataInitializer">
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="initializerType" use="required" type="xs:string" />
+    <xs:attribute name="description" use="optional" type="xs:string" />
+    <xs:attribute name="ignoreException" use="optional" type="xs:boolean" />
+    <xs:attribute name="mode" type="bb:DMLDataInitializerMode" use="optional" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+  </xs:complexType>
+  <xs:simpleType name="DMLDataInitializerMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Default" />
+      <xs:enumeration value="Debug" />
+      <xs:enumeration value="Release" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BBDuration">
+    <xs:annotation>
+      <xs:documentation>pattern is (D.HH:MM:SS | D) In which D is days, HH is 2-digit 00-24 hour, MM is 2-digit 00-59 minute and SS is 2-digit second 00-59</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^\d+|(\d+\.)?([01]\d|2[0-3]):([0-5]\d)(:[0-5]\d)?$" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

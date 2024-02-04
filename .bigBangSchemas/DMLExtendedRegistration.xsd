@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.bigbang.io/dml/extendedRegistration" xmlns:bb="http://www.bigbang.io/dml/extendedRegistration">
+  <xs:element name="configuration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="extendedRegistration" type="bb:DMLExtendedRegistration" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="DMLExtendedRegistration">
+    <xs:all>
+      <xs:element name="fields">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="username" type="bb:DMLExtendedRegistrationUsernameField" />
+            <xs:element name="password" type="bb:DMLExtendedRegistrationPasswordField" />
+            <xs:element name="name" type="bb:DMLExtendedRegistrationNameField" />
+            <xs:element name="email" type="bb:DMLExtendedRegistrationEmailField" />
+            <xs:element name="phone" type="bb:DMLExtendedRegistrationPhoneField" />
+            <xs:element name="custom" type="bb:DMLExtendedRegistrationCustomField" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLExtendedRegistrationUsernameField">
+    <xs:all>
+      <xs:element name="verification" type="bb:DMLExtendedRegistrationFieldVerification" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="allowNull" use="optional" type="xs:boolean" />
+    <xs:attribute name="isActive" use="optional" type="xs:boolean" />
+    <xs:attribute name="canChangeInOptions" use="optional" type="xs:boolean" />
+    <xs:attribute name="isRetype" use="optional" type="xs:boolean" />
+    <xs:attribute name="isPassword" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLExtendedRegistrationFieldVerification">
+    <xs:attribute name="isActive" use="optional" type="xs:boolean" />
+    <xs:attribute name="canChangeInOptions" use="optional" type="xs:boolean" />
+    <xs:attribute name="providerType" use="optional" type="xs:string" />
+    <xs:attribute name="type" type="bb:DMLVerificationType" use="optional" />
+  </xs:complexType>
+  <xs:simpleType name="DMLVerificationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OneStep" />
+      <xs:enumeration value="TwoSteps" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLExtendedRegistrationPasswordField">
+    <xs:all>
+      <xs:element name="verification" type="bb:DMLExtendedRegistrationFieldVerification" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="allowNull" use="optional" type="xs:boolean" />
+    <xs:attribute name="isActive" use="optional" type="xs:boolean" />
+    <xs:attribute name="canChangeInOptions" use="optional" type="xs:boolean" />
+    <xs:attribute name="isRetype" use="optional" type="xs:boolean" />
+    <xs:attribute name="isPassword" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLExtendedRegistrationNameField">
+    <xs:all>
+      <xs:element name="verification" type="bb:DMLExtendedRegistrationFieldVerification" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="allowNull" use="optional" type="xs:boolean" />
+    <xs:attribute name="isActive" use="optional" type="xs:boolean" />
+    <xs:attribute name="canChangeInOptions" use="optional" type="xs:boolean" />
+    <xs:attribute name="isRetype" use="optional" type="xs:boolean" />
+    <xs:attribute name="isPassword" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLExtendedRegistrationEmailField">
+    <xs:all>
+      <xs:element name="verification" type="bb:DMLExtendedRegistrationFieldVerification" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="allowNull" use="optional" type="xs:boolean" />
+    <xs:attribute name="isActive" use="optional" type="xs:boolean" />
+    <xs:attribute name="canChangeInOptions" use="optional" type="xs:boolean" />
+    <xs:attribute name="isRetype" use="optional" type="xs:boolean" />
+    <xs:attribute name="isPassword" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLExtendedRegistrationPhoneField">
+    <xs:all>
+      <xs:element name="verification" type="bb:DMLExtendedRegistrationFieldVerification" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="allowNull" use="optional" type="xs:boolean" />
+    <xs:attribute name="isActive" use="optional" type="xs:boolean" />
+    <xs:attribute name="canChangeInOptions" use="optional" type="xs:boolean" />
+    <xs:attribute name="isRetype" use="optional" type="xs:boolean" />
+    <xs:attribute name="isPassword" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLExtendedRegistrationCustomField">
+    <xs:all>
+      <xs:element name="verification" type="bb:DMLExtendedRegistrationFieldVerification" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="allowNull" use="optional" type="xs:boolean" />
+    <xs:attribute name="isActive" use="optional" type="xs:boolean" />
+    <xs:attribute name="canChangeInOptions" use="optional" type="xs:boolean" />
+    <xs:attribute name="isRetype" use="optional" type="xs:boolean" />
+    <xs:attribute name="isPassword" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:simpleType name="BBDuration">
+    <xs:annotation>
+      <xs:documentation>pattern is (D.HH:MM:SS | D) In which D is days, HH is 2-digit 00-24 hour, MM is 2-digit 00-59 minute and SS is 2-digit second 00-59</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^\d+|(\d+\.)?([01]\d|2[0-3]):([0-5]\d)(:[0-5]\d)?$" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

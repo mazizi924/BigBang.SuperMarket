@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.bigbang.io/dml/expressionFunction" xmlns:bb="http://www.bigbang.io/dml/expressionFunction">
+  <xs:element name="configuration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="expressionFunction" type="bb:DMLExpressionFunction" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="DMLExpressionFunction">
+    <xs:all>
+      <xs:element name="function" minOccurs="1" maxOccurs="1" type="xs:string" />
+      <xs:element name="documentation" type="bb:DMLExpressionFunctionDocumentation" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLExpressionFunctionDocumentation">
+    <xs:all>
+      <xs:element name="sampleCodes">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="sampleCode" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="parameters" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="parameter" type="bb:DMLExpressionFunctionParameter" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="descriptpion" use="optional" type="xs:string" />
+    <xs:attribute name="unlimitedArguments" use="required" type="xs:boolean" />
+    <xs:attribute name="tag" use="optional" type="xs:string" />
+    <xs:attribute name="result" type="bb:DMLExpressionFunctionDataType" use="required" />
+  </xs:complexType>
+  <xs:complexType name="DMLExpressionFunctionParameter">
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="description" use="required" type="xs:string" />
+    <xs:attribute name="optional" use="required" type="xs:boolean" />
+    <xs:attribute name="type" type="bb:DMLExpressionFunctionDataType" use="required" />
+  </xs:complexType>
+  <xs:simpleType name="DMLExpressionFunctionDataType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Any" />
+      <xs:enumeration value="Object" />
+      <xs:enumeration value="Array" />
+      <xs:enumeration value="String" />
+      <xs:enumeration value="Number" />
+      <xs:enumeration value="Boolean" />
+      <xs:enumeration value="DateTime" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BBDuration">
+    <xs:annotation>
+      <xs:documentation>pattern is (D.HH:MM:SS | D) In which D is days, HH is 2-digit 00-24 hour, MM is 2-digit 00-59 minute and SS is 2-digit second 00-59</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^\d+|(\d+\.)?([01]\d|2[0-3]):([0-5]\d)(:[0-5]\d)?$" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

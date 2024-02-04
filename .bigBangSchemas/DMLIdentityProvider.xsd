@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.bigbang.io/dml/identityProvider" xmlns:bb="http://www.bigbang.io/dml/identityProvider">
+  <xs:element name="configuration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="identityProvider" type="bb:DMLIdentityProvider" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="DMLIdentityProvider">
+    <xs:all>
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="icon" type="bb:DMLIcon" minOccurs="0" maxOccurs="1" />
+      <xs:element name="provider">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="1">
+            <xs:element name="oauth" type="bb:DMLOAuthIdentityProviderConfiguration" />
+            <xs:element name="custom" type="bb:DMLCustomIdentityProviderConfiguration" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="foreColor" use="optional" type="xs:string" />
+    <xs:attribute name="backColor" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLIcon">
+    <xs:choice>
+      <xs:element name="simple" type="bb:DMLSimpleIcon" />
+      <xs:element name="font" type="bb:DMLFontIcon" />
+      <xs:element name="system" type="bb:DMLSystemIcon" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="DMLSimpleIcon">
+    <xs:all>
+      <xs:element name="content">
+        <xs:complexType>
+          <xs:attribute name="x-key" type="xs:string" />
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLFontIcon">
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="color" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLSystemIcon">
+    <xs:attribute name="type" type="bb:DMLSystemIconType" use="required" />
+    <xs:attribute name="color" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="DMLSystemIconType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Submit" />
+      <xs:enumeration value="Cancel" />
+      <xs:enumeration value="Apply" />
+      <xs:enumeration value="Settings" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLOAuthIdentityProviderConfiguration">
+    <xs:all>
+      <xs:element name="scopes">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="scope" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="claims">
+        <xs:complexType>
+          <xs:choice minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="username" type="bb:DMLIdentityProviderUsernameClaim" />
+            <xs:element name="name" type="bb:DMLIdentityProviderNameClaim" />
+            <xs:element name="phone" type="bb:DMLIdentityProviderPhoneClaim" />
+            <xs:element name="email" type="bb:DMLIdentityProviderEmailClaim" />
+            <xs:element name="picture" type="bb:DMLIdentityProviderPictureClaim" />
+            <xs:element name="custom" type="bb:DMLIdentityProviderCustomClaim" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="issuer" use="required" type="xs:string" />
+    <xs:attribute name="authorizationSegment" use="required" type="xs:string" />
+    <xs:attribute name="configurationSegment" use="required" type="xs:string" />
+    <xs:attribute name="clientId" use="required" type="xs:string" />
+    <xs:attribute name="responseType" type="bb:DMLOAuthResponseType" use="required" />
+  </xs:complexType>
+  <xs:simpleType name="DMLOAuthResponseType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Implicit" />
+      <xs:enumeration value="Hybrid" />
+      <xs:enumeration value="AuthorizationCode" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLIdentityProviderUsernameClaim">
+    <xs:attribute name="key" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLIdentityProviderNameClaim">
+    <xs:attribute name="key" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLIdentityProviderPhoneClaim">
+    <xs:attribute name="key" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLIdentityProviderEmailClaim">
+    <xs:attribute name="key" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLIdentityProviderPictureClaim">
+    <xs:attribute name="key" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLIdentityProviderCustomClaim">
+    <xs:attribute name="key" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLCustomIdentityProviderConfiguration" />
+  <xs:simpleType name="BBDuration">
+    <xs:annotation>
+      <xs:documentation>pattern is (D.HH:MM:SS | D) In which D is days, HH is 2-digit 00-24 hour, MM is 2-digit 00-59 minute and SS is 2-digit second 00-59</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^\d+|(\d+\.)?([01]\d|2[0-3]):([0-5]\d)(:[0-5]\d)?$" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

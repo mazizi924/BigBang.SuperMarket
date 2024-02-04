@@ -1,0 +1,498 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemas.bigbang.io/bigbangconfig" xmlns:bb="http://schemas.bigbang.io/bigbangconfig">
+  <xs:element name="configuration">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="expression" type="bb:ExpressionConfig" minOccurs="0" maxOccurs="1" />
+        <xs:element name="applicationCatalog" type="bb:ApplicationCatalogConfig" minOccurs="0" maxOccurs="1" />
+        <xs:element name="troubleshooting" type="bb:TroubleshootingConfig" minOccurs="0" maxOccurs="1" />
+        <xs:element name="environment" type="bb:EnvironmentConfig" minOccurs="0" maxOccurs="1" />
+        <xs:element name="logging" type="bb:LoggingConfig" minOccurs="0" maxOccurs="1" />
+        <xs:element name="serverInfo" type="bb:ServerInfoConfig" minOccurs="0" maxOccurs="1" />
+        <xs:element name="serviceBus" type="bb:ServiceBusConfig" minOccurs="0" maxOccurs="1" />
+        <xs:element name="attachment" type="bb:AttachmentDatabaseConfig" minOccurs="0" maxOccurs="1" />
+        <xs:element name="organizationIntegration" type="bb:OrganizationIntegrationConfig" minOccurs="0" maxOccurs="1" />
+        <xs:element name="bootupTransactionScope" type="bb:BootupTransactionScopeConfig" minOccurs="0" maxOccurs="1" />
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ExpressionConfig">
+    <xs:all>
+      <xs:element name="expressionService" type="bb:ExpressionServiceConfig" minOccurs="0" maxOccurs="1" />
+      <xs:element name="jsLibraries" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="jsLibrary" type="bb:JsLibraryConfig" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="resourceJsLibraries" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="resourceJsLibrary" type="bb:ResourceJsLibraryConfig" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="ExpressionServiceConfig">
+    <xs:attribute name="port" use="optional" type="xs:int" />
+    <xs:attribute name="debugMode" use="optional" type="xs:boolean" />
+    <xs:attribute name="autoRun" use="required" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="JsLibraryConfig">
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="path" use="required" type="xs:string" />
+    <xs:attribute name="FullName" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="ResourceJsLibraryConfig">
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="assembly" use="required" type="xs:string" />
+    <xs:attribute name="resource" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="ApplicationCatalogConfig">
+    <xs:all>
+      <xs:element name="database" type="bb:DatabaseApplicationCatalogConfig" minOccurs="0" maxOccurs="1" />
+      <xs:element name="channels" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="custom" type="bb:ChannelDatabaseApplicationCatalogConfig" />
+            <xs:element name="readOnly" type="bb:ReadOnlyChannelDatabaseApplicationCatalogConfig" />
+            <xs:element name="writeOnly" type="bb:WriteOnlyChannelDatabaseApplicationCatalogConfig" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="applications">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="application" type="bb:ApplicationConfig" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="safeMode" use="optional" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>Bypass database migration, authorization sync and default user sync</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="DatabaseApplicationCatalogConfig">
+    <xs:attribute name="dataSource" use="required" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The name or network address of the instance of SQL Server to connect to.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="username" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The username to be used when connecting to SQL Server.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="password" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The password for the SQL Server account.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="connectTimeout" use="optional" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>The length of time (in seconds) to wait for a connection to the server before terminating the attempt and generating an error.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="integratedSecurity" use="optional" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>A Boolean value that indicates whether User ID and Password are specified in the connection (when false) or whether the current Windows account credentials are used for authentication (when true).</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="persistSecurityInfo" use="optional" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>A Boolean value that indicates if security-sensitive information, such as the password, is not returned as part of the connection if the connection is open or has ever been in an open state.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="maxPoolSize" use="optional" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>The value of the MaxPoolSize property, or 100 if none has been supplied.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="applicationIntent" type="bb:DatabaseApplicationIntent" use="optional">
+      <xs:annotation>
+        <xs:documentation>The value of the ApplicationIntent property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="DatabaseApplicationIntent">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ReadWrite" />
+      <xs:enumeration value="ReadOnly" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ChannelDatabaseApplicationCatalogConfig">
+    <xs:attribute name="ChannelName" use="required" type="xs:string" />
+    <xs:attribute name="dataSource" use="required" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The name or network address of the instance of SQL Server to connect to.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="username" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The username to be used when connecting to SQL Server.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="password" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The password for the SQL Server account.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="connectTimeout" use="optional" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>The length of time (in seconds) to wait for a connection to the server before terminating the attempt and generating an error.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="integratedSecurity" use="optional" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>A Boolean value that indicates whether User ID and Password are specified in the connection (when false) or whether the current Windows account credentials are used for authentication (when true).</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="persistSecurityInfo" use="optional" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>A Boolean value that indicates if security-sensitive information, such as the password, is not returned as part of the connection if the connection is open or has ever been in an open state.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="maxPoolSize" use="optional" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>The value of the MaxPoolSize property, or 100 if none has been supplied.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="applicationIntent" type="bb:DatabaseApplicationIntent" use="optional">
+      <xs:annotation>
+        <xs:documentation>The value of the ApplicationIntent property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ReadOnlyChannelDatabaseApplicationCatalogConfig">
+    <xs:attribute name="dataSource" use="required" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The name or network address of the instance of SQL Server to connect to.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="username" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The username to be used when connecting to SQL Server.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="password" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The password for the SQL Server account.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="connectTimeout" use="optional" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>The length of time (in seconds) to wait for a connection to the server before terminating the attempt and generating an error.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="integratedSecurity" use="optional" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>A Boolean value that indicates whether User ID and Password are specified in the connection (when false) or whether the current Windows account credentials are used for authentication (when true).</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="persistSecurityInfo" use="optional" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>A Boolean value that indicates if security-sensitive information, such as the password, is not returned as part of the connection if the connection is open or has ever been in an open state.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="maxPoolSize" use="optional" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>The value of the MaxPoolSize property, or 100 if none has been supplied.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="applicationIntent" type="bb:DatabaseApplicationIntent" use="optional">
+      <xs:annotation>
+        <xs:documentation>The value of the ApplicationIntent property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="WriteOnlyChannelDatabaseApplicationCatalogConfig">
+    <xs:attribute name="dataSource" use="required" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The name or network address of the instance of SQL Server to connect to.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="username" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The username to be used when connecting to SQL Server.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="password" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The password for the SQL Server account.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="connectTimeout" use="optional" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>The length of time (in seconds) to wait for a connection to the server before terminating the attempt and generating an error.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="integratedSecurity" use="optional" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>A Boolean value that indicates whether User ID and Password are specified in the connection (when false) or whether the current Windows account credentials are used for authentication (when true).</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="persistSecurityInfo" use="optional" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>A Boolean value that indicates if security-sensitive information, such as the password, is not returned as part of the connection if the connection is open or has ever been in an open state.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="maxPoolSize" use="optional" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>The value of the MaxPoolSize property, or 100 if none has been supplied.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="applicationIntent" type="bb:DatabaseApplicationIntent" use="optional">
+      <xs:annotation>
+        <xs:documentation>The value of the ApplicationIntent property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ApplicationConfig">
+    <xs:choice minOccurs="0" maxOccurs="1">
+      <xs:element name="connection" type="bb:DatabaseConnectionConfig" />
+      <xs:element name="connectionString" type="bb:DatabaseConnectionStringConfig" />
+      <xs:element name="initialCatalog" type="bb:DatabaseInitialCatalogConfig" />
+    </xs:choice>
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="assemblyName" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DatabaseConnectionConfig">
+    <xs:attribute name="initialCatalog" use="required" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The name of the database associated with the connection.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="databaseVersionType" type="bb:DatabaseVersionType" use="optional">
+      <xs:annotation>
+        <xs:documentation>Add version to database name</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="dataSource" use="required" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The name or network address of the instance of SQL Server to connect to.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="username" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The username to be used when connecting to SQL Server.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="password" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The password for the SQL Server account.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="connectTimeout" use="optional" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>The length of time (in seconds) to wait for a connection to the server before terminating the attempt and generating an error.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="integratedSecurity" use="optional" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>A Boolean value that indicates whether User ID and Password are specified in the connection (when false) or whether the current Windows account credentials are used for authentication (when true).</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="persistSecurityInfo" use="optional" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>A Boolean value that indicates if security-sensitive information, such as the password, is not returned as part of the connection if the connection is open or has ever been in an open state.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="maxPoolSize" use="optional" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>The value of the MaxPoolSize property, or 100 if none has been supplied.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="applicationIntent" type="bb:DatabaseApplicationIntent" use="optional">
+      <xs:annotation>
+        <xs:documentation>The value of the ApplicationIntent property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="DatabaseVersionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Production">
+        <xs:annotation>
+          <xs:documentation>Default behaviour of database version. no postfix will be added to database name</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Development">
+        <xs:annotation>
+          <xs:documentation>add source control branch name to end of db name if not be in main line development</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DatabaseConnectionStringConfig">
+    <xs:attribute name="value" use="required" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The basis for the database connection information.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="databaseVersionType" type="bb:DatabaseVersionType" use="optional">
+      <xs:annotation>
+        <xs:documentation>Add version to database name</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="DatabaseInitialCatalogConfig">
+    <xs:attribute name="value" use="required" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The name of the database associated with the connection.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="databaseVersionType" type="bb:DatabaseVersionType" use="optional">
+      <xs:annotation>
+        <xs:documentation>Add version to database name</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="TroubleshootingConfig">
+    <xs:all>
+      <xs:element name="trace" type="bb:Trace" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Trace">
+    <xs:all>
+      <xs:element name="applications" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="application" type="bb:TraceApplication" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="http" use="optional" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>If the property set to true capture all http traffic. The default value is false.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="app" use="optional" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>If the property set to true capture all application level. The default value is false.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="sql" use="optional" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>If the property set to true capture all sql query. The default value is false.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="bus" use="optional" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>If the property set to true capture all Message bus events. The default value is false.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="TraceApplication">
+    <xs:attribute name="name" use="required" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Name of the BigBang application</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="service" use="required" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>If the property set to true capture all service call. The default value is false.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="EnvironmentConfig">
+    <xs:attribute name="name" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="LoggingConfig">
+    <xs:attribute name="local" use="required" type="xs:boolean" />
+    <xs:attribute name="name" use="optional" type="xs:string" />
+    <xs:attribute name="port" use="optional" type="xs:int" />
+  </xs:complexType>
+  <xs:complexType name="ServerInfoConfig">
+    <xs:all>
+      <xs:element name="hostInfo" type="bb:HostInfoConfig" minOccurs="0" maxOccurs="1" />
+      <xs:element name="defaultUser" type="bb:DefaultUserConfig" />
+      <xs:element name="cors" type="bb:CorsConfig" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="virtualDirectoryName" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="HostInfoConfig">
+    <xs:attribute name="protocol" use="required" type="xs:string" />
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="port" use="required" type="xs:int" />
+  </xs:complexType>
+  <xs:complexType name="DefaultUserConfig">
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="username" use="required" type="xs:string" />
+    <xs:attribute name="password" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="CorsConfig">
+    <xs:all>
+      <xs:element name="origins">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="origin" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="ServiceBusConfig">
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="port" use="required" type="xs:int" />
+    <xs:attribute name="chanelPrefix" use="optional" type="xs:string" />
+    <xs:attribute name="type" type="bb:ServiceBusType" use="optional" />
+  </xs:complexType>
+  <xs:simpleType name="ServiceBusType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Kafka" />
+      <xs:enumeration value="ActiveMQ" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="AttachmentDatabaseConfig">
+    <xs:attribute name="connectionString" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="OrganizationIntegrationConfig">
+    <xs:attribute name="policy" type="bb:OrganizationIntegrationPolicy" use="optional" />
+  </xs:complexType>
+  <xs:simpleType name="OrganizationIntegrationPolicy">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Master" />
+      <xs:enumeration value="Follower" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="BootupTransactionScopeConfig">
+    <xs:attribute name="type" type="bb:BootupTransactionScopeType" use="required" />
+  </xs:complexType>
+  <xs:simpleType name="BootupTransactionScopeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None">
+        <xs:annotation>
+          <xs:documentation>no transaction scope will be configured. default behaviour</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Debug">
+        <xs:annotation>
+          <xs:documentation>no transaction scope will be configured only in debug mode.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Release">
+        <xs:annotation>
+          <xs:documentation>no transaction scope will be configured only in release mode.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DebugRelease">
+        <xs:annotation>
+          <xs:documentation>no transaction scope will be configured in debug and release mode.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BBDuration">
+    <xs:annotation>
+      <xs:documentation>pattern is (D.HH:MM:SS | D) In which D is days, HH is 2-digit 00-24 hour, MM is 2-digit 00-59 minute and SS is 2-digit second 00-59</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^\d+|(\d+\.)?([01]\d|2[0-3]):([0-5]\d)(:[0-5]\d)?$" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

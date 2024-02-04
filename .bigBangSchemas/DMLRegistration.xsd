@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.bigbang.io/dml/registration" xmlns:bb="http://www.bigbang.io/dml/registration">
+  <xs:element name="configuration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="registration" type="bb:DMLRegistration" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="DMLRegistration">
+    <xs:all>
+      <xs:element name="fields">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="username" type="bb:DMLRegistrationUsernameField" />
+            <xs:element name="password" type="bb:DMLRegistrationPasswordField" />
+            <xs:element name="name" type="bb:DMLRegistrationNameField" />
+            <xs:element name="email" type="bb:DMLRegistrationEmailField" />
+            <xs:element name="phone" type="bb:DMLRegistrationPhoneField" />
+            <xs:element name="custom" type="bb:DMLRegistrationCustomField" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLRegistrationUsernameField">
+    <xs:all>
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="icon" type="bb:DMLIcon" minOccurs="0" maxOccurs="1" />
+      <xs:element name="verification" type="bb:DMLRegistrationFieldVerification" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="allowNull" use="optional" type="xs:boolean" />
+    <xs:attribute name="isRetype" use="optional" type="xs:boolean" />
+    <xs:attribute name="isPassword" use="optional" type="xs:boolean" />
+    <xs:attribute name="validationRegex" use="optional" type="xs:string" />
+    <xs:attribute name="isActive" use="optional" type="xs:boolean" />
+    <xs:attribute name="canChangeInOptions" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLIcon">
+    <xs:choice>
+      <xs:element name="simple" type="bb:DMLSimpleIcon" />
+      <xs:element name="font" type="bb:DMLFontIcon" />
+      <xs:element name="system" type="bb:DMLSystemIcon" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="DMLSimpleIcon">
+    <xs:all>
+      <xs:element name="content">
+        <xs:complexType>
+          <xs:attribute name="x-key" type="xs:string" />
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLFontIcon">
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="color" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLSystemIcon">
+    <xs:attribute name="type" type="bb:DMLSystemIconType" use="required" />
+    <xs:attribute name="color" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="DMLSystemIconType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Submit" />
+      <xs:enumeration value="Cancel" />
+      <xs:enumeration value="Apply" />
+      <xs:enumeration value="Settings" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLRegistrationFieldVerification">
+    <xs:attribute name="isActive" use="optional" type="xs:boolean" />
+    <xs:attribute name="canChangeInOptions" use="optional" type="xs:boolean" />
+    <xs:attribute name="type" type="bb:DMLVerificationType" use="required" />
+    <xs:attribute name="providerType" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="DMLVerificationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OneStep" />
+      <xs:enumeration value="TwoSteps" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLRegistrationPasswordField">
+    <xs:all>
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="icon" type="bb:DMLIcon" minOccurs="0" maxOccurs="1" />
+      <xs:element name="verification" type="bb:DMLRegistrationFieldVerification" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="allowNull" use="optional" type="xs:boolean" />
+    <xs:attribute name="isRetype" use="optional" type="xs:boolean" />
+    <xs:attribute name="isPassword" use="optional" type="xs:boolean" />
+    <xs:attribute name="validationRegex" use="optional" type="xs:string" />
+    <xs:attribute name="isActive" use="optional" type="xs:boolean" />
+    <xs:attribute name="canChangeInOptions" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLRegistrationNameField">
+    <xs:all>
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="icon" type="bb:DMLIcon" minOccurs="0" maxOccurs="1" />
+      <xs:element name="verification" type="bb:DMLRegistrationFieldVerification" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="allowNull" use="optional" type="xs:boolean" />
+    <xs:attribute name="isRetype" use="optional" type="xs:boolean" />
+    <xs:attribute name="isPassword" use="optional" type="xs:boolean" />
+    <xs:attribute name="validationRegex" use="optional" type="xs:string" />
+    <xs:attribute name="isActive" use="optional" type="xs:boolean" />
+    <xs:attribute name="canChangeInOptions" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLRegistrationEmailField">
+    <xs:all>
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="icon" type="bb:DMLIcon" minOccurs="0" maxOccurs="1" />
+      <xs:element name="verification" type="bb:DMLRegistrationFieldVerification" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="allowNull" use="optional" type="xs:boolean" />
+    <xs:attribute name="isRetype" use="optional" type="xs:boolean" />
+    <xs:attribute name="isPassword" use="optional" type="xs:boolean" />
+    <xs:attribute name="validationRegex" use="optional" type="xs:string" />
+    <xs:attribute name="isActive" use="optional" type="xs:boolean" />
+    <xs:attribute name="canChangeInOptions" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLRegistrationPhoneField">
+    <xs:all>
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="icon" type="bb:DMLIcon" minOccurs="0" maxOccurs="1" />
+      <xs:element name="verification" type="bb:DMLRegistrationFieldVerification" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="allowNull" use="optional" type="xs:boolean" />
+    <xs:attribute name="isRetype" use="optional" type="xs:boolean" />
+    <xs:attribute name="isPassword" use="optional" type="xs:boolean" />
+    <xs:attribute name="validationRegex" use="optional" type="xs:string" />
+    <xs:attribute name="isActive" use="optional" type="xs:boolean" />
+    <xs:attribute name="canChangeInOptions" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLRegistrationCustomField">
+    <xs:all>
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="icon" type="bb:DMLIcon" minOccurs="0" maxOccurs="1" />
+      <xs:element name="verification" type="bb:DMLRegistrationFieldVerification" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="order" use="optional" type="xs:int" />
+    <xs:attribute name="allowNull" use="optional" type="xs:boolean" />
+    <xs:attribute name="isRetype" use="optional" type="xs:boolean" />
+    <xs:attribute name="isPassword" use="optional" type="xs:boolean" />
+    <xs:attribute name="validationRegex" use="optional" type="xs:string" />
+    <xs:attribute name="isActive" use="optional" type="xs:boolean" />
+    <xs:attribute name="canChangeInOptions" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:simpleType name="BBDuration">
+    <xs:annotation>
+      <xs:documentation>pattern is (D.HH:MM:SS | D) In which D is days, HH is 2-digit 00-24 hour, MM is 2-digit 00-59 minute and SS is 2-digit second 00-59</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^\d+|(\d+\.)?([01]\d|2[0-3]):([0-5]\d)(:[0-5]\d)?$" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

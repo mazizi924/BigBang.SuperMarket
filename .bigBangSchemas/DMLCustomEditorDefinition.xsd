@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.bigbang.io/dml/customEditor" xmlns:bb="http://www.bigbang.io/dml/customEditor">
+  <xs:element name="configuration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="customEditor" type="bb:DMLCustomEditorDefinition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="DMLCustomEditorDefinition">
+    <xs:all>
+      <xs:element name="supportedDataTypes">
+        <xs:complexType>
+          <xs:choice minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="object" type="bb:DMLObjectFieldDataType" />
+            <xs:element name="dictionary" type="bb:DMLDictionaryFieldDataType" />
+            <xs:element name="model" type="bb:DMLModelFieldDataType" />
+            <xs:element name="crossReference" type="bb:DMLCrossReferenceFieldDataType" />
+            <xs:element name="list" type="bb:DMLListFieldDataType" />
+            <xs:element name="guid" type="bb:DMLGuidFieldDataType" />
+            <xs:element name="string" type="bb:DMLStringFieldDataType" />
+            <xs:element name="dateTime" type="bb:DMLDateTimeFieldDataType" />
+            <xs:element name="boolean" type="bb:DMLBooleanFieldDataType" />
+            <xs:element name="byte" type="bb:DMLByteFieldDataType" />
+            <xs:element name="short" type="bb:DMLShortFieldDataType" />
+            <xs:element name="int" type="bb:DMLIntFieldDataType" />
+            <xs:element name="long" type="bb:DMLLongFieldDataType" />
+            <xs:element name="float" type="bb:DMLFloatFieldDataType" />
+            <xs:element name="decimal" type="bb:DMLDecimalFieldDataType" />
+            <xs:element name="double" type="bb:DMLDoubleFieldDataType" />
+            <xs:element name="binary" type="bb:DMLBinaryFieldDataType" />
+            <xs:element name="file" type="bb:DMLFileFieldDataType" />
+            <xs:element name="image" type="bb:DMLImageFieldDataType" />
+            <xs:element name="version" type="bb:DMLVersionFieldDataType" />
+            <xs:element name="duration" type="bb:DMLDurationFieldDataType" />
+            <xs:element name="enum" type="bb:DMLEnumFieldDataType" />
+            <xs:element name="json" type="bb:DMLJsonFieldDataType" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="service" use="optional" type="xs:string" />
+    <xs:attribute name="assembly" use="required" type="xs:string" />
+    <xs:attribute name="jsResourceName" use="required" type="xs:string" />
+    <xs:attribute name="templateResourceName" use="optional" type="xs:string" />
+    <xs:attribute name="styleResourceName" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLObjectFieldDataType">
+    <xs:attribute name="specialType" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLDictionaryFieldDataType">
+    <xs:all>
+      <xs:element name="valueType" type="bb:DMLDictionaryFilteredFieldDataType" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLDictionaryFilteredFieldDataType">
+    <xs:choice>
+      <xs:element name="guid" type="bb:DMLGuidFieldDataType" />
+      <xs:element name="string" type="bb:DMLStringFieldDataType" />
+      <xs:element name="dateTime" type="bb:DMLDateTimeFieldDataType" />
+      <xs:element name="boolean" type="bb:DMLBooleanFieldDataType" />
+      <xs:element name="byte" type="bb:DMLByteFieldDataType" />
+      <xs:element name="short" type="bb:DMLShortFieldDataType" />
+      <xs:element name="int" type="bb:DMLIntFieldDataType" />
+      <xs:element name="long" type="bb:DMLLongFieldDataType" />
+      <xs:element name="float" type="bb:DMLFloatFieldDataType" />
+      <xs:element name="decimal" type="bb:DMLDecimalFieldDataType" />
+      <xs:element name="double" type="bb:DMLDoubleFieldDataType" />
+      <xs:element name="duration" type="bb:DMLDurationFieldDataType" />
+      <xs:element name="enum" type="bb:DMLEnumFieldDataType" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="DMLGuidFieldDataType" />
+  <xs:complexType name="DMLStringFieldDataType" />
+  <xs:complexType name="DMLDateTimeFieldDataType" />
+  <xs:complexType name="DMLBooleanFieldDataType" />
+  <xs:complexType name="DMLByteFieldDataType" />
+  <xs:complexType name="DMLShortFieldDataType" />
+  <xs:complexType name="DMLIntFieldDataType" />
+  <xs:complexType name="DMLLongFieldDataType" />
+  <xs:complexType name="DMLFloatFieldDataType" />
+  <xs:complexType name="DMLDecimalFieldDataType" />
+  <xs:complexType name="DMLDoubleFieldDataType" />
+  <xs:complexType name="DMLDurationFieldDataType" />
+  <xs:complexType name="DMLEnumFieldDataType">
+    <xs:attribute name="name" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLModelFieldDataType">
+    <xs:attribute name="sourceModel" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLCrossReferenceFieldDataType">
+    <xs:all>
+      <xs:element name="entityModels" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="entityModel" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="interface" use="optional" type="xs:string" />
+    <xs:attribute name="useCrossReferenceTypeWhenInterfaceProvided" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLListFieldDataType">
+    <xs:all>
+      <xs:element name="elementType" type="bb:DMLListFilteredFieldDataType" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLListFilteredFieldDataType">
+    <xs:choice>
+      <xs:element name="object" type="bb:DMLObjectFieldDataType" />
+      <xs:element name="dictionary" type="bb:DMLDictionaryFieldDataType" />
+      <xs:element name="model" type="bb:DMLModelFieldDataType" />
+      <xs:element name="crossReference" type="bb:DMLCrossReferenceFieldDataType" />
+      <xs:element name="guid" type="bb:DMLGuidFieldDataType" />
+      <xs:element name="string" type="bb:DMLStringFieldDataType" />
+      <xs:element name="dateTime" type="bb:DMLDateTimeFieldDataType" />
+      <xs:element name="boolean" type="bb:DMLBooleanFieldDataType" />
+      <xs:element name="byte" type="bb:DMLByteFieldDataType" />
+      <xs:element name="short" type="bb:DMLShortFieldDataType" />
+      <xs:element name="int" type="bb:DMLIntFieldDataType" />
+      <xs:element name="long" type="bb:DMLLongFieldDataType" />
+      <xs:element name="float" type="bb:DMLFloatFieldDataType" />
+      <xs:element name="decimal" type="bb:DMLDecimalFieldDataType" />
+      <xs:element name="double" type="bb:DMLDoubleFieldDataType" />
+      <xs:element name="binary" type="bb:DMLBinaryFieldDataType" />
+      <xs:element name="file" type="bb:DMLFileFieldDataType" />
+      <xs:element name="image" type="bb:DMLImageFieldDataType" />
+      <xs:element name="version" type="bb:DMLVersionFieldDataType" />
+      <xs:element name="duration" type="bb:DMLDurationFieldDataType" />
+      <xs:element name="enum" type="bb:DMLEnumFieldDataType" />
+      <xs:element name="json" type="bb:DMLJsonFieldDataType" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="DMLBinaryFieldDataType" />
+  <xs:complexType name="DMLFileFieldDataType" />
+  <xs:complexType name="DMLImageFieldDataType" />
+  <xs:complexType name="DMLVersionFieldDataType" />
+  <xs:complexType name="DMLJsonFieldDataType">
+    <xs:attribute name="schema" use="optional" type="xs:string" />
+    <xs:attribute name="templateSelectionPolicy" type="bb:DMLJsonTemplateSelectionPolicy" use="optional" />
+  </xs:complexType>
+  <xs:simpleType name="DMLJsonTemplateSelectionPolicy">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Property" />
+      <xs:enumeration value="BeforeCreate" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BBDuration">
+    <xs:annotation>
+      <xs:documentation>pattern is (D.HH:MM:SS | D) In which D is days, HH is 2-digit 00-24 hour, MM is 2-digit 00-59 minute and SS is 2-digit second 00-59</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^\d+|(\d+\.)?([01]\d|2[0-3]):([0-5]\d)(:[0-5]\d)?$" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

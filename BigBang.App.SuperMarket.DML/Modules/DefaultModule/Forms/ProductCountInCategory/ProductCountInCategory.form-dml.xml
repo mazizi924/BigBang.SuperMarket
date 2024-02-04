@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns="http://www.bigbang.io/dml/form">
+	<form name="ProductCountInCategory" displayName="تعداد محصول در هر نوع" moduleName="DefaultModule">
+		<splitter>
+			<panel1>
+				<modelComponent name="Category" model="SMCategory" viewType="List">
+					<businessContext>
+						<businessContextItem name="ActiveCategory">
+							<value><![CDATA[true]]></value>
+						</businessContextItem>
+					</businessContext>
+					<modelSettings>
+						<formatting>
+							<property name="Title"/>
+							<constant value="("/>
+							<property name="VirtualProductsCount" />
+							<constant value=")"/>
+						</formatting>
+					</modelSettings>
+				</modelComponent>
+			</panel1>
+			<panel2>
+				<splitter>
+					<panel1>
+						<associateModelComponent owner="Category" associateProperty="Products" name="ProductCategory"  viewType="Grid">
+							<modelSettings>
+								<properties>
+									<property name="Category">
+										<formatting>
+											<property name="Title"/>
+										</formatting>
+									</property>
+								</properties>
+							</modelSettings>
+						</associateModelComponent>
+					</panel1>
+					<panel2>
+						<tab>
+						</tab>
+					</panel2>
+				</splitter>
+			</panel2>
+		</splitter>
+	</form>
+</configuration>

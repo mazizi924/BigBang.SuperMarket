@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns="http://www.bigbang.io/dml/form">
+  <form name="ContactProduct" displayName="فرم محصولات مشتریان" moduleName="DefaultModule">
+	  <splitter>
+		  <panel1>
+			  <modelComponent name="Products" model="SMProduct" viewType="List">
+				  <modelSettings>
+					  <formatting>
+						  <property name="Title"/>
+						  <constant value="("/>
+						  <constant value=" موجودی : "/>
+						  <property  name="Inventory"/>
+						  <constant value=" - وضعیت : "/>
+						  <property  name="IsActive"/>
+						  <constant value=")"/>
+					  </formatting>
+				  </modelSettings>
+				  <businessContext>
+					  <businessContextItem name="ActiveCategory">
+						  <value><![CDATA[true]]></value>
+					  </businessContextItem>
+				  </businessContext>
+			  </modelComponent>
+		  </panel1>
+		  <panel2>
+			  <tab>
+				  <items>
+					  <item title="مشتریان حقیقی">
+						  <splitter>
+							  <panel1>
+								  <associateModelComponent owner="Products" associateProperty="ContactProducts" name="ContactPersonProduct" viewType="Grid">
+									  <businessContext>
+										  <businessContextItem name="IsPerson">
+											  <value><![CDATA[true]]></value>
+										  </businessContextItem>
+									  </businessContext>
+								  </associateModelComponent>
+							  </panel1>
+							  <panel2>
+								  <tab>
+								  </tab>
+							  </panel2>
+						  </splitter>
+					  </item>
+					  <item title="مشتریان حقوقی">
+						  <splitter>
+							  <panel1>
+								  <associateModelComponent owner="Products" associateProperty="ContactProducts" name="ContactOrganizationProduct" viewType="Grid">
+									  <businessContext>
+										  <businessContextItem name="IsPerson">
+											  <value><![CDATA[false]]></value>
+										  </businessContextItem>
+									  </businessContext>
+								  </associateModelComponent>
+							  </panel1>
+							  <panel2>
+								  <tab>
+								  </tab>
+							  </panel2>
+						  </splitter>
+					  </item>
+				  </items>
+			  </tab>
+		  </panel2>
+	  </splitter>
+  </form>
+</configuration>

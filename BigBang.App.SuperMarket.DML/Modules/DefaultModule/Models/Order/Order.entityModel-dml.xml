@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns="http://www.bigbang.io/dml/entityModel">
+  <entityModel name="SMOrder" moduleName="DefaultModule">
+    <propertiesCollection>
+      <properties>
+        <primitive name="Id" order="1" isReadOnly="true" displayName="شناسه"  isVisible="false"/>
+		  <primitive name="Contact" order="2" displayName="مشتری" isVisible="false" >
+			  <virtualReference target="BigBang.BBContact" targetProperty="OrderContacts"></virtualReference>
+		  </primitive>
+        <primitive name="OrderDate" order="3" displayName="تاریخ سفارش"/>
+        <primitive name="Address" order="4" displayName="آدرس" />
+      </properties>
+    </propertiesCollection>
+  </entityModel>
+</configuration>

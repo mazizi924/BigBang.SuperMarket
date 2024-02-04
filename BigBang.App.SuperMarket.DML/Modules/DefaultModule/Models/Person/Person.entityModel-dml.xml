@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns="http://www.bigbang.io/dml/entityModel">
+  <entityModel name="SMPerson" moduleName="DefaultModule" displayName="مشتری حقیقی">
+	  <baseModel target="BigBang.BBContact" deleteCascade="Delete">
+		  <settings>
+			  <properties>
+				  <property name="Name" displayName="نام و نام خانوادگی" order="1"/>
+			  </properties>
+		  </settings>
+	  </baseModel>
+	  <propertiesCollection>
+		  <properties>
+			  <primitive name="Id" order="1"  isVisible="false"/>
+			  <primitive name="NationalCode" order="2"  displayName="کد ملی"/>
+			  <primitive name="MobileNumber" order="3" displayName="شماره همراه"/>
+		  </properties>
+	  </propertiesCollection>
+  </entityModel>
+</configuration>

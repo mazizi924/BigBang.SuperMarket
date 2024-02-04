@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns="http://www.bigbang.io/dml/report">
+	<reportModel name="ContactProductReportService.Report" displayName="گزارش محصولات  مشتریان" moduleName="DefaultModule" reportType="Static">
+		<propertiesCollection>
+			<properties>
+				<property name="Id" displayName="شناسه" isVisible="false">
+					<propertyType>
+						<guid/>
+					</propertyType>
+				</property>
+				<property name="Name" displayName="نام و نام خانوادگی">
+					<propertyType>
+						<string/>
+					</propertyType>
+				</property>
+			</properties>
+		</propertiesCollection>
+		<subReports>
+			<subReport stepInMode="IgnoreDrillDownIfNull" target="DataSource" property="Name">
+				<bindings>
+					<property sourceProperty="Id" targetParameter="Id"/>
+				</bindings>
+			</subReport>
+		</subReports>
+	</reportModel>
+</configuration>

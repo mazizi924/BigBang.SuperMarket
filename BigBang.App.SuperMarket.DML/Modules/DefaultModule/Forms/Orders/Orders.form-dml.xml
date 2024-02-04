@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns="http://www.bigbang.io/dml/form">
+	<form name="Orders" displayName="سفارشات" moduleName="DefaultModule">
+		<splitter>
+			<panel1>
+				<modelComponent model="SMOrder" name="Orders" viewType="Grid"></modelComponent>
+			</panel1>
+			<panel2>
+				<associateModelComponent owner="Orders" associateProperty="OrderDetails" name="OrderDetail" viewType="Grid">
+					<businessContext>
+						<businessContextItem name="CurrentUserProduct"> 
+							<value>0</value>
+						</businessContextItem> 
+					</businessContext>
+				</associateModelComponent>
+			</panel2>
+		</splitter>
+	</form>
+</configuration>

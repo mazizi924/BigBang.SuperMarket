@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns="http://www.bigbang.io/dml/enum">
+  <enum name="CategoryStatus">
+    <members>
+		<member name="New" value="0"  displayName="جدید"/>
+		<member name="NoNeed" value="1"  displayName="عدم نیاز"/>
+		<member name="Active" value="2"  displayName="فعال"/>
+		<member name="WaitingCheck" value="3"  displayName="در انتظار بررسی"/>
+  </members> 
+  </enum>
+</configuration>

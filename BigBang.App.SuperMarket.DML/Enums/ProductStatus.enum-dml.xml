@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns="http://www.bigbang.io/dml/enum">
+  <enum name="ProductStatus">
+    <members>
+		<member name="Active" displayName="فعال" value="1" />
+		<member name="DeActive" displayName="غیرفعال" value="0" />
+    </members>
+  </enum>
+</configuration>

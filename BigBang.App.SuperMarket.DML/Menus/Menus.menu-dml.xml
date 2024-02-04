@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns="http://www.bigbang.io/dml/menu">
+  <menu>
+    <modules>
+      <module title="سوپرمارکت">
+		  <groups>
+			  <group title="مدل ها">
+				  <items>
+					  <item title="مشتری حقیقی">
+						  <action type="Model" value="SMPerson" />
+					  </item>
+					  <item title="مشتری حقوقی">
+						  <action type="Model" value="SMOrganization" />
+					  </item>
+					  <item title="محصولات">
+						  <action type="Model" value="SMProduct" />
+					  </item>
+					  <item title="نوع محصولات">
+						  <action type="Model" value="SMCategory" />
+					  </item>
+				  </items>
+			  </group>
+			  <group title="فرم ها">
+				  <items>
+					  <item title="مشتریان">
+						  <action type="Form" value="Contact" />
+					  </item>
+					  <item title="محصولات مشتریان">
+						  <action type="Form" value="ContactProduct" />
+					  </item>
+					  <item title="تعداد محصول در هرنوع">
+						  <action type="Form" value="ProductCountInCategory" />
+					  </item>
+					  <item title="سفارشات">
+						  <action type="Form" value="Orders" />
+					  </item>
+				  </items>
+			  </group>
+			  <group title="گزارشات">
+				  <items>
+					  <item title="گزارش">
+						  <action type="Report" value="Report" />
+					  </item>
+				  </items>
+			  </group>
+		  </groups>
+      </module>
+    </modules>
+  </menu>
+</configuration>

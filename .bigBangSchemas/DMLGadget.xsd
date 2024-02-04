@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.bigbang.io/dml/gadget" xmlns:bb="http://www.bigbang.io/dml/gadget">
+  <xs:element name="configuration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="gadget" type="bb:DMLGadget" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="DMLGadget">
+    <xs:all>
+      <xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+      <xs:element name="icon" type="bb:DMLIcon" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="optional" type="xs:string" />
+    <xs:attribute name="configModel" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Config virtual entity model</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="form" use="required" type="xs:string" />
+    <xs:attribute name="categoryName" use="optional" type="xs:string" />
+    <xs:attribute name="headerColor" use="optional" type="xs:string" />
+    <xs:attribute name="height" use="optional" type="xs:int">
+      <xs:annotation>
+        <xs:documentation>Default value is 400</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="showHeader" use="optional" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>Default value is 'true'</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="removable" use="optional" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>Default value is 'true'</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="draggable" use="optional" type="xs:boolean">
+      <xs:annotation>
+        <xs:documentation>Default value is 'true'</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="DMLIcon">
+    <xs:choice>
+      <xs:element name="simple" type="bb:DMLSimpleIcon" />
+      <xs:element name="font" type="bb:DMLFontIcon" />
+      <xs:element name="system" type="bb:DMLSystemIcon" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="DMLSimpleIcon">
+    <xs:all>
+      <xs:element name="content">
+        <xs:complexType>
+          <xs:attribute name="x-key" type="xs:string" />
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLFontIcon">
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="color" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLSystemIcon">
+    <xs:attribute name="type" type="bb:DMLSystemIconType" use="required" />
+    <xs:attribute name="color" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="DMLSystemIconType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Submit" />
+      <xs:enumeration value="Cancel" />
+      <xs:enumeration value="Apply" />
+      <xs:enumeration value="Settings" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BBDuration">
+    <xs:annotation>
+      <xs:documentation>pattern is (D.HH:MM:SS | D) In which D is days, HH is 2-digit 00-24 hour, MM is 2-digit 00-59 minute and SS is 2-digit second 00-59</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^\d+|(\d+\.)?([01]\d|2[0-3]):([0-5]\d)(:[0-5]\d)?$" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

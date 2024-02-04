@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns="http://www.bigbang.io/dml/entityModel">
+  <entityModel name="SMCategory" moduleName="DefaultModule">
+
+	  <propertiesCollection>
+		  <properties>
+			  <primitive name="Id" order="1" isReadOnly="true" isVisible="false" />
+			  <primitive name="Title" order="2" displayName="نوع محصول"/> 
+			  <primitive name="State" order="4" displayName="وضعیت"/>
+			  <virtual name="VirtualProductsCount" displayName="تعداد محصول" isVisible="false">
+				  <propertyType>
+					  <int/>
+				  </propertyType>
+			  </virtual>
+		  </properties>
+	  </propertiesCollection>
+	  <formatting>
+		  <property name="Title"/>
+		  <constant value="("/>
+		  <property  name="State"/>
+		  <constant value=")"/>
+	  </formatting>
+	  <stateMachine stateProperty="State" initialState="New">
+		  <states>
+			  <state name="New" value="0"  displayName="جدید"/>
+			  <state name="NoNeed" value="1"  displayName="عدم نیاز"/>
+			  <state name="Active" value="2"  displayName="فعال"/>
+			  <state name="WaitingCheck" value="3"  displayName="در انتظار بررسی"/>
+		  </states>
+		  <transitions >
+			  <transition name="Check" displayName="بررسی شود">
+				  <relations>
+					  <relation from="New" to="WaitingCheck" />
+					  <relation from="NoNeed" to="WaitingCheck" />
+				  </relations>
+			  </transition>
+			  <transition name="NotNeeded" displayName="عدم نیاز">
+				  <relations>
+					  <relation from="WaitingCheck" to="NoNeed" />
+				  </relations>
+			  </transition>
+			  <transition name="Accept" displayName="تایید">
+				  <relations>
+					  <relation from="WaitingCheck" to="Active" />
+				  </relations>
+			  </transition>
+		  </transitions>
+	  </stateMachine>
+  </entityModel>
+</configuration>

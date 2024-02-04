@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns="http://www.bigbang.io/dml/form">
+	<form name="Contact" displayName="فرم مشتریان" moduleName="DefaultModule">
+		<splitter>
+			<panel1>
+				<modelComponent name="Contacts" model="BigBang.BBContact" viewType="List" />
+			</panel1>
+			<panel2>
+				<panel>
+					<associateModelComponent owner="Contacts" associateProperty="ProductContacts" name="Product" viewType="List" >
+						<businessContext>
+							<businessContextItem name="ActiveProduct">
+								<value><![CDATA[true]]></value>
+							</businessContextItem>
+						</businessContext>
+					</associateModelComponent>
+				</panel>
+			</panel2>
+		</splitter>
+	</form>
+</configuration>

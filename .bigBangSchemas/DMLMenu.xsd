@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.bigbang.io/dml/menu" xmlns:bb="http://www.bigbang.io/dml/menu">
+  <xs:element name="configuration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="menu" type="bb:DMLMenu" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="DMLMenu">
+    <xs:all>
+      <xs:element name="modules" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="module" type="bb:DMLMenuModule" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="items" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="item" type="bb:DMLMenuItem" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLMenuModule">
+    <xs:all>
+      <xs:element name="icon" type="bb:DMLIcon" minOccurs="0" maxOccurs="1" />
+      <xs:element name="groups" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="group" type="bb:DMLMenuGroup" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="items" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="item" type="bb:DMLMenuItem" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="filterKeys" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="filterKey" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="title" use="required" type="xs:string" />
+    <xs:attribute name="site" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLIcon">
+    <xs:choice>
+      <xs:element name="simple" type="bb:DMLSimpleIcon" />
+      <xs:element name="font" type="bb:DMLFontIcon" />
+      <xs:element name="system" type="bb:DMLSystemIcon" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="DMLSimpleIcon">
+    <xs:all>
+      <xs:element name="content">
+        <xs:complexType>
+          <xs:attribute name="x-key" type="xs:string" />
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DMLFontIcon">
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="color" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLSystemIcon">
+    <xs:attribute name="type" type="bb:DMLSystemIconType" use="required" />
+    <xs:attribute name="color" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="DMLSystemIconType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Submit" />
+      <xs:enumeration value="Cancel" />
+      <xs:enumeration value="Apply" />
+      <xs:enumeration value="Settings" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLMenuGroup">
+    <xs:all>
+      <xs:element name="icon" type="bb:DMLIcon" minOccurs="0" maxOccurs="1" />
+      <xs:element name="items" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="item" type="bb:DMLMenuItem" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="filterKeys" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="filterKey" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="title" use="required" type="xs:string" />
+    <xs:attribute name="site" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLMenuItem">
+    <xs:all>
+      <xs:element name="icon" type="bb:DMLIcon" minOccurs="0" maxOccurs="1" />
+      <xs:element name="action" type="bb:DMLMenuAction" minOccurs="0" maxOccurs="1" />
+      <xs:element name="items" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="item" type="bb:DMLMenuItem" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="filterKeys" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="filterKey" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="title" use="required" type="xs:string" />
+    <xs:attribute name="site" use="optional" type="xs:string" />
+    <xs:attribute name="merge" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="DMLMenuAction">
+    <xs:all>
+      <xs:element name="badge" type="bb:DMLBadge" minOccurs="0" maxOccurs="1" />
+      <xs:element name="businessContext" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="businessContextItem" type="bb:DMLBusinessContextItem" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="type" type="bb:DMLMenuActionType" use="required" />
+    <xs:attribute name="value" use="required" type="xs:string" />
+    <xs:attribute name="viewMode" type="bb:DMLMenuViewMode" use="optional" />
+    <xs:attribute name="allowMultiple" use="optional" type="xs:boolean" />
+    <xs:attribute name="aliasName" use="optional" type="xs:string" />
+    <xs:attribute name="autoOpen" use="optional" type="xs:boolean" />
+    <xs:attribute name="ignoreFromRecentActivity" use="optional" type="xs:boolean" />
+  </xs:complexType>
+  <xs:simpleType name="DMLMenuActionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Form" />
+      <xs:enumeration value="Model" />
+      <xs:enumeration value="CreateModel" />
+      <xs:enumeration value="Report" />
+      <xs:enumeration value="Process" />
+      <xs:enumeration value="GlobalCommand" />
+      <xs:enumeration value="CustomView" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DMLMenuViewMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="MainMenu" />
+      <xs:enumeration value="Sidebar" />
+      <xs:enumeration value="All" />
+      <xs:enumeration value="Nav" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DMLBadge">
+    <xs:all>
+      <xs:element name="configs" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="config" type="bb:DMLBadgeConfig" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="key" use="required" type="xs:string" />
+    <xs:attribute name="applicationName" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLBadgeConfig">
+    <xs:all>
+      <xs:element name="expression" minOccurs="1" maxOccurs="1" type="xs:string" />
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLBusinessContextItem">
+    <xs:all>
+      <xs:element name="value" minOccurs="1" maxOccurs="1" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Expression for business context value</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="BBDuration">
+    <xs:annotation>
+      <xs:documentation>pattern is (D.HH:MM:SS | D) In which D is days, HH is 2-digit 00-24 hour, MM is 2-digit 00-59 minute and SS is 2-digit second 00-59</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^\d+|(\d+\.)?([01]\d|2[0-3]):([0-5]\d)(:[0-5]\d)?$" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemas.bigbang.io/configuration/databaseMigrator" xmlns:bb="http://schemas.bigbang.io/configuration/databaseMigrator">
+  <xs:element name="configuration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="migrator" type="bb:DatabaseMigratorConfig" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="DatabaseMigratorConfig">
+    <xs:all>
+      <xs:element name="applications" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="application" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="bigbangConfig" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Path to bigbang.config file.default will be picked from bigbang.config near to BigBang.Metadata.GeneratorTool.exe</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="assemblyPath" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Path to the directory that all dependent assemblies going to be loaded from. Default location is current directory.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="hostProject" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Use this configuration to get package.config of nuget. Default is set to 'Host' project</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="solution" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Path of Solution.Default is set to the CurrentDirectory</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="BBDuration">
+    <xs:annotation>
+      <xs:documentation>pattern is (D.HH:MM:SS | D) In which D is days, HH is 2-digit 00-24 hour, MM is 2-digit 00-59 minute and SS is 2-digit second 00-59</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^\d+|(\d+\.)?([01]\d|2[0-3]):([0-5]\d)(:[0-5]\d)?$" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

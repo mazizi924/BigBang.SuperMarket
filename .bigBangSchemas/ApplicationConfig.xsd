@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemas.bigbang.io/applicationconfig" xmlns:bb="http://schemas.bigbang.io/applicationconfig">
+  <xs:element name="configuration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="application" type="bb:GeneratorApplicationConfig" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="GeneratorApplicationConfig">
+    <xs:all>
+      <xs:element name="modules" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="module" type="bb:ModuleConfig" />
+            <xs:element name="extendedModule" type="bb:ExtendedModuleConfig" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="migrationConfig" type="bb:MigrationConfig" minOccurs="0" maxOccurs="1" />
+      <xs:element name="generatorConfig" type="bb:MetadataGeneratorConfig" />
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="displayName" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="ModuleConfig">
+    <xs:attribute name="moduleName" use="required" type="xs:string" />
+    <xs:attribute name="assemblyName" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="ExtendedModuleConfig">
+    <xs:attribute name="application" use="required" type="xs:string" />
+    <xs:attribute name="moduleName" use="required" type="xs:string" />
+    <xs:attribute name="assemblyName" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="MigrationConfig">
+    <xs:attribute name="assembly" use="optional" type="xs:string" />
+    <xs:attribute name="server" use="optional" type="xs:string" />
+    <xs:attribute name="database" use="optional" type="xs:string" />
+    <xs:attribute name="username" use="optional" type="xs:string" />
+    <xs:attribute name="password" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="MetadataGeneratorConfig">
+    <xs:all>
+      <xs:element name="dependentAssemblies" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="dependentAssembly" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="moduleDefinitions" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="moduleDefinition" type="bb:ModuleDefinition" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="tableFilters" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="emptyFilter" type="bb:EmptyFilter" />
+            <xs:element name="regexFilter" type="bb:RegexFilter" />
+            <xs:element name="collectionFilter" type="bb:CollectionFilter" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="tableNameRefactors" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="pluralRefactor" type="bb:PluralTableNameRefactor" />
+            <xs:element name="regexRefactor" type="bb:RegexNameRefactor" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="viewNameRefactors" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="pluralRefactor" type="bb:PluralTableNameRefactor" />
+            <xs:element name="regexRefactor" type="bb:RegexNameRefactor" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="formatTypeResolvers" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="columnResolver" type="bb:ColumnTypeFormatResolver" />
+            <xs:element name="regexResolver" type="bb:RegexFormatTypeResolver" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="viewFilters" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="emptyFilter" type="bb:EmptyFilter" />
+            <xs:element name="regexFilter" type="bb:RegexFilter" />
+            <xs:element name="collectionFilter" type="bb:CollectionFilter" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="commandFilters" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="emptyFilter" type="bb:EmptyFilter" />
+            <xs:element name="regexFilter" type="bb:RegexFilter" />
+            <xs:element name="collectionFilter" type="bb:CollectionFilter" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="commandNameRefactors" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="pluralRefactor" type="bb:PluralTableNameRefactor" />
+            <xs:element name="regexRefactor" type="bb:RegexNameRefactor" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="systemCommandParameterResolvers" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="regexResolver" type="bb:RegexSystemCommandParameterResolver" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="customAttributeResolvers" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="propertyResolver" type="bb:PropertyCustomAttributeResolver" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="customPropertyFilters" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="regexFilter" type="bb:RegexCustomPropertyFilter" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="propertyTypeRefactors" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="typeRefactor" type="bb:PropertyTypeRefactor" />
+            <xs:element name="columnRefactor" type="bb:PropertyTypeRefactorByColumnType" />
+            <xs:element name="propertyRefactor" type="bb:PropertyTypeRefactorByPropertyType" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DML" type="bb:DMLStructureHierarchyConfig" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+    <xs:attribute name="assembly" use="required" type="xs:string" />
+    <xs:attribute name="namespace" use="required" type="xs:string" />
+    <xs:attribute name="defaultModuleName" use="required" type="xs:string" />
+    <xs:attribute name="applicationPrefix" use="optional" type="xs:string" />
+    <xs:attribute name="generationSource" type="bb:MetadataGenerationSource" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="ModuleDefinition">
+    <xs:attribute name="name" use="required" type="xs:string" />
+    <xs:attribute name="pattern" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="EmptyFilter">
+    <xs:attribute name="FilterType" type="bb:FilterType" use="required" />
+  </xs:complexType>
+  <xs:simpleType name="FilterType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Reject" />
+      <xs:enumeration value="Accept" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="RegexFilter">
+    <xs:attribute name="pattern" use="required" type="xs:string" />
+    <xs:attribute name="filterType" type="bb:FilterType" use="required" />
+  </xs:complexType>
+  <xs:complexType name="CollectionFilter">
+    <xs:all>
+      <xs:element name="items">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="item" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="filterType" type="bb:FilterType" use="required" />
+  </xs:complexType>
+  <xs:complexType name="PluralTableNameRefactor" />
+  <xs:complexType name="RegexNameRefactor">
+    <xs:all>
+      <xs:element name="groups" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="group" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="refactorFormat" use="required" type="xs:string" />
+    <xs:attribute name="searchPattern" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="ColumnTypeFormatResolver">
+    <xs:all>
+      <xs:element name="config" type="bb:RegexFormatTypeResolverConfig" />
+    </xs:all>
+    <xs:attribute name="type" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="RegexFormatTypeResolverConfig">
+    <xs:all>
+      <xs:element name="columnDataTypes">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="columnDataType" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="restrictedColumns">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="restrictedColumn" type="bb:RestrictedColumn" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="formatType" type="bb:FormatType" use="required" />
+    <xs:attribute name="ignoreCase" use="required" type="xs:boolean" />
+  </xs:complexType>
+  <xs:simpleType name="FormatType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Currency" />
+      <xs:enumeration value="Time" />
+      <xs:enumeration value="Date" />
+      <xs:enumeration value="DateTime" />
+      <xs:enumeration value="Duration" />
+      <xs:enumeration value="Digit" />
+      <xs:enumeration value="Custom" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="RestrictedColumn">
+    <xs:attribute name="column" use="required" type="xs:string" />
+    <xs:attribute name="table" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="RegexFormatTypeResolver">
+    <xs:all>
+      <xs:element name="config" type="bb:RegexFormatTypeResolverConfig" />
+    </xs:all>
+    <xs:attribute name="namePattern" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="RegexSystemCommandParameterResolver">
+    <xs:attribute name="commandPattern" use="optional" type="xs:string" />
+    <xs:attribute name="parameterPattern" use="optional" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="PropertyCustomAttributeResolver">
+    <xs:all>
+      <xs:element name="customAttributeInfos">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="customAttributeInfo" type="bb:CustomAttributeInfo" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="columnRegex" use="required" type="xs:string" />
+    <xs:attribute name="tableRegex" use="required" type="xs:string" />
+    <xs:attribute name="propertyRegex" use="required" type="xs:string" />
+    <xs:attribute name="modelRegex" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="CustomAttributeInfo">
+    <xs:attribute name="attributeClassName" use="required" type="xs:string" />
+    <xs:attribute name="propertyAttribute" use="required" type="xs:string" />
+    <xs:attribute name="attributeCode" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="RegexCustomPropertyFilter">
+    <xs:all>
+      <xs:element name="customProperty" type="bb:CustomProperty" />
+    </xs:all>
+    <xs:attribute name="propertyType" use="required" type="xs:string" />
+    <xs:attribute name="columnRegex" use="required" type="xs:string" />
+    <xs:attribute name="tableRegex" use="required" type="xs:string" />
+    <xs:attribute name="propertyRegex" use="required" type="xs:string" />
+    <xs:attribute name="modelRegex" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="CustomProperty">
+    <xs:attribute name="getter" use="required" type="xs:string" />
+    <xs:attribute name="setter" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="PropertyTypeRefactor">
+    <xs:attribute name="modelName" use="required" type="xs:string" />
+    <xs:attribute name="propertyName" use="required" type="xs:string" />
+    <xs:attribute name="propertyType" use="required" type="xs:string" />
+    <xs:attribute name="mappingPropertyType" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="PropertyTypeRefactorByColumnType">
+    <xs:attribute name="columnType" use="required" type="xs:string" />
+    <xs:attribute name="propertyType" use="required" type="xs:string" />
+    <xs:attribute name="mappingPropertyType" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="PropertyTypeRefactorByPropertyType">
+    <xs:attribute name="propertyType" use="required" type="xs:string" />
+    <xs:attribute name="mappingPropertyType" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLStructureHierarchyConfig">
+    <xs:all>
+      <xs:element name="extends" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="extend" type="bb:DMLExtendConfig" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLExtendConfig">
+    <xs:attribute name="application" use="required" type="xs:string" />
+    <xs:attribute name="name" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="MetadataGenerationSource">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Database" />
+      <xs:enumeration value="DML" />
+      <xs:enumeration value="None" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BBDuration">
+    <xs:annotation>
+      <xs:documentation>pattern is (D.HH:MM:SS | D) In which D is days, HH is 2-digit 00-24 hour, MM is 2-digit 00-59 minute and SS is 2-digit second 00-59</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^\d+|(\d+\.)?([01]\d|2[0-3]):([0-5]\d)(:[0-5]\d)?$" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

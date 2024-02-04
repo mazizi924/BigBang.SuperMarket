@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.bigbang.io/dml/extendedSecurityTask" xmlns:bb="http://www.bigbang.io/dml/extendedSecurityTask">
+  <xs:element name="configuration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="extendedSecurityTask" type="bb:DMLExtendedSecurityTask" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="DMLExtendedSecurityTask">
+    <xs:all>
+      <xs:element name="members">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="customOperation" type="bb:DMLCustomOperationSecurityMember" />
+            <xs:element name="serviceMethod" type="bb:DMLServiceMethodSecurityMember" />
+            <xs:element name="service" type="bb:DMLServiceSecurityMember" />
+            <xs:element name="customTask" type="bb:DMLTaskSecurityMember" />
+            <xs:element name="create" type="bb:DMLEntityCreateSecurityMember" />
+            <xs:element name="customCommand" type="bb:DMLEntityCustomCommandSecurityMember" />
+            <xs:element name="delete" type="bb:DMLEntityDeleteSecurityMember" />
+            <xs:element name="log" type="bb:DMLEntityLogSecurityMember" />
+            <xs:element name="entityPrint" type="bb:DMLEntityPrintSecurityMember" />
+            <xs:element name="read" type="bb:DMLEntityReadSecurityMember" />
+            <xs:element name="entity" type="bb:DMLEntitySecurityTaskMember" />
+            <xs:element name="stateHistory" type="bb:DMLEntityStateHistorySecurityMember" />
+            <xs:element name="transition" type="bb:DMLEntityTransitionSecurityMember" />
+            <xs:element name="update" type="bb:DMLEntityUpdateSecurityMember" />
+            <xs:element name="form" type="bb:DMLFormSecurityMember" />
+            <xs:element name="globalCommand" type="bb:DMLGlobalCommandSecurityMember" />
+            <xs:element name="process" type="bb:DMLProcessSecurityMember" />
+            <xs:element name="report" type="bb:DMLReportSecurityMember" />
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="name" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLCustomOperationSecurityMember">
+    <xs:attribute name="operation" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLServiceMethodSecurityMember">
+    <xs:attribute name="service" use="required" type="xs:string" />
+    <xs:attribute name="method" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLServiceSecurityMember">
+    <xs:attribute name="service" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLTaskSecurityMember">
+    <xs:attribute name="task" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityCreateSecurityMember">
+    <xs:attribute name="model" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityCustomCommandSecurityMember">
+    <xs:attribute name="command" use="required" type="xs:string" />
+    <xs:attribute name="model" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityDeleteSecurityMember">
+    <xs:attribute name="model" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityLogSecurityMember">
+    <xs:attribute name="model" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityPrintSecurityMember">
+    <xs:attribute name="printTemplate" use="required" type="xs:string" />
+    <xs:attribute name="model" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityReadSecurityMember">
+    <xs:attribute name="model" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntitySecurityTaskMember">
+    <xs:attribute name="model" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityStateHistorySecurityMember">
+    <xs:attribute name="model" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityTransitionSecurityMember">
+    <xs:attribute name="transition" use="required" type="xs:string" />
+    <xs:attribute name="model" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLEntityUpdateSecurityMember">
+    <xs:attribute name="model" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLFormSecurityMember">
+    <xs:attribute name="form" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLGlobalCommandSecurityMember">
+    <xs:attribute name="globalCommand" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLProcessSecurityMember">
+    <xs:attribute name="process" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DMLReportSecurityMember">
+    <xs:attribute name="report" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="BBDuration">
+    <xs:annotation>
+      <xs:documentation>pattern is (D.HH:MM:SS | D) In which D is days, HH is 2-digit 00-24 hour, MM is 2-digit 00-59 minute and SS is 2-digit second 00-59</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^\d+|(\d+\.)?([01]\d|2[0-3]):([0-5]\d)(:[0-5]\d)?$" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
